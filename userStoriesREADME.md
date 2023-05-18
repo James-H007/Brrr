@@ -259,7 +259,7 @@ Returns all the Blogs.
     - Content-Type: application/json
   - Body:
 
-    ```json
+    ````json
     {
       "Blogs": [
         {
@@ -267,11 +267,43 @@ Returns all the Blogs.
           "ownerId": 1,
           "Title": "Title bs",
           "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36"
+          "updatedAt": "2021-11-19 20:39:36",
+          "posts":
+          [{
+            "id": 1,
+            "blogId": 1,
+            "userId": 1,
+            "post_title": "Hello world",
+            "post_type": "Text",
+            "post_body": "I am new to this world",
+            "post_caption":  "New person" ,
+            "video_embed_code": "link",
+            "image_embed_code": "link",
+            "likes": 34,
+            "reblogs": 1,
+            "created_at": "date",
+            "updated_at": "date"
+          },
+          {
+            "id": 2,
+            "blogId": 1,
+            "userId": 3,
+            "post_title": "Bye world",
+            "post_type": "Text",
+            "post_body": "I am not new to this world",
+            "post_caption":  "Old person" ,
+            "video_embed_code": "link",
+            "image_embed_code": "link",
+            "likes": 11,
+            "reblogs": 2,
+            "created_at": "date",
+            "updated_at": "date"
+          }]
         }
       ]
     }
-    ```
+    ``` text, video, link, image
+    ````
 
 ### Get all Blogs created by the Current User
 
@@ -299,13 +331,45 @@ Returns all the Blogs owned (created) by the current user.
           "ownerId": 1,
           "Title": "Title bs",
           "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36"
+          "updatedAt": "2021-11-19 20:39:36",
+          "posts": [
+            {
+              "id": 1,
+              "blogId": 1,
+              "userId": 1,
+              "post_title": "First post",
+              "post_type": "Text",
+              "post_body": "I am new to this world",
+              "post_caption": "New person",
+              "video_embed_code": "link",
+              "image_embed_code": "link",
+              "likes": 34,
+              "reblogs": 1,
+              "created_at": "date",
+              "updated_at": "date"
+            },
+            {
+              "id": 2,
+              "blogId": 1,
+              "userId": 1,
+              "post_title": "Second post",
+              "post_type": "Text",
+              "post_body": "I am not new to this world",
+              "post_caption": "Old person",
+              "video_embed_code": "link",
+              "image_embed_code": "link",
+              "likes": 11,
+              "reblogs": 2,
+              "created_at": "date",
+              "updated_at": "date"
+            }
+          ]
         }
       ]
     }
     ```
 
-### Get Post details of a Blog from an id
+### Get Posts of a Blog from an id
 
 Returns the details of a Blog specified by its id.
 
@@ -325,39 +389,47 @@ Returns the details of a Blog specified by its id.
 
     ```json
     {
-      "id": 1,
-      "blogId": 1
-      "ownerId": 1,
-      "address": "123 Disney Lane",
-      "city": "San Francisco",
-      "state": "California",
-      "country": "United States of America",
-      "lat": 37.7645358,
-      "lng": -122.4730327,
-      "name": "App Academy",
-      "description": "Place where web developers are created",
-      "price": 123,
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36",
-      "numReviews": 5,
-      "avgStarRating": 4.5,
-      "BlogImages": [
+      "Blogs": [
         {
           "id": 1,
-          "url": "image url",
-          "preview": true
-        },
-        {
-          "id": 2,
-          "url": "image url",
-          "preview": false
+          "ownerId": 1,
+          "Title": "Title bs",
+          "createdAt": "2021-11-19 20:39:36",
+          "updatedAt": "2021-11-19 20:39:36",
+          "posts": [
+            {
+              "id": 1,
+              "blogId": 1,
+              "userId": 3,
+              "post_title": "First post",
+              "post_type": "Text",
+              "post_body": "I am new to this world",
+              "post_caption": "New person",
+              "video_embed_code": "link",
+              "image_embed_code": "link",
+              "likes": 34,
+              "reblogs": 1,
+              "created_at": "date",
+              "updated_at": "date"
+            },
+            {
+              "id": 2,
+              "blogId": 1,
+              "userId": 3,
+              "post_title": "different user post",
+              "post_type": "Text",
+              "post_body": "I am not new to this world",
+              "post_caption": "Old person",
+              "video_embed_code": "link",
+              "image_embed_code": "link",
+              "likes": 11,
+              "reblogs": 2,
+              "created_at": "date",
+              "updated_at": "date"
+            }
+          ]
         }
-      ],
-      "Owner": {
-        "id": 1,
-        "firstName": "John",
-        "lastName": "Smith"
-      }
+      ]
     }
     ```
 
@@ -383,22 +455,15 @@ Creates and returns a new Blog.
 - Request
 
   - Method: POST
-  - URL: /api/blogs
+  - URL: /api/blogs/new
   - Headers:
     - Content-Type: application/json
   - Body:
 
     ```json
     {
-      "address": "123 Disney Lane",
-      "city": "San Francisco",
-      "state": "California",
-      "country": "United States of America",
-      "lat": 37.7645358,
-      "lng": -122.4730327,
-      "name": "App Academy",
-      "description": "Place where web developers are created",
-      "price": 123
+      "title": "DaBlog",
+      "url": "DaBlog.tumblr.com"
     }
     ```
 
@@ -411,19 +476,22 @@ Creates and returns a new Blog.
 
     ```json
     {
-      "id": 1,
-      "ownerId": 1,
-      "address": "123 Disney Lane",
-      "city": "San Francisco",
-      "state": "California",
-      "country": "United States of America",
-      "lat": 37.7645358,
-      "lng": -122.4730327,
-      "name": "App Academy",
-      "description": "Place where web developers are created",
-      "price": 123,
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36"
+       {
+      "Blogs": [
+        {
+          "id": 1,
+          "ownerId": 1,
+          "Title": "Title bs",
+          "createdAt": "2021-11-19 20:39:36",
+          "updatedAt": "2021-11-19 20:39:36",
+          "posts": [
+            {
+             "message": "No posts Available, Learn how to make a post."
+            },
+          ]
+        }
+      ]
+    }
     }
     ```
 
@@ -439,20 +507,15 @@ Creates and returns a new Blog.
       "message": "Validation Error",
       "statusCode": 400,
       "errors": {
-        "address": "Street address is required",
-        "city": "City is required",
-        "state": "State is required",
-        "country": "Country is required",
-        "lat": "Latitude is not valid",
-        "lng": "Longitude is not valid",
-        "name": "Name must be less than 50 characters",
-        "description": "Description is required",
-        "price": "Price per day is required"
+        "title": "Needs to be at least 8 characters",
+        "url": "must be unique url"
       }
     }
     ```
 
-### Add an Image to a Blog based on the Blog's id
+### Add an Background Image to a Blog based on the Blog's id
+
+needs work
 
 Create and return a new image for a Blog specified by id.
 
@@ -461,15 +524,14 @@ Create and return a new image for a Blog specified by id.
 - Request
 
   - Method: POST
-  - URL: /api/blogs/:blogId/images
+  - URL: /api/blogs/:blogId/
   - Headers:
     - Content-Type: application/json
   - Body:
 
     ```json
     {
-      "url": "image url",
-      "preview": true
+      "url": "image url"
     }
     ```
 
@@ -483,8 +545,7 @@ Create and return a new image for a Blog specified by id.
     ```json
     {
       "id": 1,
-      "url": "image url",
-      "preview": true
+      "url": "image url"
     }
     ```
 
@@ -518,15 +579,8 @@ Updates and returns an existing Blog.
 
     ```json
     {
-      "address": "123 Disney Lane",
-      "city": "San Francisco",
-      "state": "California",
-      "country": "United States of America",
-      "lat": 37.7645358,
-      "lng": -122.4730327,
-      "name": "App Academy",
-      "description": "Place where web developers are created",
-      "price": 123
+      "title": "DaBlog",
+      "url": "DaBlog.tumblr.com"
     }
     ```
 
@@ -539,17 +593,8 @@ Updates and returns an existing Blog.
 
     ```json
     {
-      "id": 1,
-      "ownerId": 1,
-      "address": "123 Disney Lane",
-      "city": "San Francisco",
-      "state": "California",
-      "country": "United States of America",
-      "lat": 37.7645358,
-      "lng": -122.4730327,
-      "name": "App Academy",
-      "description": "Place where web developers are created",
-      "price": 123,
+      "title": "DaBlog",
+      "url": "DaBlog.tumblr.com",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-20 10:06:40"
     }
@@ -567,15 +612,8 @@ Updates and returns an existing Blog.
       "message": "Validation Error",
       "statusCode": 400,
       "errors": {
-        "address": "Street address is required",
-        "city": "City is required",
-        "state": "State is required",
-        "country": "Country is required",
-        "lat": "Latitude is not valid",
-        "lng": "Longitude is not valid",
-        "name": "Name must be less than 50 characters",
-        "description": "Description is required",
-        "price": "Price per day is required"
+        "title": "Needs to be at least 8 characters",
+        "url": "must be unique url"
       }
     }
     ```
@@ -589,7 +627,7 @@ Updates and returns an existing Blog.
 
     ```json
     {
-      "message": " couldn't be found",
+      "message": "Blog couldn't be found",
       "statusCode": 404
     }
     ```
@@ -634,763 +672,16 @@ Deletes an existing Blog.
     }
     ```
 
-## REVIEWS
+    ### Delete a Blog Image
 
-### Get all Reviews of the Current User
-
-Returns all the reviews written by the current user.
-
-- Require Authentication: true
-- Request
-
-  - Method: GET
-  - URL: /api/reviews/current
-  - Body: none
-
-- Successful Response
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "Reviews": [
-        {
-          "id": 1,
-          "userId": 1,
-          "blogId": 1,
-          "review": "This was an awesome Blog!",
-          "stars": 5,
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "User": {
-            "id": 1,
-            "firstName": "John",
-            "lastName": "Smith"
-          },
-          "Blog": {
-            "id": 1,
-            "ownerId": 1,
-            "address": "123 Disney Lane",
-            "city": "San Francisco",
-            "state": "California",
-            "country": "United States of America",
-            "lat": 37.7645358,
-            "lng": -122.4730327,
-            "name": "App Academy",
-            "price": 123,
-            "previewImage": "image url"
-          },
-          "ReviewImages": [
-            {
-              "id": 1,
-              "url": "image url"
-            }
-          ]
-        }
-      ]
-    }
-    ```
-
-### Get all Reviews by a Blog's id
-
-Returns all the reviews that belong to a Blog specified by id.
-
-- Require Authentication: false
-- Request
-
-  - Method: GET
-  - URL: /api/blogs/:blogId/reviews
-  - Body: none
-
-- Successful Response
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "Reviews": [
-        {
-          "id": 1,
-          "userId": 1,
-          "blogId": 1,
-          "review": "This was an awesome Blog!",
-          "stars": 5,
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "User": {
-            "id": 1,
-            "firstName": "John",
-            "lastName": "Smith"
-          },
-          "ReviewImages": [
-            {
-              "id": 1,
-              "url": "image url"
-            }
-          ]
-        }
-      ]
-    }
-    ```
-
-- Error response: Couldn't find a Blog with the specified id
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Blog couldn't be found",
-      "statusCode": 404
-    }
-    ```
-
-### Create a Review for a Blog based on the Blog's id
-
-Create and return a new review for a Blog specified by id.
-
-- Require Authentication: true
-- Request
-
-  - Method: POST
-  - URL: /api/blogs/:blogId/reviews
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "review": "This was an awesome Blog!",
-      "stars": 5
-    }
-    ```
-
-- Successful Response
-
-  - Status Code: 201
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "id": 1,
-      "userId": 1,
-      "blogId": 1,
-      "review": "This was an awesome Blog!",
-      "stars": 5,
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36"
-    }
-    ```
-
-- Error Response: Body validation errors
-
-  - Status Code: 400
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Validation error",
-      "statusCode": 400,
-      "errors": {
-        "review": "Review text is required",
-        "stars": "Stars must be an integer from 1 to 5"
-      }
-    }
-    ```
-
-- Error response: Couldn't find a Blog with the specified id
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Blog couldn't be found",
-      "statusCode": 404
-    }
-    ```
-
-- Error response: Review from the current user already exists for the Blog
-
-  - Status Code: 403
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "User already has a review for this Blog",
-      "statusCode": 403
-    }
-    ```
-
-### Add an Image to a Review based on the Review's id
-
-Create and return a new image for a review specified by id.
-
-- Require Authentication: true
-- Require proper authorization: Review must belong to the current user
-- Request
-
-  - Method: POST
-  - URL: /api/reviews/:reviewId/images
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "url": "image url"
-    }
-    ```
-
-- Successful Response
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "id": 1,
-      "url": "image url"
-    }
-    ```
-
-- Error response: Couldn't find a Review with the specified id
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Review couldn't be found",
-      "statusCode": 404
-    }
-    ```
-
-- Error response: Cannot add any more images because there is a maximum of 10
-  images per resource
-
-  - Status Code: 403
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Maximum number of images for this resource was reached",
-      "statusCode": 403
-    }
-    ```
-
-### Edit a Review
-
-Update and return an existing review.
-
-- Require Authentication: true
-- Require proper authorization: Review must belong to the current user
-- Request
-
-  - Method: PUT
-  - URL: /api/reviews/:reviewId
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "review": "This was an awesome Blog!",
-      "stars": 5
-    }
-    ```
-
-- Successful Response
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "id": 1,
-      "userId": 1,
-      "blogId": 1,
-      "review": "This was an awesome Blog!",
-      "stars": 5,
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-20 10:06:40"
-    }
-    ```
-
-- Error Response: Body validation errors
-
-  - Status Code: 400
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Validation error",
-      "statusCode": 400,
-      "errors": {
-        "review": "Review text is required",
-        "stars": "Stars must be an integer from 1 to 5"
-      }
-    }
-    ```
-
-- Error response: Couldn't find a Review with the specified id
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Review couldn't be found",
-      "statusCode": 404
-    }
-    ```
-
-### Delete a Review
-
-Delete an existing review.
-
-- Require Authentication: true
-- Require proper authorization: Review must belong to the current user
-- Request
-
-  - Method: DELETE
-  - URL: /api/reviews/:reviewId
-  - Body: none
-
-- Successful Response
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Successfully deleted",
-      "statusCode": 200
-    }
-    ```
-
-- Error response: Couldn't find a Review with the specified id
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Review couldn't be found",
-      "statusCode": 404
-    }
-    ```
-
-## BOOKINGS
-
-### Get all of the Current User's Bookings
-
-Return all the bookings that the current user has made.
-
-- Require Authentication: true
-- Request
-
-  - Method: GET
-  - URL: /api/bookings/current
-  - Body: none
-
-- Successful Response
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "Bookings": [
-        {
-          "id": 1,
-          "blogId": 1,
-          "Blog": {
-            "id": 1,
-            "ownerId": 1,
-            "address": "123 Disney Lane",
-            "city": "San Francisco",
-            "state": "California",
-            "country": "United States of America",
-            "lat": 37.7645358,
-            "lng": -122.4730327,
-            "name": "App Academy",
-            "price": 123,
-            "previewImage": "image url"
-          },
-          "userId": 2,
-          "startDate": "2021-11-19",
-          "endDate": "2021-11-20",
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36"
-        }
-      ]
-    }
-    ```
-
-### Get all Bookings for a Blog based on the Blog's id
-
-Return all the bookings for a Blog specified by id.
-
-- Require Authentication: true
-- Request
-
-  - Method: GET
-  - URL: /api/blogs/:blogId/bookings
-  - Body: none
-
-- Successful Response: If you ARE NOT the owner of the Blog.
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "Bookings": [
-        {
-          "blogId": 1,
-          "startDate": "2021-11-19",
-          "endDate": "2021-11-20"
-        }
-      ]
-    }
-    ```
-
-- Successful Response: If you ARE the owner of the Blog.
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "Bookings": [
-        {
-          "User": {
-            "id": 2,
-            "firstName": "John",
-            "lastName": "Smith"
-          },
-          "id": 1,
-          "blogId": 1,
-          "userId": 2,
-          "startDate": "2021-11-19",
-          "endDate": "2021-11-20",
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36"
-        }
-      ]
-    }
-    ```
-
-- Error response: Couldn't find a Blog with the specified id
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Blog couldn't be found",
-      "statusCode": 404
-    }
-    ```
-
-### Create a Booking from a Blog based on the Blog's id
-
-Create and return a new booking from a Blog specified by id.
-
-- Require Authentication: true
-- Require proper authorization: Blog must NOT belong to the current user
-- Request
-
-  - Method: POST
-  - URL: /api/blogs/:blogId/bookings
-  - Body:
-
-    ```json
-    {
-      "startDate": "2021-11-19",
-      "endDate": "2021-11-20"
-    }
-    ```
-
-- Successful Response
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "id": 1,
-      "blogId": 1,
-      "userId": 2,
-      "startDate": "2021-11-19",
-      "endDate": "2021-11-20",
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36"
-    }
-    ```
-
-- Error response: Body validation errors
-
-  - Status Code: 400
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Validation error",
-      "statusCode": 400,
-      "errors": {
-        "endDate": "endDate cannot be on or before startDate"
-      }
-    }
-    ```
-
-- Error response: Couldn't find a Blog with the specified id
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Blog couldn't be found",
-      "statusCode": 404
-    }
-    ```
-
-- Error response: Booking conflict
-
-  - Status Code: 403
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Sorry, this blog is already booked for the specified dates",
-      "statusCode": 403,
-      "errors": {
-        "startDate": "Start date conflicts with an existing booking",
-        "endDate": "End date conflicts with an existing booking"
-      }
-    }
-    ```
-
-### Edit a Booking
-
-Update and return an existing booking.
-
-- Require Authentication: true
-- Require proper authorization: Booking must belong to the current user
-- Request
-
-  - Method: PUT
-  - URL: /api/bookings/:bookingId
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "startDate": "2021-11-19",
-      "endDate": "2021-11-20"
-    }
-    ```
-
-- Successful Response
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "id": 1,
-      "blogId": 1,
-      "userId": 2,
-      "startDate": "2021-11-19",
-      "endDate": "2021-11-20",
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-20 10:06:40"
-    }
-    ```
-
-- Error response: Body validation errors
-
-  - Status Code: 400
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Validation error",
-      "statusCode": 400,
-      "errors": {
-        "endDate": "endDate cannot come before startDate"
-      }
-    }
-    ```
-
-- Error response: Couldn't find a Booking with the specified id
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Booking couldn't be found",
-      "statusCode": 404
-    }
-    ```
-
-- Error response: Can't edit a booking that's past the end date
-
-  - Status Code: 403
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Past bookings can't be modified",
-      "statusCode": 403
-    }
-    ```
-
-- Error response: Booking conflict
-
-  - Status Code: 403
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Sorry, this blog is already booked for the specified dates",
-      "statusCode": 403,
-      "errors": {
-        "startDate": "Start date conflicts with an existing booking",
-        "endDate": "End date conflicts with an existing booking"
-      }
-    }
-    ```
-
-### Delete a Booking
-
-Delete an existing booking.
-
-- Require Authentication: true
-- Require proper authorization: Booking must belong to the current user or the
-  Blog must belong to the current user
-- Request
-
-  - Method: DELETE
-  - URL: /api/bookings/:bookingId
-  - Body: none
-
-- Successful Response
-
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Successfully deleted",
-      "statusCode": 200
-    }
-    ```
-
-- Error response: Couldn't find a Booking with the specified id
-
-  - Status Code: 404
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Booking couldn't be found",
-      "statusCode": 404
-    }
-    ```
-
-- Error response: Bookings that have been started can't be deleted
-
-  - Status Code: 403
-  - Headers:
-    - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "message": "Bookings that have been started can't be deleted",
-      "statusCode": 403
-    }
-    ```
-
-## IMAGES
-
-### Delete a Blog Image
-
-Delete an existing image for a Blog.
+Delete an existing background image for a Blog.
 
 - Require Authentication: true
 - Require proper authorization: Blog must belong to the current user
 - Request
 
   - Method: DELETE
-  - URL: /api/blog-images/:imageId
+  - URL: /api/blogs/:blogId
   - Body: none
 
 - Successful Response
@@ -1421,16 +712,463 @@ Delete an existing image for a Blog.
     }
     ```
 
-### Delete a Review Image
+## Posts
 
-Delete an existing image for a Review.
+### Get all Post of the Current User
+
+Returns all the posts posted by the current user.
 
 - Require Authentication: true
-- Require proper authorization: Review must belong to the current user
+- Request
+
+  - Method: GET
+  - URL: /api/profile/current
+  - Body: none
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "Posts": [
+        {
+          "id": 1,
+          "blogId": 1,
+          "userId": 3,
+          "post_title": "First post",
+          "post_type": "Text",
+          "post_body": "I am new to this world",
+          "post_caption": "New person",
+          "video_embed_code": "link",
+          "image_embed_code": "link",
+          "likes": 34,
+          "reblogs": 1,
+          "created_at": "date",
+          "updated_at": "date"
+        },
+        {
+          "id": 2,
+          "blogId": 2,
+          "userId": 3,
+          "post_title": "second user post",
+          "post_type": "Text",
+          "post_body": "I am not new to this world",
+          "post_caption": "Old person",
+          "video_embed_code": "link",
+          "image_embed_code": "link",
+          "likes": 11,
+          "reblogs": 2,
+          "created_at": "date",
+          "updated_at": "date"
+        }
+      ]
+    }
+    ```
+
+### Create a Text Post for a Blog based on the Blog's id
+
+Create and return a new post for a Blog specified by id.
+
+- Require Authentication: true
+- Request
+
+  - Method: POST
+  - URL: /api/blogs/:blogId/new
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "post_title": "First post",
+      "post_type": "Text",
+      "post_body": "I am new to this world",
+      "post_caption": "New person",
+      "video_embed_code (nullable)": "link",
+      "image_embed_code (nullable)": "link"
+    }
+    ```
+
+- Successful Response
+
+  - Status Code: 201
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "id": 1,
+      "userId": 1,
+      "blogId": 1,
+      "post_title": "First post",
+      "post_type": "Text",
+      "post_body": "I am new to this world",
+      "post_caption": "New person",
+      "video_embed_code (nullable)": "link",
+      "image_embed_code (nullable)": "link",
+      "Likes": 0,
+      "Reblogs": 0,
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36"
+    }
+    ```
+
+- Error Response: Body validation errors
+
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "message": "Validation error",
+      "statusCode": 400,
+      "errors": {
+        "post_title": "Must be at least 8 Characters long",
+        "post_body": "Must be 10 characters long",
+        "post_caption": "Much be 8 Characters long",
+        "video_embed_code (nullable)": "Must be valid link",
+        "image_embed_code (nullable)": "Must be valid link"
+      }
+    }
+    ```
+
+- Error response: Couldn't find a Blog with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "message": "Blog couldn't be found",
+      "statusCode": 404
+    }
+    ```
+
+### Create a Link Post for a Blog based on the Blog's id
+
+Create and return a new post for a Blog specified by id.
+
+- Require Authentication: true
+- Request
+
+  - Method: POST
+  - URL: /api/blogs/:blogId/new
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "post_type": "Link",
+      "post_body (nullable)": "string",
+      "post_caption": "urlLink"
+    }
+    ```
+
+- Successful Response
+
+  - Status Code: 201
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "id": 1,
+      "userId": 1,
+      "blogId": 1,
+      "post_type": "Link",
+      "post_body": "string",
+      "post_caption": "urlLink",
+      "Likes": 0,
+      "Reblogs": 0,
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36"
+    }
+    ```
+
+- Error Response: Body validation errors
+
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "message": "Validation error",
+      "statusCode": 400,
+      "errors": {
+        "post_caption": "Must be valid link"
+      }
+    }
+    ```
+
+- Error response: Couldn't find a Blog with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "message": "Blog couldn't be found",
+      "statusCode": 404
+    }
+    ```
+
+  ### Create a Photo Post for a Blog based on the Blog's id
+
+Create and return a new photo post for a Blog specified by id.
+
+- Require Authentication: true
+- Request
+
+  - Method: POST
+  - URL: /api/blogs/:blogId/new
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "post_type": "Photo",
+      "post_body (nullable)": "string",
+      "image_embed_code": "link"
+    }
+    ```
+
+- Successful Response
+
+  - Status Code: 201
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "id": 1,
+      "userId": 1,
+      "blogId": 1,
+      "post_type": "Link",
+      "post_body": "string",
+      "image_embed_code": "link",
+      "Likes": 0,
+      "Reblogs": 0,
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36"
+    }
+    ```
+
+- Error Response: Body validation errors
+
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "message": "Validation error",
+      "statusCode": 400,
+      "errors": {
+        "image_embed_code (nullable)": "Must be valid link"
+      }
+    }
+    ```
+
+- Error response: Couldn't find a Blog with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "message": "Blog couldn't be found",
+      "statusCode": 404
+    }
+    ```
+
+### Create a Video Post for a Blog based on the Blog's id
+
+Create and return a new video post for a Blog specified by id.
+
+- Require Authentication: true
+- Request
+
+  - Method: POST
+  - URL: /api/blogs/:blogId/new
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "post_type": "Photo",
+      "post_body (nullable)": "string",
+      "video_embed_code": "link"
+    }
+    ```
+
+- Successful Response
+
+  - Status Code: 201
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "id": 1,
+      "userId": 1,
+      "blogId": 1,
+      "post_type": "Link",
+      "post_body": "string",
+      "video_embed_code": "link",
+      "Likes": 0,
+      "Reblogs": 0,
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36"
+    }
+    ```
+
+- Error Response: Body validation errors
+
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "message": "Validation error",
+      "statusCode": 400,
+      "errors": {
+        "video_embed_code (nullable)": "Must be valid link"
+      }
+    }
+    ```
+
+- Error response: Couldn't find a Blog with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "message": "Blog couldn't be found",
+      "statusCode": 404
+    }
+    ```
+
+### Edit a Post
+
+Update and return an existing post.
+
+- Require Authentication: true
+- Require proper authorization: post must belong to the current user
+- Request
+
+  - Method: PUT
+  - URL: /api/blogs/:blogId/:postId
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "post_title": "First post",
+      "post_type": "Text",
+      "post_body": "I am new to this world",
+      "post_caption": "New person",
+      "video_embed_code (nullable)": "link",
+      "image_embed_code (nullable)": "link"
+    }
+    ```
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "id": 1,
+      "userId": 1,
+      "blogId": 1,
+      "post_title": "First post",
+      "post_type": "Text",
+      "post_body": "I am new to this world",
+      "post_caption": "New person",
+      "video_embed_code (nullable)": "link",
+      "image_embed_code (nullable)": "link",
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-20 10:06:40"
+    }
+    ```
+
+- Error Response: Body validation errors
+
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "message": "Validation error",
+      "statusCode": 400,
+      "errors": {
+        "post_title": "Must be at least 8 Characters long",
+        "post_type": "Must select post type",
+        "post_body": "Must be 10 characters long",
+        "post_caption": "Much be 8 Characters long",
+        "video_embed_code (nullable)": "Must be valid link",
+        "image_embed_code (nullable)": "Must be valid link"
+      }
+    }
+    ```
+
+- Error response: Couldn't find a Post with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "message": "Post couldn't be found",
+      "statusCode": 404
+    }
+    ```
+
+### Delete a Post
+
+Delete an existing Post.
+
+- Require Authentication: true
+- Require proper authorization: Post must belong to the current user
 - Request
 
   - Method: DELETE
-  - URL: /api/review-images/:imageId
+  - URL: /api/blogs/:blogId/:postId
   - Body: none
 
 - Successful Response
@@ -1447,7 +1185,7 @@ Delete an existing image for a Review.
     }
     ```
 
-- Error response: Couldn't find a Review Image with the specified id
+- Error response: Couldn't find a Post with the specified id
 
   - Status Code: 404
   - Headers:
@@ -1456,29 +1194,21 @@ Delete an existing image for a Review.
 
     ```json
     {
-      "message": "Review Image couldn't be found",
+      "message": "Post couldn't be found",
       "statusCode": 404
     }
     ```
 
-## Add Query Filters to Get All Blogs
+### Delete a Post Image
 
-Return blogs filtered by query parameters.
+Delete an existing image for a Post.
 
-- Require Authentication: false
+- Require Authentication: true
+- Require proper authorization: Post must belong to the current user
 - Request
 
-  - Method: GET
-  - URL: /api/blogs
-  - Query Parameters
-    - page: integer, minimum: 1, maximum: 10, default: 1
-    - size: integer, minimum: 1, maximum: 20, default: 20
-    - minLat: decimal, optional
-    - maxLat: decimal, optional
-    - minLng: decimal, optional
-    - maxLng: decimal, optional
-    - minPrice: decimal, optional, minimum: 0
-    - maxPrice: decimal, optional, minimum: 0
+  - Method: DELETE
+  - URL: /api/blogs/:blogId/:postId
   - Body: none
 
 - Successful Response
@@ -1490,52 +1220,21 @@ Return blogs filtered by query parameters.
 
     ```json
     {
-      "Blogs": [
-        {
-          "id": 1,
-          "ownerId": 1,
-          "address": "123 Disney Lane",
-          "city": "San Francisco",
-          "state": "California",
-          "country": "United States of America",
-          "lat": 37.7645358,
-          "lng": -122.4730327,
-          "name": "App Academy",
-          "description": "Place where web developers are created",
-          "price": 123,
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "avgRating": 4.5,
-          "previewImage": "image url"
-        }
-      ],
-      "page": 2,
-      "size": 25
+      "message": "Successfully deleted",
+      "statusCode": 200
     }
     ```
 
-- Error Response: Query parameter validation errors
+- Error response: Couldn't find a Post Image with the specified id
 
-  - Status Code: 400
+  - Status Code: 404
   - Headers:
     - Content-Type: application/json
   - Body:
 
     ```json
     {
-      "message": "Validation Error",
-      "statusCode": 400,
-      "errors": {
-        "page": "Page must be greater than or equal to 1",
-        "size": "Size must be greater than or equal to 1",
-        "maxLat": "Maximum latitude is invalid",
-        "minLat": "Minimum latitude is invalid",
-        "minLng": "Maximum longitude is invalid",
-        "maxLng": "Minimum longitude is invalid",
-        "minPrice": "Maximum price must be greater than or equal to 0",
-        "maxPrice": "Minimum price must be greater than or equal to 0"
-      }
+      "message": "Post Image couldn't be found",
+      "statusCode": 404
     }
     ```
-
-    ![image](https://user-images.githubusercontent.com/60053292/216487616-be7ee4c3-b45f-4ae3-b5b9-2e00a7e44719.png)
