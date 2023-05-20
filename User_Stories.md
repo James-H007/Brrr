@@ -96,6 +96,7 @@
             * So that I can change banner images or blog profile pictures
 
 ### Deleting BrrrBlogs
+* As a logged in user, I will be unable to delete the BrrBlog that was created on account creation. 
 * As a logged in user, I want to be able to delete my BrrrBlog by clicking a Delete button associated with the BrrrBlog anywhere that BrrrBlogs appear.
     * When I'm on the `/blogs` page:
         * I can click "Delete" to permanently delete a BrrrPost I have posted.
