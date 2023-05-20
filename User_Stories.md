@@ -134,4 +134,12 @@
     * When I'm on `/likes` page:
         * I can view what posts I like:
             * So I can look at the funny memes and cat videos I liked.
+---
+### BrrComments (Optional)
+---
+### Comments
+* As a logged in user, I want to be able to comment on posts
+  * When I am on `/:postId`:
+    * I can comment on a post
+        * So I can tell this blog poser I find funny
          
