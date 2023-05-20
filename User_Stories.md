@@ -43,6 +43,19 @@
 
 ### Create BrrrPosts
 
+1. There should be a "pen icon" on the navigation bar on the right side for the logged-in users. There should also be 4 "post type" icons at the top of the feed.
+2. Upon clicking the "pen icon" or any of the 4 "post type" icons, a modal should pop up which is a blank form to gather data for a new post.
+3. In the modal, the header should be the blog title, to the top left of the modal box, there needs to be the blog avatar. Depending on the post type, there should be different inputs for the form.
+4. On the blog title, t
+5. The submit button should have the text 'Post'
+6. The modal should have a button that says "Close". When clicked it, should bring up another modal with no background saying, "Discard this post?". There should be two buttons below it with the following text, "Nevermind" and "Discard". If "Nevermind" is pressed, return the user back the post form. None of the form inputs should be affected. If "Discard" is pressed, exit out of the form modal. 
+7. The user should be able to exit by clicking outside of the modal.
+8. For `Text` Post Types, there should be a caption that says "Title". There has to be a textarea below that will be inputted as a string inside the data. If both areas are empty, disable the submit button.
+9. For `Image` Post Types, there should be an icon image of a camera with the placeholder text "Upload images underneath it". When the camera icon is clicked on, the user should receive a popup to upload an image from their computer. Validations should check if it's a `.png`, `.jpg`, `.jpeg`, '.gif'. The limit should be 2 MB. Alternatively, allow user to upload an image link. This should have a textarea input for users to add a description. If there is no image or image link, disable the submit button. If the image is uploaded or the image-url is inputted, show a thumbnail of the image and show the textarea box for the user to add a description.
+10. For `Link` Post Types, there should be a single text input field that will take in a url. Placeholder for input should be `Type or paste Link`. The submit button should be disabled until a URL has been inputted. Once a URL is inputted, show the url link, below it have two optional text inputs with the following placeholders, "Enter a title" and "Enter a summary". The text area field to add a description should also pop up once the URL has been inputted. 
+11. For `Video` Post Types, there should be a video camera icon with a text input field below it with the placeholder "Upload Video URL". The submit button should be disabled if the field is empty. The user should be able to put in the URL. Once the URL is inputted, a preview of the video should be displayed. The textarea to add a description should also be included. 
+12. When the user successfully submits a post, they should be redirected to the post they just created. 
+13. Navigating outside of the modal and back to create a post should reset any erros and clears all data entered (back to its default state)
 __________
 
 --- This will be a Modal. ---
@@ -55,8 +68,6 @@ __________
    * 3). When I arrive to the post Modal, I am able to put input data, ex.) "Text", "Image", "Video", "Link".
    * 4). Inputting correct data will allow the user to click on the "Create Post" button.
    * 5). After this the user will be redirected to the "/posts" route, where they can view their post.
-   
-   
    
 __________
 
