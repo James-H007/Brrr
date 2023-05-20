@@ -65,7 +65,7 @@
 * As a logged in user, I want to be able to edit my BrrPosts by clicking an Edit button associated with the BrrPost anywhere that BrrPost appears.
   * When I'm on the `/feed`, `/posts/:id`, or `/users/:id/posts` pages:
     * I can click "Edit" to make permanent changes to BrrrTweets I have posted.
-      * So that I can fix any errors I make in my BrrrTweets.
+      * So that I can fix any errors I make in my BrrrTweets..
 
 ### Deleting BrrrPosts
 
