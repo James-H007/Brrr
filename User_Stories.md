@@ -75,7 +75,7 @@
       * So that when I realize I shouldn't have publicly said something, I can easily remove it.
 
 ### BrrBlogs
-
+----
 ### Creating BrrrBlogs
 
 * As a logged in user, I want to be able to create a BrrBlog.
@@ -84,10 +84,19 @@
             * So I can create more BrrrPosts in this new blog or have different blogs for different purposes
 
 ### Viewing BrrrBlogs
+* As a logged in user, I want to view other blogs.
+    * When I'm on the `/explore` or `:blog_title` page:
+        * I can view other blogs and their contents
+            * So I can see other blogs and see their memes
+ 
 * As a logged in user, I want to be able to view all my blogs.
     * When I'm on the `/blogs` page:
         * I can view all my Blogs that I have created and see the follower count of each blog.
             * So I can see how many of my friends follow me and have different niches of blogs
+    * When I'm on the `/blogs/:id` page:
+        * I can view that specific blog with that specific id
+            * So I can follow the blog or look through their posts
+            * It will redirect me to `/:blog_title`
 
 ### Updating BrrrBlogs
 * As a logged in user, I want to be able to edit my BrrBlogs by clicking an Edit button associated with the BrrrBlog anywhere that BrrrBlog appears.
@@ -101,3 +110,26 @@
     * When I'm on the `/blogs` page:
         * I can click "Delete" to permanently delete a BrrrPost I have posted.
             * So that when I am unhappy with a blog I own, I can easily delete it.
+---
+### BrrFollows
+
+### Follows
+* As a logged in user, I want to be able to follow BrrBlogs
+* When I am on `/feed`, `/blogs/:id`, `/explore`:
+    * I can see other blogs to follow
+       * So that I can follow blogs that I think I would enjoy to see on my feed.
+### Followers
+* As a logged in user, I want to be able to see my followers
+    * When I am looking at my blog, I should be able to see how many followers that blog has
+        * So I can count how many of my friends and other people are following me.
+* Followers of my blog will see the contents of my blog show up on their feed in chronological order.
+
+### Likes
+* As a logged in user, I want to be able to like posts
+    * When I am looking at `/feed`, `/:blog_title` I can see the posts and like them
+        * So I can like my posts
+* As a logged in user, I want to see posts that I liked
+    * When I'm on `/likes` page:
+        * I can view what posts I like:
+            * So I can look at the funny memes and cat videos I liked.
+         
