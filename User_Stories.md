@@ -129,7 +129,7 @@
 ### Likes
 * As a logged in user, I want to be able to like posts
     * When I am looking at `/feed`, `/:blog_title` I can see the posts and like them
-        * So I can like my posts
+        * So I can like posts I find funny.
 * As a logged in user, I want to see posts that I liked
     * When I'm on `/likes` page:
         * I can view what posts I like:
