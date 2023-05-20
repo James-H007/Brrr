@@ -85,7 +85,7 @@
 
 ### Viewing BrrrBlogs
 * As a logged in user, I want to view other blogs.
-    * When I'm on the `/explore` or `:blog_title` page:
+    * When I'm on the `/explore` or `/:blog_title` page:
         * I can view other blogs and their contents
             * So I can see other blogs and see their memes
  
