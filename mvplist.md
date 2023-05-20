@@ -17,26 +17,30 @@ Brrr, a Tumblr clone, is a website for users to share text, images, and video po
 * All users can view a sampling of the most recent posts.
 * Users can have various post types such as text, images, or video.
 
-## 3. Comments
+## 3. Blogs
+* Logged in users ccan create multiple blogs.
+* Logged in users can edit and delete their own posts.
+* Each blog can have a different blog avatar, banner, and follower count.
+* Blogs can host posts that will show up on feeds of followers.
+
+## 4. Comments
 
 * Logged in users can post comments on posts.
 * Logged in users can edit and delete their own comments.
 * All users can view comments on posts.
 
-## 4. Likes
+## 5. Likes
 
 * Logged in users can like posts.
 * Logged in users can remove their own like from posts.
 * All users can see how many users have liked a post.
 
-## 5. Follows
+## 6. Follows
 
 * Logged in users can follow other users.
 * All users can check how many people follow them.
 * Users will see who they're following and their posts on their own feed.
 
-## 6. Bonus Features
-
-* Allow users to comment on other user's posts.
+## 7. Bonus Features
 * User's can upload their own profile pictures
 * Users can reblog other user's posts which will show up on their feed
