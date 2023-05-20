@@ -47,14 +47,14 @@ __________
 
 --- This will be a Modal. ---
 
--I can create a post from the following actions, (clicking on either of these options will display a modal).
-   1). Clicking on the "pen" icon to create a new post.
-   2). Clicking on 1 of the 4 "post type" icons.
+* -I can create a post from the following actions, (clicking on either of these options will display a modal).
+   * 1). Clicking on the "pen" icon to create a new post.
+   * 2). Clicking on 1 of the 4 "post type" icons.
    
--Creating a post.   
-   3). When I arrive to the post Modal, I am able to put input data, ex.) "Text", "Image", "Video", "Link".
-   4). Inputting correct data will allow the user to click on the "Create Post" button.
-   5). After this the user will be redirected to the "/posts" route, where they can view their post.
+* -Creating a post.   
+   * 3). When I arrive to the post Modal, I am able to put input data, ex.) "Text", "Image", "Video", "Link".
+   * 4). Inputting correct data will allow the user to click on the "Create Post" button.
+   * 5). After this the user will be redirected to the "/posts" route, where they can view their post.
    
    
    
