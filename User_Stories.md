@@ -111,8 +111,8 @@
         * I can click "Delete" to permanently delete a BrrrPost I have posted.
             * So that when I am unhappy with a blog I own, I can easily delete it.
 ---
-### BrrFollows
-
+### BrrrFollows
+---
 ### Follows
 * As a logged in user, I want to be able to follow BrrBlogs
 * When I am on `/feed`, `/blogs/:id`, `/explore`:
@@ -123,7 +123,9 @@
     * When I am looking at my blog, I should be able to see how many followers that blog has
         * So I can count how many of my friends and other people are following me.
 * Followers of my blog will see the contents of my blog show up on their feed in chronological order.
-
+---
+### BrrrLikes
+---
 ### Likes
 * As a logged in user, I want to be able to like posts
     * When I am looking at `/feed`, `/:blog_title` I can see the posts and like them
