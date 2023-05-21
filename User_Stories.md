@@ -46,8 +46,8 @@
 
 - [ ] 1. There should be a "pen icon" on the navigation bar on the right side for the logged-in users. There should also be 4 "post type" icons at the top of the feed.
 - [ ] 2. Upon clicking the "pen icon" or any of the 4 "post type" icons, a modal should pop up which is a blank form to gather data for a new post.
-- [ ] 3. In the modal, the header should be the blog title, to the top left of the modal box, there needs to be the blog avatar. Depending on the post type, there should be different inputs for the form.
-- [ ] 4. On the blog title, the user should be able to click on the blog title. Clicking on the blog title will pop up another drop down modal to switch between the user's blogs. This will then be the blog that will be the owner of the new post.
+- [ ] 3. In the modal, the header should be the blog name, to the top left of the modal box, there needs to be the blog avatar. Depending on the post type, there should be different inputs for the form.
+- [ ] 4. On the blog name, the user should be able to click on the blog name. Clicking on the blog name will pop up another drop down modal to switch between the user's blogs. This will then be the blog that will be the owner of the new post.
 - [ ] 5. The submit button should have the text 'Post'
 - [ ] 6. The modal should have a button that says "Close". When clicked it, should bring up another modal with no background saying, "Discard this post?". There should be two buttons below it with the following text, "Nevermind" and "Discard". If "Nevermind" is pressed, return the user back the post form. None of the form inputs should be affected. If "Discard" is pressed, exit out of the form modal. 
 - [ ] 7. The user should be able to exit by clicking outside of the modal.
@@ -57,31 +57,36 @@
 - [ ] 11. For `Video` Post Types, there should be a video camera icon with a text input field below it with the placeholder "Upload Video URL". The submit button should be disabled if the field is empty. The user should be able to put in the URL. Once the URL is inputted, a preview of the video should be displayed. The textarea to add a description should also be included. 
 - [ ] 12. When the user successfully submits a post, they should be redirected to the post they just created. 
 - [ ] 13. Navigating outside of the modal and back to create a post should reset any erros and clears all data entered (back to its default state)
-- [ ] 14. Error validations of incorrect data types should be placed below the blog title.
+- [ ] 14. Error validations of incorrect data types should be placed below the blog name.
+- [ ] 15. The url should contain a query url string with the blog_name and post type. For example if the blog's name is "Guest1" and they wanted to make an "image" post type, the url should change to `/new/photo?name=guest1`.
 
 ### Feature: Feed - List of Posts 
 - [ ] 1. Navigation bar should be fixed on top of the page at all times.
 - [ ] 2. The users should see posts based on the other users they follow in chronological order, from newest at the top to the oldest at the bottom. If the user isn't following anyone, they should be recommended some blogs to follow.
 - [ ] 3. If a user is not logged in, the navigation bar should only have a "Log in" button on the top right. Their feed should be seeded data from default site admin posts.
-- [ ] 4. Posts are stacked on top of each other. A post should have the blog's icon on the top left of the post box. The blog title it's from at the top left. Show a 'like' and 'comment' button. A display of notes which is the sum of "Likes" + "Reblogs" + "Comments".
-- [ ] 5. Clicking on the blog title or blog avatar of the post should either have a modal pop up of the respective blog or redirect the user to the blog page.
-- [ ] 6. Hovering over a blog title or blog avatar should show a pop up of the blog's banner, title, description, and avatar. There should also be a follow/unfollow button users can click on.
+- [ ] 4. Posts are stacked on top of each other. A post should have the blog's icon on the top left of the post box. The blog name it's from at the top left. Show a 'like' and 'comment' button. A display of notes which is the sum of "Likes" + "Reblogs" + "Comments".
+- [ ] 5. Clicking on the blog name or blog avatar of the post should either have a modal pop up of the respective blog or redirect the user to the blog page.
+- [ ] 6. Hovering over a blog name or blog avatar should show a pop up of the blog's banner, name, title, description, and avatar. There should also be a follow/unfollow button users can click on.
 
 ### Feature: View Post Details
 - [ ] 1. Post details are similar to how they are viewed on a feed, but instead it's just a single post. Ex. Display Likes, Reblog and Comment Buttons. Show note counts. 
-- [ ] 2. There should be a follow button next to the blog title, if the user is not following the user of that post. If they click on it, they should be now following that user and the follow button should disappear.
+- [ ] 2. There should be a follow button next to the blog name, if the user is not following the user of that post. If they click on it, they should be now following that user and the follow button should disappear.
 - [ ] 3. If a user clicks on the comment button or reblog button, have a pop up alert saying, "This feature has yet to be implemented." (Bonus: Implemenet the functionality)
 - [ ] 4. If a user clicks on the like button, change the state of the heart from gray to red. The user can toggle between the 'like' button, which should dynamically change the note counts without having to refresh the page.
 - [ ] 5. If a user is the owner of the post, they should be able to see 'cog' or 'triple dot' icon on the top right in the post. Clicking on it should show a dropdown which displays the time the post was updated/created. It should also show two choices stacked on top of each other. Edit and Delete. Clicking on the respective button will lead to the Feature: Edit Post or Feature: Delete Post.
+- [ ] 6. If a user is the owner of the post, they should also see a 'pencil' and 'trashcan' icon that will lead to the 'Edit' and 'Delete' feature of the specific post. 
 
 ### Feature: Edit Post
 - [ ] 1. Required Authentication. Clicking on the Edit Button which is located by clicking on the "triple dots" or "cog" will show a dropdown that will have an edit button. Clicking on the button will bring up a form.
-- [ ] 2. The form will look different based on the 'Post Type'. It will have the information already filled out similar to 'Posting a BrrPost'. The user is free to edit the title, contents, and captions of the post.
-- [ ] 3. It should have the same functionality of a 'Posting a BrrrPost'.
-- [ ] 4. Instead of a "Submit" button, it should say "Save" instead. Upon clicking save, the changes will be added to the post.
+- [ ] 2. A modal should pop up which is similar to "Posting a BrrPost". The url should change into `/edit/:blogName/:postId`.
+- [ ] 3. The form will look different based on the 'Post Type'. It will have the information already filled out similar to 'Posting a BrrPost'. The user is free to edit the title, contents, and captions of the post.
+- [ ] 4. It should have the same functionality of a 'Posting a BrrrPost'.
+- [ ] 5. Instead of a "Submit" button, it should say "Save" instead. Upon clicking save, the changes will be added to the post.
 
 ### Feature: Delete Post
-- [ ] 1. 
+- [ ] 1. On click of the "trashcan" icon or "Delete" button from the dropdown menu, a modal pop up without any solid background should appear. It should say, "Are you sure you want to delete this post?" and then have two buttons "Cancel" and "OK". If 'cancel' is clicked on, end the modal. If the 'OK' button is clicked on, delete the post and end the modal. (Optional) Have an animation of the post fade away on delete. The post should be gone and the user should not have to refresh to see the post gone.
+- [ ] 2. If the user is not the owner of the post, the delete buttons should be hidden.
+- [ ] 3. Once the post is deleted, the post should not appear on any parts of the blog or website.
 __________
 
 --- This will be a Modal. ---
