@@ -39,6 +39,34 @@
     * I can log out of my account and be redirected to a page displaying recent FauxTweets.
       * So that I can easily log out to keep my information secure.
 
+## BrrrBlogs
+
+### Feature: Create BrrrBlogs
+- [ ] 1. When the logged in user clicks on the "person" icon on the navigation bar, there should be a drop down, that shows likes, following, and a list of the user's blogs. Above the stack of blogs, there should be a box with the text, "Blogs" and a "+ New" text which can be clicked on. Once clicked, the user should be navigated to the `/new/blog` route.
+- [ ] 2. Once the user is redirected, the user must type in a `blog_title`and `blog_name`. The `blog_name` must be unique.
+- [ ] 3. Error validations must appear at the top if the user fails to meet the form requirements. `"You must enter a title."` and `"You must enter a blog name"` are the two requirements. If the user chooses a blog name that is already taken, there should be an error that appears at the top saying `"Blog name is taken!"`
+- [ ] 4. There should be a submit button on the bottom left of the page that says "Create Blog". Once the button is clicked, they will be redirected to the user's blog page.
+- [ ] 5. There should be a 'cancel' button, when clicked it should redirect the user to their feed. When the user goes back all the inputs and error validations should return to their default state.
+
+### Feature: Viewing BrrrBlogs
+- [ ] 1. When the logged in user clicks on a `blog_name` or `blog_avatar` on their feed, they will be redirected to that user's blog. The route should be called `/:blog_name`.
+- [ ] 2. The blog should have a similar functionality to a feed, but instead we only see the posts of the respective blog. At the top of the blog, we should see the blog's banner, title, avatar, description and name.
+- [ ] 3. If the logged-in user is not following the blog owner, then there should be a `Follow` button at the top. Once clicked, the `Follow` button should turn into `Following` button. The user can toggle between following and not following the user with that button.
+- [ ] 4. If the logged-in user is the owner of that blog, there should be a blue `Blog Settings` button. When clicked on it should take you to the `/settings/blog/:blog_name`. If the user tries to use this route to edit another blog that they do not own, redirect them to an error page. The error page should say unauthorized access.
+
+### Feature: Editing BrrrBlogs
+- [ ] 1. When the user clicks on "Blog Settings" when they are on their blog page or through the navigation bar drop menu, where they can also select "Blog Settings", they will be redirected to the `/settings/blog/:blog_name`. Authorization is required, if not, redirect the user to an error page.
+- [ ] 2. When the user is in the blog settings page, they should should have an option to change their blog title, description, banner, avatar, and name. If the user tries to change their name to an already taken one, display an error next to the text field input which says, `"Blog name has been taken"`. When the user is in the process of editing the name, two new buttons should pop up "Cancel" and "Save". Pressing the "Save" button will attempt to change the blog name. The user should not have to refresh the page to see the changes.
+- [ ] 3. There should be a preview of the icon and banner image with a button saying "Edit Appearance" on the top right of the banner display. This will pop up 4 new buttons on the page. A 'Cancel' and 'Save' button on the top right. Below the save button is a 'pencil' icon when clicked allows the user to change their banner. On the blog avatar, there should be another 'pencil' icon, when clicked it should allow the user to change their blog avatar. When either 'Cancel' or 'Save' is pressed, the following buttons should disappear and return to only the "Edit Appearance" button.
+
+### Feature: Deleting BrrrBlogs
+- [ ] 1. At the bottom of the `/settings/blog/:blog_name` page, there should be a red 'Delete <blog_name>` button. Once press, the user should be redirected to `/blog/:blog_name/delete` saying if the user is absolutely sure if they want to delete the blog. There should be an input for the user's email and password in order to verify this.
+- [ ] 2. The submit button shoudl be a red button that says `Delete <blog_name>`. 
+- [ ] 3. There should be a small underlined 'Nevermind' line underneath the submit button in the modal. It will redirect back to the previous page for the settings.
+- [ ] 4. If the credentials for the email and password are correct and the submit button to delete is pressed, the forms should disappear and be told that the blog has been successfully deleted. The user can press a button to be redirected back to their feed.
+- [ ] 5. The user should not be able to delete their main blog.
+
+---
 
 ## BrrrPosts
 
@@ -60,7 +88,7 @@
 - [ ] 14. Error validations of incorrect data types should be placed below the blog name.
 - [ ] 15. The url should contain a query url string with the blog_name and post type. For example if the blog's name is "Guest1" and they wanted to make an "image" post type, the url should change to `/new/photo?name=guest1`.
 
-### Feature: Feed - List of Posts 
+### Feature: BrrrFeed - List of Posts 
 - [ ] 1. Navigation bar should be fixed on top of the page at all times.
 - [ ] 2. The users should see posts based on the other users they follow in chronological order, from newest at the top to the oldest at the bottom. If the user isn't following anyone, they should be recommended some blogs to follow.
 - [ ] 3. If a user is not logged in, the navigation bar should only have a "Log in" button on the top right. Their feed should be seeded data from default site admin posts.
@@ -68,7 +96,7 @@
 - [ ] 5. Clicking on the blog name or blog avatar of the post should either have a modal pop up of the respective blog or redirect the user to the blog page.
 - [ ] 6. Hovering over a blog name or blog avatar should show a pop up of the blog's banner, name, title, description, and avatar. There should also be a follow/unfollow button users can click on.
 
-### Feature: View Post Details
+### Feature: View BrrrPost Details
 - [ ] 1. Post details are similar to how they are viewed on a feed, but instead it's just a single post. Ex. Display Likes, Reblog and Comment Buttons. Show note counts. 
 - [ ] 2. There should be a follow button next to the blog name, if the user is not following the user of that post. If they click on it, they should be now following that user and the follow button should disappear.
 - [ ] 3. If a user clicks on the comment button or reblog button, have a pop up alert saying, "This feature has yet to be implemented." (Bonus: Implemenet the functionality)
@@ -76,14 +104,14 @@
 - [ ] 5. If a user is the owner of the post, they should be able to see 'cog' or 'triple dot' icon on the top right in the post. Clicking on it should show a dropdown which displays the time the post was updated/created. It should also show two choices stacked on top of each other. Edit and Delete. Clicking on the respective button will lead to the Feature: Edit Post or Feature: Delete Post.
 - [ ] 6. If a user is the owner of the post, they should also see a 'pencil' and 'trashcan' icon that will lead to the 'Edit' and 'Delete' feature of the specific post. 
 
-### Feature: Edit Post
+### Feature: Edit BrrrPost
 - [ ] 1. Required Authentication. Clicking on the Edit Button which is located by clicking on the "triple dots" or "cog" will show a dropdown that will have an edit button. Clicking on the button will bring up a form.
 - [ ] 2. A modal should pop up which is similar to "Posting a BrrPost". The url should change into `/edit/:blogName/:postId`.
 - [ ] 3. The form will look different based on the 'Post Type'. It will have the information already filled out similar to 'Posting a BrrPost'. The user is free to edit the title, contents, and captions of the post.
 - [ ] 4. It should have the same functionality of a 'Posting a BrrrPost'.
 - [ ] 5. Instead of a "Submit" button, it should say "Save" instead. Upon clicking save, the changes will be added to the post.
 
-### Feature: Delete Post
+### Feature: Delete BrrrPost
 - [ ] 1. On click of the "trashcan" icon or "Delete" button from the dropdown menu, a modal pop up without any solid background should appear. It should say, "Are you sure you want to delete this post?" and then have two buttons "Cancel" and "OK". If 'cancel' is clicked on, end the modal. If the 'OK' button is clicked on, delete the post and end the modal. (Optional) Have an animation of the post fade away on delete. The post should be gone and the user should not have to refresh to see the post gone.
 - [ ] 2. If the user is not the owner of the post, the delete buttons should be hidden.
 - [ ] 3. Once the post is deleted, the post should not appear on any parts of the blog or website.
