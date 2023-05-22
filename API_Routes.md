@@ -264,8 +264,13 @@ Returns all the Blogs.
       "Blogs": [
         {
           "id": 1,
-          "ownerId": 1,
-          "Title": "Title bs",
+          "owner_id": 1,
+          "default_blog": true,
+          "title": "This is my Blog Title!",
+          "banner_img": banner.png,
+          "blog_avatar": avatar.png,
+          "blog_name": "Karen222",
+          "description": "My name is Karen. 23/F"
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
           "posts":
@@ -741,7 +746,7 @@ Returns all the posts posted by the current user.
           "userId": 3,
           "post_title": "First post",
           "post_type": "Text",
-          "post_body": "I am new to this world",
+          "post_description": "I am new to this world",
           "post_caption": "New person",
           "video_embed_code": "link",
           "image_embed_code": "link",
