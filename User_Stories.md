@@ -115,6 +115,20 @@
 - [ ] 1. On click of the "trashcan" icon or "Delete" button from the dropdown menu, a modal pop up without any solid background should appear. It should say, "Are you sure you want to delete this post?" and then have two buttons "Cancel" and "OK". If 'cancel' is clicked on, end the modal. If the 'OK' button is clicked on, delete the post and end the modal. (Optional) Have an animation of the post fade away on delete. The post should be gone and the user should not have to refresh to see the post gone.
 - [ ] 2. If the user is not the owner of the post, the delete buttons should be hidden.
 - [ ] 3. Once the post is deleted, the post should not appear on any parts of the blog or website.
+
+
+## Feature: BrrrLikes
+- [ ] 1. A logged in user should be able to click on the 'heart' icon in a post on the feed, specific post, or on a blog. The 'heart' icon should turn from red to gray and vice versa if the user wants to unlike the post.
+- [ ] 2. When a post is liked, it should increase the note count by 1 and if a post is unliked, the note count should decrease by 1.
+- [ ] 3. A post can only be liked once by a specific user. They should be unable able to spam likes.
+- [ ] 4. The note count should dynamically change without the user needing to refresh the page.
+- [ ] 5. Logged in users should be able to see all the posts they liked, similar format to a feed. The route should be `/likes`.
+
+## Feature: BrrrFollows
+- [ ] 1. Users can follow other blogs. They can hover over a blog name for a pop up of the preview of the blog and click on the follow button. The route `/explore` should be helpful in finding blogs if the user hasn't followed any blogs yet.
+- [ ] 2. Once a user follows a blog, the blog's content will show up in the user's feed combined with the other blogs they followed. This will create a chronological list of the contents.
+- [ ] 3. The user can unfollow blogs, by clicking on the 'Unfollow' button. The follow/unfollow button can be clicked to transition between the two choices.
+- [ ] 4. The user can all the blogs they are following in the route `/following`. This will include the "Blog Avatar" and "Blog Name". It will be ordered alphabetically. There will also be an unfollow button next to each blog in the following page.
 __________
 
 --- This will be a Modal. ---
