@@ -14,3 +14,5 @@ class Comment(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     post = db.relationship('Post', back_populates='comments')
+
+    #Many Side, many comments can go to one post

@@ -1,17 +1,18 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
-likes = db.Table(
+#LIKES SHOULD NOT NEED TO BE A JOIN TABLE, CODE BLOCK BELOW DEPRECATED
+# likes = db.Table(
 
-    'likes',
-    db.Model.metadata,
+#     'likes',
+#     db.Model.metadata,
 
-    db.Column('user_id', db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), primary_key=True),
-    db.Column('post_id', db.Integer, db.ForeignKey(add_prefix_for_prod("posts.id")), primary_key=True),
-    db.Column('is_liked', db.Boolean),
-    db.Column('created_at', db.DateTime, default=datetime.utcnow),
-    db.Column('created_at', db.DateTime, default=datetime.utcnow,  onupdate=datetime.utcnow)
-)
+#     db.Column('user_id', db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), primary_key=True),
+#     db.Column('post_id', db.Integer, db.ForeignKey(add_prefix_for_prod("posts.id")), primary_key=True),
+#     db.Column('is_liked', db.Boolean),
+#     db.Column('created_at', db.DateTime, default=datetime.utcnow),
+#     db.Column('created_at', db.DateTime, default=datetime.utcnow,  onupdate=datetime.utcnow)
+# )
 
 followers = db.Table(
     'followers',
@@ -23,14 +24,15 @@ followers = db.Table(
 
 )
 
-comments = db.Table(
-    'comments',
-    db.Model.metadata,
+# Comments does not need to be a join table (Code below is deprecated)
+# comments = db.Table(
+#     'comments',
+#     db.Model.metadata,
 
-    db.Column('user_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'))),
-    db.Column('post_id', db.Integer, db.ForeignKey(add_prefix_for_prod('posts.id'))),
-    db.Column('comment', db.String(255))
-)
+#     db.Column('user_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'))),
+#     db.Column('post_id', db.Integer, db.ForeignKey(add_prefix_for_prod('posts.id'))),
+#     db.Column('comment', db.String(255))
+# )
 
 class Blog(db.Model):
     __tablename__ = "blogs"
@@ -40,7 +42,7 @@ class Blog(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    default_vlog = db.Column(db.Boolean, nullable=False)
+    default_blog = db.Column(db.Boolean, nullable=False)
     blog_title = db.Column(db.String(255))
     banner_img_url = db.Column(db.String(800))
     blog_avatar_url = db.Column(db.String(800))
@@ -63,6 +65,20 @@ class Blog(db.Model):
         secondary=followers,
         back_populates="user_follows"
     )
+
+    # @property
+    def to_dict_no_user(self):
+        return {
+            'id': self.id,
+            'default_ blog': self.default_blog,
+            'blog_title':self.blog_title,
+            'banner_img_url': self.banner_img_url,
+            'blog_avatar_url': self.blog_avatar_url,
+            'blog_name': self.blog_name,
+            'description':self.description,
+            'created_at':self.created_at,
+            'updated_at':self.updated_at
+        }
 
 class Post(db.Model):
     __tablename__ = "posts"
@@ -95,20 +111,24 @@ class Post(db.Model):
 
     #One side, post hosts many likes
     #When the post is deleted, then we delete all the likes associated with it
-    # likes = db.relationship("Like", back_populates='post', cascade='all, delete-orphan')
+    likes = db.relationship("Like", back_populates='post', cascade='all, delete-orphan')
 
-    #Many to Many: Posts can get liked by many users
-    post_likes = db.relationship(
-        'User',
-        secondary=likes,
-        back_populates="user_likes",
-    )
+    #Many to Many: Posts can get liked by many users (DEPRECATED)
+    # post_likes = db.relationship(
+    #     'User',
+    #     secondary=likes,
+    #     back_populates="user_likes",
+    # )
 
-    post_comments = db.relationship(
-        "User",
-        secondary=comments,
-        back_populates="user_comments"
-    )
+    #One side, post hosts many comments
+    comments = db.relationship("Comment", back_populates='post', cascade='all, delete-orphan')
+
+    # Code block below (DEPRECATED)
+    # post_comments = db.relationship(
+    #     "User",
+    #     secondary=comments,
+    #     back_populates="user_comments"
+    # )
 
 class PostImage(db.Model):
     __tablename__ = "post_images"

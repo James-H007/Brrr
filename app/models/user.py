@@ -2,7 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
-from .blogs_post import likes, followers, comments
+from .blogs_post import followers, Blog, Post, PostImage
 
 
 
@@ -23,13 +23,13 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     #A user can like many posts
-
-    user_likes = db.relationship(
-        "Post",
-        secondary=likes,
-        back_populates="post_likes",
-        cascade='all, delete-orphan'
-    )
+    # CODE BLOCK BELOW DEPRECATED
+    # user_likes = db.relationship(
+    #     "Post",
+    #     secondary=likes,
+    #     back_populates="post_likes",
+    #     cascade='all, delete-orphan'
+    # )
 
     # A user can follow many blogs
 
@@ -40,13 +40,13 @@ class User(db.Model, UserMixin):
     )
 
     # A user can leave many comments
+    # CODE BLOCK BELOW
+    # user_comments = db.relationship(
+    #     "Post",
+    #     secondary=comments,
+    #     back_populates="post_comments",
 
-    user_comments = db.relationship(
-        "Post",
-        secondary=comments,
-        back_populates="post_comments",
-
-    )
+    # )
 
     #One side: A user can own many blogs
     blogs = db.relationship("Blog", back_populates='user', cascade='all, delete-orphan')
@@ -63,6 +63,18 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name':self.last_name,
+            'username': self.username,
+            'email': self.email,
+            'profile_pic_url': self.profile_pic_url,
+            'blogs': [blog.to_dict_no_user() for blog in self.blogs],
+            'created_at':self.created_at,
+            'updated_at':self.updated_at
+        }
+    def to_dict_no_blogs(self):
         return {
             'id': self.id,
             'first_name': self.first_name,
