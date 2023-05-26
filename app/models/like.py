@@ -15,3 +15,14 @@ class Like(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     post = db.relationship("Post", back_populates="likes")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'userId': self.user_id,
+            'postId': self.post_id,
+            'isLiked': self.is_liked,
+            'createdAt': self.created_at,
+            'updatedAt': self.updated_at,
+            'post': self.post.to_dict()
+        }

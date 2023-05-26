@@ -65,23 +65,23 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
-            'first_name': self.first_name,
-            'last_name':self.last_name,
+            'firstName': self.first_name,
+            'lastName':self.last_name,
             'username': self.username,
             'email': self.email,
-            'profile_pic_url': self.profile_pic_url,
-            'blogs': [blog.to_dict_no_user() for blog in self.blogs],
-            'created_at':self.created_at,
-            'updated_at':self.updated_at
+            'profilePicUrl': self.profile_pic_url,
+            'blogs': [blog.to_dict() for blog in self.blogs],
+            'createdAt':self.created_at,
+            'updatedAt':self.updated_at
         }
     def to_dict_no_blogs(self):
         return {
             'id': self.id,
-            'first_name': self.first_name,
-            'last_name':self.last_name,
+            'firstName': self.first_name,
+            'lastName':self.last_name,
             'username': self.username,
             'email': self.email,
-            'profile_pic_url': self.profile_pic_url,
-            'created_at':self.created_at,
-            'updated_at':self.updated_at
+            'profilePicUrl': self.profile_pic_url,
+            'createdAt':self.created_at,
+            'updatedAt':self.updated_at
         }

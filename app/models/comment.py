@@ -16,3 +16,13 @@ class Comment(db.Model):
     post = db.relationship('Post', back_populates='comments')
 
     #Many Side, many comments can go to one post
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'postId': self.post_id,
+            'userId': self.user_id,
+            'comment': self.comment,
+            'createdAt': self.created_at,
+            'updatedAt': self.updated_at
+        }

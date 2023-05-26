@@ -67,17 +67,22 @@ class Blog(db.Model):
     )
 
     # @property
-    def to_dict_no_user(self):
+
+    def to_dict(self):
         return {
             'id': self.id,
-            'default_ blog': self.default_blog,
-            'blog_title':self.blog_title,
-            'banner_img_url': self.banner_img_url,
-            'blog_avatar_url': self.blog_avatar_url,
-            'blog_name': self.blog_name,
+            'ownerId': self.owner_id,
+            'defaultBlog': self.default_blog,
+            'blogTitle':self.blog_title,
+            'bannerImgUrl': self.banner_img_url,
+            'blogAvatarUrl': self.blog_avatar_url,
+            'blogName': self.blog_name,
+            'followerCount': len(self.blog_follows),
             'description':self.description,
-            'created_at':self.created_at,
-            'updated_at':self.updated_at
+            'createdAt':self.created_at,
+            'updatedAt':self.updated_at,
+            'posts':[post.to_dict() for post in self.posts]
+
         }
 
 class Post(db.Model):
@@ -130,6 +135,25 @@ class Post(db.Model):
     #     back_populates="user_comments"
     # )
 
+    def to_dict(self):
+        return {
+            'id':self.id,
+            'blogId':self.blog_id,
+            'userId':self.user_id,
+            'postTitle':self.post_title,
+            'postType':self.post_type,
+            'postDescription':self.post_description,
+            'videoEmbedCode':self.video_embed_code,
+            'imageEmbedCode':self.image_embed_code,
+            'likes':len(self.likes),
+            'reblogs':self.reblogs,
+            'comments':[comment.to_dict() for comment in self.comments],
+            'notes':self.notes,
+            'createdAt':self.created_at,
+            'updatedAt':self.updated_at,
+            'postImages': [image.to_dict() for image in self.post_images]
+        }
+
 class PostImage(db.Model):
     __tablename__ = "post_images"
 
@@ -144,3 +168,12 @@ class PostImage(db.Model):
 
     #Many images can go to one post
     post = db.relationship("Post", back_populates='post_images')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'postId': self.post_id,
+            'imageUrl': self.image_url,
+            'createdAt': self.created_at,
+            'updatedAt': self.updated_at
+        }
