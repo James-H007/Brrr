@@ -21,7 +21,7 @@ def seed_followers():
         description="This is blog about Turkeys",
     )
 
-    turkey.followers.append(terry)
+    turkey.blog_follows.append(terry)
 
     db.session.add(terry)
     db.session.add(turkey)
