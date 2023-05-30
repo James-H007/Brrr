@@ -15,6 +15,6 @@ class PostTypeForm(FlaskForm):
         choices=[('image', 'Image'), ('video', 'Video'), ('text', 'Text'), ('link', 'Link')],
         validators=[DataRequired()]
     )
-    image_embed_code = StringField('Image Embed Codee', validators=[DataRequired(), validate_image])
+    image_embed_code = StringField('Image Embed Codee', validators=[DataRequired()])
     video_embed_code = StringField('Video Embed Code', validators=[DataRequired()])
     submit = SubmitField('Post')
