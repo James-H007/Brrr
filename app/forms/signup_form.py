@@ -33,5 +33,5 @@ class SignUpForm(FlaskForm):
         'Username', validators=[DataRequired(), username_exists])
     email = StringField('Email', validators=[DataRequired(), user_exists])
     password = StringField('Password', validators=[DataRequired()])
-    profile_pic_url = FileField('Upload Profile Picture', valdiators=[DataRequired(), validate_image])
+    profile_pic_url = StringField('Upload Profile Picture', valdiators=[DataRequired(), validate_image])
     submit = SubmitField("Create")
