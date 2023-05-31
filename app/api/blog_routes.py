@@ -99,3 +99,17 @@ def blog_create():
 #         db.session.add(blog)
 #         db.session.commit()
 #         return {'blog': blog.to_dict()}
+
+@blog_routes.route("/following")
+@login_required
+def blog_follows():
+     """
+    Route to get all blogs followed by the current user
+    """
+     userId = current_user.id
+
+     user = User.query.get(userId)
+
+     followed_blogs = [{"blog_name": blog.blog_name, "blog_avatar": blog.blog_avatar_url} for blog in user.user_follows]
+
+     return {'followed_blogs': followed_blogs}, 200
