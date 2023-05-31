@@ -96,7 +96,7 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     post_title = db.Column(db.String(255))
     post_type = db.Column(db.String(255), nullable=False)
-    post_description = db.Column(db.String(255))
+    post_description = db.Column(db.String(1200))
     video_embed_code = db.Column(db.String(800))
     image_embed_code = db.Column(db.String(800))
     likes_count = db.Column(db.Integer)
