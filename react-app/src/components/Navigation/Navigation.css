@@ -1,3 +1,57 @@
+.navBar {
+  /* background-color: rgb(51, 51, 59); */
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  border-bottom: 1px solid lightgray;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+}
+
+
+.logoSearch {
+
+  display: flex;
+  flex-direction: row;
+  width: 45%;
+  margin-bottom: 8px;
+  margin-left: 2px;
+}
+
+.searchArea {
+  width: 80%;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.searchLogo {
+  width: 35px;
+  height: 35px;
+  margin-top: 5px;
+  margin-right: 5px;
+  opacity: .8;
+}
+
+.searchForm {
+  height: 65%;
+  width: 100%;
+  padding-top: 5px;
+}
+
+.searchInput {
+  width: 80%;
+  height: 90%;
+
+  border-radius: 5px;
+}
+
+
 .profile-dropdown {
   position: absolute;
 }
