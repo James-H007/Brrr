@@ -42,7 +42,7 @@ class Blog(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    default_blog = db.Column(db.Boolean, nullable=False)
+    default_blog = db.Column(db.Boolean, default=False, nullable=False)
     blog_title = db.Column(db.String(255))
     banner_img_url = db.Column(db.String(800))
     blog_avatar_url = db.Column(db.String(800))

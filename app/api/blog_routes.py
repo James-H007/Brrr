@@ -1,6 +1,7 @@
-from flask import Blueprint, jsonify, session, request
+from flask import Blueprint, jsonify, session, request, abort
 from flask_login import login_required, current_user
 from app.models import Blog, User, db
+from app.forms.blog_form import BlogForm
 
 blog_routes = Blueprint('blogs', __name__)
 
@@ -18,6 +19,9 @@ def blog(id):
     """
     Query for a blog by id and returns that blog in a dictionary
     """
+    if blog is None:
+        return jsonify({"error": "Blog not found"}), 404
+
     if request.method == 'GET':
         print(blog.to_dict())
         return blog.to_dict()
@@ -46,12 +50,14 @@ def blog(id):
         return {'successfully deleted'}
 
 
+
 @blog_routes.route('/create', methods=["POST"])
 @login_required
 def blog_create():
     """
-    Create a blog based on user id,, for the first time
+    Create a blog based on user id, for the first time
     """
+    print(current_user, "---------------------------------------------")
     userId = current_user.id
     form = BlogForm()
     if form.validate_on_submit():
@@ -66,6 +72,30 @@ def blog_create():
         )
         db.session.add(blog)
         db.session.commit()
-        return {'blog': blog.to_dict()}
+        return jsonify({'blog': blog.to_dict()})
+
+    # If form validation fails, you can return an error response
+    errors = form.errors
+    return jsonify({'errors': errors}), 400
 
 #Sign up => #Log in => #Create Default Blog
+
+# def blog_create():
+#     """
+#     Create a blog based on user id,, for the first time
+#     """
+#     userId = current_user.id
+#     form = BlogForm()
+#     if form.validate_on_submit():
+#         blog = Blog (
+#             blog_title = form.data["blog_title"],
+#             owner_id = userId,
+#             default_blog = form.data["default_blog"],
+#             banner_img_url = form.data["banner_img_url"],
+#             blog_avatar_url = form.data["blog_avatar_url"],
+#             blog_name = form.data["blog_name"],
+#             description = form.data["description"]
+#         )
+#         db.session.add(blog)
+#         db.session.commit()
+#         return {'blog': blog.to_dict()}
