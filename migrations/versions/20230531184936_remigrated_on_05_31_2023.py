@@ -1,20 +1,16 @@
-"""Completed database
+"""remigrated on 05/31/2023
 
-Revision ID: 052dd6ea94cb
-Revises:
-Create Date: 2023-05-27 11:05:01.730367
+Revision ID: 03316db0a82b
+Revises: 
+Create Date: 2023-05-31 18:49:36.033746
 
 """
 from alembic import op
 import sqlalchemy as sa
 
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
-
 
 # revision identifiers, used by Alembic.
-revision = '052dd6ea94cb'
+revision = '03316db0a82b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -64,7 +60,7 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('post_title', sa.String(length=255), nullable=True),
     sa.Column('post_type', sa.String(length=255), nullable=False),
-    sa.Column('post_description', sa.String(length=255), nullable=True),
+    sa.Column('post_description', sa.String(length=1200), nullable=True),
     sa.Column('video_embed_code', sa.String(length=800), nullable=True),
     sa.Column('image_embed_code', sa.String(length=800), nullable=True),
     sa.Column('likes_count', sa.Integer(), nullable=True),
@@ -108,9 +104,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['post_id'], ['posts.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
