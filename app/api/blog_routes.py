@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request, abort
 from flask_login import login_required, current_user
-from app.models import Blog, User, db
+from app.models import Blog, User, db, followers
 from app.forms.blog_form import BlogForm
 
 blog_routes = Blueprint('blogs', __name__)
@@ -113,3 +113,30 @@ def blog_follows():
      followed_blogs = [{"blog_name": blog.blog_name, "blog_avatar": blog.blog_avatar_url} for blog in user.user_follows]
 
      return {'followed_blogs': followed_blogs}, 200
+
+
+@blog_routes.route("/<int:id>/followers")
+@login_required
+def blog_followers(id):
+    """
+    Route to get all the blog followers
+    """
+    selected_blog = Blog.query.get(id)
+
+    if not selected_blog:
+        return {'message': 'Blog not found'}, 404
+
+    followersz = db.session.query(User).join(followers).filter(followers.c.blog_id == selected_blog.id).all()
+
+    return_format = [
+        {
+            "id": follower.id,
+            "first_name": follower.first_name,
+            "last_name": follower.last_name,
+            "email": follower.email,
+            "username": follower.username
+        }
+        for follower in followersz
+    ]
+
+    return {'followers': return_format}, 200
