@@ -95,7 +95,7 @@ def create_post(blog_id):
 
         return {'post': post.to_dict()}, 201
 
-    return {"error": "YURRRRR"}, 404 # <<-- change this after testing
+    return {"error": form.errors}, 404 # <<-- change this after testing
 
 
 @post_routes.route('/<int:post_id>', methods=["PUT"])
