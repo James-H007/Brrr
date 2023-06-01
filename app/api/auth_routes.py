@@ -3,6 +3,7 @@ from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+from flask_wtf.csrf import generate_csrf
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -83,3 +84,12 @@ def unauthorized():
     Returns unauthorized JSON when flask-login authentication fails
     """
     return {'errors': ['Unauthorized']}, 401
+
+
+@auth_routes.route('/csrf')
+def get_csrf():
+    """
+    Generates a new CSRF token.
+    """
+    csrf_token = generate_csrf()
+    return {"csrf_token": csrf_token}, 200
