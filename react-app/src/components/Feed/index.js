@@ -7,6 +7,8 @@ import video from "../../assets/video.svg"
 import Post from '../Post'
 
 const Feed = () => {
+
+
     return (
         <>
             <div className='main-feed'>
