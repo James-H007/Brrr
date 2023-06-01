@@ -19,6 +19,7 @@ function Navigation({ isLoaded }) {
 					<img src={MagnifyingGlass} alt="magnifying-glass" className='searchLogo' />
 					<form className='searchForm'>
 						<input type="text" name="search" placeholder='Search...' className='searchInput'></input>
+						<button type="submit" className='search-button'>Search</button>
 					</form>
 				</li>
 			</div>
