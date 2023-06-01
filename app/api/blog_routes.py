@@ -127,17 +127,16 @@ def blog_followers(id):
     if not selected_blog:
         return {'message': 'Blog not found'}, 404
 
-    followersz = db.session.query(User).join(followers).filter(followers.c.blog_id == selected_blog.id).all()
+    followers = selected_blog.followers.all()
 
     return_format = [
         {
             "id": follower.id,
             "first_name": follower.first_name,
             "last_name": follower.last_name,
-            "email": follower.email,
             "username": follower.username
         }
-        for follower in followersz
+        for follower in followers
     ]
 
     return {'followers': return_format}, 200
