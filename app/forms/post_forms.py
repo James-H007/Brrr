@@ -17,6 +17,6 @@ class PostTypeForm(FlaskForm):
         validators=[DataRequired()]
     )
     post_description = StringField('Add a description', validators=[Length(min=1, max=1200)] )
-    image_embed_code = StringField('Image Embed Code', validators=[DataRequired()])
-    video_embed_code = StringField('Video Embed Code', validators=[DataRequired()])
+    image_embed_code = StringField('Image Embed Code', validate_image)
+    video_embed_code = StringField('Video Embed Code')
     submit = SubmitField('Post')

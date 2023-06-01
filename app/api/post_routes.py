@@ -5,7 +5,7 @@ from app.forms.signup_form import SignUpForm
 from app.forms.post_forms import PostTypeForm
 from flask_login import current_user, login_user, logout_user, login_required
 
-post_routes = Blueprint('post', __name__)
+post_routes = Blueprint('posts', __name__)
 
 @post_routes.route('/')
 def posts():

@@ -31,11 +31,11 @@ def blog(id):
         Edit a blog to change the banner image, blog avatar, and title
         """
         blog_title = request.form['blog_title']
-        blog_avatar = request.form['blog_avatar_url']
+        blog_avatar_url = request.form['blog_avatar_url']
         banner_img_url = request.form['banner_img_url']
 
         blog["blog_title"] = blog_title
-        blog["blog_avatar"] = blog_avatar
+        blog["blog_avatar_url"] = blog_avatar_url
         blog["banner_img_url"] = banner_img_url
         db.session.commit()
         return blog.to_dict()
