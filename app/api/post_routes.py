@@ -7,7 +7,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.utils import secure_filename
 from ..aws_s3_bucket import s3, bucket
 
-post_routes = Blueprint('post', __name__)
+post_routes = Blueprint('posts', __name__)
 
 @post_routes.route('/')
 def posts():
