@@ -1,0 +1,28 @@
+button {
+    background-color: none;
+}
+
+.profile-button {
+    width: 40px;
+    height: 40px;
+    margin-right: 50px;
+    background-color: none;
+}
+
+.profile-button:hover {
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 10%;
+    right: 50px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin: 0;
+    padding: 20px;
+    width: 100px;
+    height: 100px;
+
+}
