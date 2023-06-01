@@ -4,6 +4,8 @@ from app.forms.login_form import LoginForm
 from app.forms.signup_form import SignUpForm
 from app.forms.post_forms import PostTypeForm
 from flask_login import current_user, login_user, logout_user, login_required
+from werkzeug.utils import secure_filename
+from ..aws_s3_bucket import s3, bucket
 
 post_routes = Blueprint('post', __name__)
 
@@ -61,11 +63,40 @@ def create_post(blog_id):
             video_embed_code = form.data["video_embed_code"],
             image_embed_code = form.data["image_embed_code"],
         )
+
         db.session.add(post)
         db.session.commit()
+
+        # We have to do this after ⬇ because we need the post.id
+
+        if 'file' in request.files:
+            file = request.files['file']
+            # if user does not select file, browser submits an empty part without a filename
+            if file.filename != '':
+                filename = secure_filename(file.filename)
+                file.save(filename)
+
+                # Upload the user's chosen file to AWS S3
+                s3.upload_file(
+                    Bucket='flaskbrrr',
+                    Filename=filename,
+                    Key=filename
+                )
+
+                # Get the URL of the uploaded file
+                url = f"https://{bucket}.s3.us-east-2.amazonaws.com/{filename}"
+
+                post_image = PostImage(
+                    post_id=post.id,
+                    image_url=url
+                )
+                db.session.add(post_image)
+                db.session.commit()
+
         return {'post': post.to_dict()}, 201
 
     return {"error": "YURRRRR"}, 404 # <<-- change this after testing
+
 
 @post_routes.route('/<int:post_id>', methods=["PUT"])
 @login_required
