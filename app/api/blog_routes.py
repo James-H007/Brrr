@@ -13,7 +13,8 @@ def blogs():
     blogs = Blog.query.all()
     return {'blogs': [blog.to_dict() for blog in blogs]}
 
-@blog_routes.route('/<int:id>', methods = ["GET", "PUT", "DELETE"])
+@blog_routes.route('/<int:id>', methods = ["GET", "DELETE"])  #🟨🟨🟨🟨🟨 Error's out with PUT
+@login_required
 def blog(id):
     blog = Blog.query.get(id)
     """
@@ -26,20 +27,6 @@ def blog(id):
         print(blog.to_dict())
         return blog.to_dict()
 
-    elif request.method == 'PUT':
-        """
-        Edit a blog to change the banner image, blog avatar, and title
-        """
-        blog_title = request.form['blog_title']
-        blog_avatar_url = request.form['blog_avatar_url']
-        banner_img_url = request.form['banner_img_url']
-
-        blog["blog_title"] = blog_title
-        blog["blog_avatar_url"] = blog_avatar_url
-        blog["banner_img_url"] = banner_img_url
-        db.session.commit()
-        return blog.to_dict()
-
     elif request.method == "DELETE":
         """
         Delete a blog based on id
@@ -48,6 +35,37 @@ def blog(id):
         db.session.delete(blog)
         db.session.commit()
         return {'Successfully deleted'}
+
+
+@blog_routes.route('/<int:id>/edit', methods = ["PUT"])  #🟨🟨🟨🟨🟨 Error's out with PUT
+@login_required
+def blog_edit(id):
+
+    userId = current_user.id
+
+    blog = Blog.query.get(id)
+
+    if not blog:
+        return {"Error": "Blog not found."}, 404
+
+    if blog.owner_id != userId:
+        return {"Error": "You don't have permission to edit this blog"}, 403
+
+    data = request.get_json()
+
+    if "blog_title" in data:
+        blog.blog_title = data["blog_title"]
+    if "banner_img_url" in data:
+        blog.banner_img_url = data["banner_img_url"]
+    if "blog_avatar_url" in data:
+        blog.blog_avatar_url = data["blog_avatar_url"]
+    if "description" in data:
+        blog.description = data["description"]
+    if "default_blog" in data:
+        blog.default_blog = data["default_blog"]
+
+    db.session.commit()
+    return {"blog": blog.to_dict()}, 200
 
 
 
@@ -75,31 +93,10 @@ def blog_create():
         db.session.commit()
         return jsonify({'blog': blog.to_dict()})
 
-    # If form validation fails, you can return an error response
     errors = form.errors
     return jsonify({'errors': errors}), 400
 
-#Sign up => #Log in => #Create Default Blog
 
-# def blog_create():
-#     """
-#     Create a blog based on user id,, for the first time
-#     """
-#     userId = current_user.id
-#     form = BlogForm()
-#     if form.validate_on_submit():
-#         blog = Blog (
-#             blog_title = form.data["blog_title"],
-#             owner_id = userId,
-#             default_blog = form.data["default_blog"],
-#             banner_img_url = form.data["banner_img_url"],
-#             blog_avatar_url = form.data["blog_avatar_url"],
-#             blog_name = form.data["blog_name"],
-#             description = form.data["description"]
-#         )
-#         db.session.add(blog)
-#         db.session.commit()
-#         return {'blog': blog.to_dict()}
 
 @blog_routes.route("/following")
 @login_required
@@ -127,7 +124,7 @@ def blog_followers(id):
     if not selected_blog:
         return {'message': 'Blog not found'}, 404
 
-    followers = selected_blog.followers.all()
+    followers = selected_blog.blog_follows
 
     return_format = [
         {

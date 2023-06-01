@@ -99,7 +99,7 @@ def create_post(blog_id):
     return {"error": form.errors}, 404 # <<-- change this after testing
 
 
-@post_routes.route('/<int:post_id>', methods=["PUT"])
+@post_routes.route('/<int:post_id>/edit', methods=["PUT"])
 @login_required
 def edit_post(post_id):
     """
@@ -115,19 +115,22 @@ def edit_post(post_id):
     if post.user_id != userId:
         return {"error": "You don't have permission to edit this post"}, 403
 
+    data = request.get_json()
 
-    form = PostTypeForm()
-    if form.validate_on_submit():
-        post.post_title = form.data["post_title"]
-        post.post_type = form.data["post_type"]
-        post.post_description = form.data["post_description"]
-        post.video_embed_code = form.data["video_embed_code"]
-        post.image_embed_code = form.data["image_embed_code"]
+    if "post_title" in data:
+        post.post_title = data["post_title"]
+    if "post_type" in data:
+        post.post_type = data["post_type"]
+    if "post_description" in data:
+        post.post_description = data["post_description"]
+    if "video_embed_code" in data:
+        post.video_embed_code = data["video_embed_code"]
+    if "image_embed_code" in data:
+        post.image_embed_code = data["image_embed_code"]
 
-        db.session.commit()
-        return {"post": post.to_dict()}, 200
+    db.session.commit()
+    return {"post": post.to_dict()}, 200
 
-    return {"error": "Invaid form data"}, 400
 
 
 @post_routes.route('/<int:post_id>', methods=["DELETE"])
