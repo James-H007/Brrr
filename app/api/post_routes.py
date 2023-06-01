@@ -53,6 +53,7 @@ def create_post(blog_id):
     userId = current_user.id
 
     form = PostTypeForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         post = Post (
             blog_id = blog_id,
@@ -95,7 +96,7 @@ def create_post(blog_id):
 
         return {'post': post.to_dict()}, 201
 
-    return {"error": "YURRRRR"}, 404 # <<-- change this after testing
+    return {"error": form.errors}, 404 # <<-- change this after testing
 
 
 @post_routes.route('/<int:post_id>', methods=["PUT"])
