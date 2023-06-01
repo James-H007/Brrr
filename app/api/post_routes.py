@@ -53,6 +53,7 @@ def create_post(blog_id):
     userId = current_user.id
 
     form = PostTypeForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         post = Post (
             blog_id = blog_id,

@@ -60,6 +60,7 @@ def blog_create():
     print(current_user, "---------------------------------------------")
     userId = current_user.id
     form = BlogForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         blog = Blog (
             blog_title = form.data["blog_title"],
