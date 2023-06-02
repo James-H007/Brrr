@@ -1,7 +1,8 @@
 .post-container {
-    background-color: lightgray;
+    background-color: rgb(255, 255, 255);
     border-radius: 5px;
-    margin-top: 10px;
+    margin-top: 20px;
+    font-family: 'Rubik';
 }
 
 .post-header {
@@ -11,13 +12,41 @@
     margin-bottom: 10px;
 }
 
+
+
 .post-owner-time {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 5px;
     gap: 10px;
+    margin-left: 10px;
 }
+
+.post-owner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.post-owner-follow {
+    color: rgb(93, 209, 255);
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.post-owner-follow:hover {
+    color: rgb(33, 71, 173);
+    cursor: pointer;
+}
+
+.post-time {
+    opacity: .5;
+}
+
 
 .post-body {
     padding: 5px;
@@ -43,6 +72,7 @@
 .post-icons {
     display: flex;
     flex-direction: row;
+    align-items: center;
     padding: 10px;
 
 }
@@ -61,5 +91,11 @@
 .post-icon {
     width: 30px;
     height: 30px;
-    padding-left: 10px;
+    padding-left: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.post-icon:hover {
+    cursor: pointer;
 }

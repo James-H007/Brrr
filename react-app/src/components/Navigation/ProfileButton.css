@@ -11,6 +11,7 @@ button {
 
 .profile-button:hover {
     cursor: pointer;
+    position: relative
 }
 
 .profile-dropdown {
@@ -21,8 +22,9 @@ button {
     flex-direction: column;
     background-color: white;
     margin: 0;
-    padding: 20px;
-    width: 100px;
-    height: 100px;
-
+    padding: 0px;
+    width: 200px;
+    height: 200px;
+    font-family: 'Rubik';
+    border: 1px solid black;
 }
