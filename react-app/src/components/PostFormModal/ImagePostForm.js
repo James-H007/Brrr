@@ -12,12 +12,13 @@ const ImagePostForm = ({ postType }) => {
                     Username
                 </header>
                 <form className="post-form">
-                    <input
-                        type="file"
+                    <div class="file-input-wrapper">
+                        <input type="file" id="fileInput" name="filename" />
+                        <label for="fileInput" class="custom-file-upload">
+                            Select a file
+                        </label>
 
-                        placeholder="Your post here..."
-                        name="filename"
-                    />
+                    </div>
                     <textarea
                         type="textarea"
                         className="post-form-input-text"

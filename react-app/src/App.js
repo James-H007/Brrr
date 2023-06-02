@@ -6,6 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Feed from "./components/Feed"
+import FollowingPage from "./components/FollowingPage";
 import "./App.css"
 
 function App() {
@@ -29,6 +30,9 @@ function App() {
             </Route>
             <Route path="/feed">
               <Feed />
+            </Route>
+            <Route path="/following">
+              <FollowingPage />
             </Route>
           </Switch>
         )}
