@@ -129,10 +129,14 @@ export default function reducer(state = initialState, action) {
 
     case EDIT_BLOG_BY_ID:
       const index = state.blogs.findIndex(i => i.id === action.payload.id)
+      let newBlogs = [...state.blogs]
       if (index !== -1){
-        state.blogs[index] = action.payload
+        newBlogs[index] = action.payload
       }
-      return {...state}
+      return {
+        ...state,
+        blogs: newBlogs
+      }
 
 		default:
 			return state;
