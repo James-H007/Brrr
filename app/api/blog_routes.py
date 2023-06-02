@@ -137,3 +137,18 @@ def blog_followers(id):
     ]
 
     return {'followers': return_format}, 200
+
+
+@blog_routes.route('/<int:id>/unfollow', methods=["POST"])
+@login_required
+def unfollow_blog(id):
+    blog = Blog.query.get(id)
+
+    if blog is None:
+        return jsonify({"error": "Blog not found"}), 404
+
+    current_user.followed_blogs.remove(blog)
+
+    db.session.commit()
+
+    return {'message': 'Unfollowed the blog successfully'}
