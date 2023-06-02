@@ -14,17 +14,13 @@ def likes():
     return {'likes': [like.to_dict() for like in likes]}
 
 
-@like_routes.route('/mine', methods=['GET'])
+@like_routes.route('/my-likes', methods=['GET'])
 @login_required
 def get_user_liked_posts():
     """"
     Query for all the liked posts by the current user
     """
-    user_likes = (
-        db.session.query(Post)
-        .join(Like, Like.post_id == Post.id)
-        .filter(Like.user_id == current_user.id)
-        .all()
-    )
+    userId = current_user.id
+    likes = Like.query.filter(Like.user_id == userId, Like.is_liked == True).all()
 
-    return ([post.to_dict() for post in user_likes])
+    return {"likedPosts": [like.to_dict() for like in likes]}
