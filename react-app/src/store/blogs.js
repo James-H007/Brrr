@@ -35,25 +35,25 @@ const editBlog = (blog) => {
 
 // @blog_routes.route('/')
 export const getAllBlogs = () => async (dispatch) => {
-	const response = await fetch("/api/blogs/", {
-		headers: {
-			"Content-Type": "application/json",
-		},
-	})
+  const response = await fetch("/api/blogs/", {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
 
-	if (response.ok) {
-		const data = await response.json();
-		dispatch(getBlogs(data.blogs));  // <<--  Might need to be just "data"
-	}
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(getBlogs(data.blogs));  // <<--  Might need to be just "data"
+  }
 };
 
 // @blog_routes.route('/<int:id>', methods = ["GET"])
 export const getBlogById = (id) => async (dispatch) => {
   const response = await fetch(`/api/blogs/${id}`, {
-		headers: {
-			"Content-Type": "application/json",
-		},
-	})
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
 
   if (response.ok) {
     const blog = await response.json()
@@ -69,16 +69,16 @@ export const removeBlogById = (id) => async (dispatch) => {
   const response = await fetch(`/api/blogs/${id}`, {
     method: "DELETE",
     headers: {
-			"Content-Type": "application/json",
-		}
+      "Content-Type": "application/json",
+    }
   })
-  if (response.ok){
+  if (response.ok) {
     dispatch(deleteBlog(id))
   }
 }
 
 // @blog_routes.route('/<int:id>/edit', methods = ["PUT"])
-export const editAblog = (id,blog) => async (dispatch) => {
+export const editAblog = (id, blog) => async (dispatch) => {
   const response = await fetch(`/api/blogs/${id}/edit`, {
     method: "PUT",
     headers: {
@@ -99,9 +99,9 @@ const initialState = { blogs: [], currentBlog: null };
 
 export default function reducer(state = initialState, action) {
 
-	switch (action.type) {
-		case GET_BLOGS:
-      console.log("unspread--->",state, "\n","spread--->",...state);
+  switch (action.type) {
+    case GET_BLOGS:
+      console.log("unspread--->", state, "\n", "spread--->", ...state);
       return {
         ...state,
         blogs: action.payload  // <<-- state => state.blogs.blogs
@@ -130,7 +130,7 @@ export default function reducer(state = initialState, action) {
     case EDIT_BLOG_BY_ID:
       const index = state.blogs.findIndex(i => i.id === action.payload.id)
       let newBlogs = [...state.blogs]
-      if (index !== -1){
+      if (index !== -1) {
         newBlogs[index] = action.payload
       }
       return {
@@ -138,7 +138,7 @@ export default function reducer(state = initialState, action) {
         blogs: newBlogs
       }
 
-		default:
-			return state;
-	}
+    default:
+      return state;
+  }
 }

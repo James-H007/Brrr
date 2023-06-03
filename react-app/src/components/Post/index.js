@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import heart from "../../assets/heart-regular.svg"
 import comment from "../../assets/comment-regular.svg"
 import share from "../../assets/share.svg"
@@ -7,8 +8,10 @@ import trash from "../../assets/trash-can-regular.svg"
 import "./post.css"
 import BlogPreview from "../BlogPreview/BlogPreview";
 
+
 const Post = ({ data }) => {
     const [isHovered, setIsHovered] = useState(false);
+    const dispatch = useDispatch()
 
     const handleHover = () => {
         setIsHovered(true);
