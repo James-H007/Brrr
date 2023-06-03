@@ -14,6 +14,7 @@ const GET_BLOG_BY_ID = "blogs/GET_BLOG_BY_ID"
 const DELETE_BLOG_BY_ID = "blogs/DELETE_BLOG_BY_ID"
 const EDIT_BLOG_BY_ID = "blogs/EDIT_BLOG_BY_ID"
 const CREATE_BLOG = "blogs/CREATE_BLOG"
+const GET_FOLLOWED_BLOGS = "blogs/GET_FOLLOWED_BLOGS"
 
 const getBlogs = (blogs) => {
   return {
@@ -47,6 +48,13 @@ const createNewBlog = (blog) => {
   return {
     type: CREATE_BLOG,
     payload: blog
+  }
+}
+
+const getFollowedBlogs = (blogs) => {
+  return {
+    type: GET_FOLLOWED_BLOGS,
+    payload: blogs
   }
 }
 
@@ -126,15 +134,40 @@ export const createBlog = (blog) => async (dispatch) => {
 
   if (response.ok) {
     const newBlog = await response.json()
-    dispatch(createNewBlog(newBlog))
+    dispatch(createNewBlog(newBlog)) // or newBlog.blog
     return newBlog
   }
 }
 
+// @blog_routes.route("/following")
+export const fetchFollowedBlogs = () => async (dispatch) => {
+  const response = await fetch('/api/blogs/following', {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+
+  if (response.ok) {
+    const { followedBlogs } = await response.json()
+    /*
+    followedBlogs returns:
+        {
+          "followed_blogs": [
+               {
+                "blog_avatar": "https://64.media.tumblr.com/ac46b069c7bb24e2ee5bf368a32b84fe/5c65a2189e2d73b7-9d/s540x810/384c42854b3fca915f79ffcb8dc711665b7c3519.jpg",
+                "blog_name": "Turkey"
+              }
+            ]
+        }
+    */
+    dispatch(getFollowedBlogs(followedBlogs))
+  }
+
+}
 
 
 
-const initialState = { blogs: [], currentBlog: null };
+const initialState = { blogs: [], currentBlog: null, followedBlogs: [] };
 
 
 export default function blogsReducer(state = initialState, action) {
@@ -182,6 +215,12 @@ export default function blogsReducer(state = initialState, action) {
       return {
         ...state,
         blogs: [...state.blogs, action.payload]
+      }
+
+    case GET_FOLLOWED_BLOGS:
+      return {
+        ...state,
+        followedBlogs: action.payload
       }
 
 
