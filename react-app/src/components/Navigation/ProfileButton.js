@@ -82,7 +82,7 @@ function ProfileButton({ user }) {
                 <img src={heart} alt="heart-icon" />
               </span>
               &nbsp;
-              <Link to="/api/likes/my-likes">Likes</Link>
+              <Link to="/my-likes">Likes</Link>
             </li>
 
             <li

@@ -5,9 +5,10 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-import Feed from "./components/Feed"
+import Feed from "./components/Feed";
 import FollowingPage from "./components/FollowingPage";
-import "./App.css"
+import "./App.css";
+import LikesPage from "./components/LikesPage/LikePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function App() {
         <Navigation isLoaded={isLoaded} />
         {isLoaded && (
           <Switch>
-            <Route path="/login" >
+            <Route path="/login">
               <LoginFormPage />
             </Route>
             <Route path="/signup">
@@ -33,6 +34,9 @@ function App() {
             </Route>
             <Route path="/following">
               <FollowingPage />
+            </Route>
+            <Route path="/my-likes">
+              <LikesPage />
             </Route>
           </Switch>
         )}
