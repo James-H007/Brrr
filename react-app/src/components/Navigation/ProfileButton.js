@@ -82,7 +82,7 @@ function ProfileButton({ user }) {
                 <img src={heart} alt="heart-icon" />
               </span>
               &nbsp;
-              <Link to="/api/likes">Likes</Link>
+              <Link to="/api/likes/my-likes">Likes</Link>
             </li>
 
             <li
@@ -93,7 +93,7 @@ function ProfileButton({ user }) {
                 <img src={following} alt="following-icon" />
               </span>
               &nbsp;
-              <Link to="/api/following">Following</Link>
+              <Link to="/api/blogs/following">Following</Link>
             </li>
 
             <li
@@ -104,7 +104,7 @@ function ProfileButton({ user }) {
                 <img src={explore} alt="explore-icon" />
               </span>
               &nbsp;
-              <Link to="/api/blogs/">Explore Blogs</Link>
+              <Link to="/feed">Explore Blogs</Link>
             </li>
 
             <li
