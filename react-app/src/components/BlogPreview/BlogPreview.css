@@ -7,7 +7,7 @@
     left: 100px;
     margin-top: 22px;
     border-radius: 2px;
-
+    animation: jumpIn 0.5s;
 }
 
 
@@ -68,4 +68,32 @@
     margin-left: 5px;
     opacity: 0.7;
     font-family: 'Rubik';
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes jumpIn {
+    0% {
+        transform: translateY(30%);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateY(0);
+        animation-timing-function: ease-out;
+        opacity: .5;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
