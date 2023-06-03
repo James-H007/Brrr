@@ -93,7 +93,7 @@ function ProfileButton({ user }) {
                 <img src={following} alt="following-icon" />
               </span>
               &nbsp;
-              <Link to="/api/blogs/following">Following</Link>
+              <Link to="/following">Following</Link>
             </li>
 
             <li
