@@ -93,6 +93,7 @@ export const getAllBlogs = () => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     // const dataObj = normalizeData(data)
+    console.log(data);
     dispatch(getBlogs(data.blogs));  // <<--  Might need to be just "data" not "data.blogs"
   }
 };
