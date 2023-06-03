@@ -7,7 +7,6 @@
 //   return obj
 // }
 
-
 // constants
 const GET_BLOGS = "blogs/GET_BLOGS";
 const GET_BLOG_BY_ID = "blogs/GET_BLOG_BY_ID"
@@ -15,6 +14,9 @@ const DELETE_BLOG_BY_ID = "blogs/DELETE_BLOG_BY_ID"
 const EDIT_BLOG_BY_ID = "blogs/EDIT_BLOG_BY_ID"
 const CREATE_BLOG = "blogs/CREATE_BLOG"
 const GET_FOLLOWED_BLOGS = "blogs/GET_FOLLOWED_BLOGS"
+const GET_FOLLOWERS = "blogs/GET_FOLLOWERS"
+const FOLLOW_BLOG = "blogs/FOLLOW_BLOG"
+const UNFOLLOW_BLOG = "blogs/UNFOLLOW_BLOG"
 
 const getBlogs = (blogs) => {
   return {
@@ -58,6 +60,27 @@ const getFollowedBlogs = (blogs) => {
   }
 }
 
+const getFollowers = (followers) => {
+  return {
+    type: GET_FOLLOWERS,
+    payload: followers
+  }
+}
+
+const followBlog = (id) => {
+  return {
+    type: FOLLOW_BLOG,
+    payload: id
+  }
+}
+
+const unfollowBlog = (id) => {
+  return {
+    type: UNFOLLOW_BLOG,
+    payload: id
+  }
+}
+
 
 // @blog_routes.route('/')
 export const getAllBlogs = () => async (dispatch) => {
@@ -69,12 +92,8 @@ export const getAllBlogs = () => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
-
-    dispatch(getBlogs(data.blogs));  // <<--  Might need to be just "data"
-
     // const dataObj = normalizeData(data)
     dispatch(getBlogs(data.blogs));  // <<--  Might need to be just "data" not "data.blogs"
-
   }
 };
 
@@ -165,20 +184,62 @@ export const fetchFollowedBlogs = () => async (dispatch) => {
         }
     */
     dispatch(getFollowedBlogs(followedBlogs))
+    return followedBlogs
   }
+}
 
+// @blog_routes.route("/<int:id>/followers")
+export const getBlogFollowers = (id) => async (dispatch) => {
+  const response = await fetch(`/api/blogs/${id}/followers`, {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+
+  if (response.ok) {
+    const { followers } = await response.json()
+    dispatch(getFollowers(followers))
+    return followers
+  }
+}
+
+// @blog_routes.route('/<int:id>/follow', methods=["POST"])
+export const followABlog = (id) => async (dispatch) => {
+  const response = await fetch(`/api/blogs/${id}/follow`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+
+  if (response.ok) {
+    dispatch(followBlog(id))
+  }
+}
+
+// @blog_routes.route('/<int:id>/unfollow', methods=["DELETE"])
+export const unFollowABlog = (id) => async (dispatch) => {
+  const response = await fetch(`/api/blogs/${id}/unfollow`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+
+  if (response.ok) {
+    dispatch(unfollowBlog(id))
+  }
 }
 
 
 
-const initialState = { blogs: [], currentBlog: null, followedBlogs: [] };
+const initialState = { blogs: [], currentBlog: null, followedBlogs: [], followers: [] };
 
 
 export default function blogsReducer(state = initialState, action) {
 
   switch (action.type) {
     case GET_BLOGS:
-      console.log("unspread--->", state, "\n", "spread--->", ...state);
       return {
         ...state,
         blogs: action.payload  // <<-- state => state.blogs.blogs
@@ -215,8 +276,6 @@ export default function blogsReducer(state = initialState, action) {
         blogs: newBlogs
       }
 
-
-
     case CREATE_BLOG:
       return {
         ...state,
@@ -229,6 +288,23 @@ export default function blogsReducer(state = initialState, action) {
         followedBlogs: action.payload
       }
 
+    case GET_FOLLOWERS:
+      return {
+        ...state,
+        followers: action.payload
+      }
+
+    case FOLLOW_BLOG:
+      return {
+        ...state,
+        followedBlogs: [...state.followedBlogs, action.payload]
+      }
+
+    case UNFOLLOW_BLOG:
+      return {
+        ...state,
+        followedBlogs: state.followedBlogs.filter(blogId => blogId !== action.payload)
+      }
 
     default:
       return state;
