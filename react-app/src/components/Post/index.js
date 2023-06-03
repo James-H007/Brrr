@@ -7,31 +7,46 @@ import pencil from "../../assets/pencil-solid.svg"
 import trash from "../../assets/trash-can-regular.svg"
 import "./post.css"
 import BlogPreview from "../BlogPreview/BlogPreview";
+import { getAllBlogs } from "../../store/blogs";
 
 
 const Post = ({ data }) => {
     const [isHovered, setIsHovered] = useState(false);
     const dispatch = useDispatch()
+    // console.log(test)
+    useEffect(() => {
+        const test = dispatch(getAllBlogs())
+        console.log(test)
+    }, [dispatch])
 
     const handleHover = () => {
-        setIsHovered(true);
+        setTimeout(() => {
+            setIsHovered(true);
+        }, 200); // Delay in milliseconds before showing the Blog Preview
     }
 
     const handleMouseLeave = () => {
-        setIsHovered(false)
+        setTimeout(() => {
+            setIsHovered(false);
+        }, 200); // Delay in milliseconds before hiding the Blog Preview
     }
 
     return (
         <>
-
+            {isHovered && (<BlogPreview />)}
             <div className="post-container">
-                {isHovered && (<BlogPreview />)}
-                <div
-                    onMouseEnter={handleHover}
-                    onMouseLeave={handleMouseLeave}>
+
+                <div>
+
                     <header className="post-header">
                         <div>
-                            <img src="https://thelifeofyourtime.files.wordpress.com/2016/05/bloodroot.jpg" alt="flower" className="post-owner-icon" />
+                            <img
+                                src="https://thelifeofyourtime.files.wordpress.com/2016/05/bloodroot.jpg"
+                                alt="flower"
+                                className="post-owner-icon"
+                                onMouseEnter={handleHover}
+                                onMouseLeave={handleMouseLeave}
+                            />
                         </div>
 
                         <div className="post-owner-time">
