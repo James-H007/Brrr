@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, session, request, abort
 from flask_login import login_required, current_user
 from app.models import Blog, User, db, followers
 from app.forms.blog_form import BlogForm
+from sqlalchemy import and_
 
 blog_routes = Blueprint('blogs', __name__)
 
@@ -138,8 +139,32 @@ def blog_followers(id):
 
     return {'followers': return_format}, 200
 
+@blog_routes.route('/<int:id>/follow', methods=["POST"])
+@login_required
+def follow_blog(id):
+    blog = Blog.query.get(id)
 
-@blog_routes.route('/<int:id>/unfollow', methods=["POST"])
+    if blog is None:
+        return jsonify({"error": "Blog not found"}), 404
+
+    # followers.insert().values(
+    #     user_id=current_user.id,
+    #     blog_id=blog.id,
+    #     is_followed=True
+    # )
+
+    db.session.connection().execute(followers.insert().values(
+        user_id=current_user.id,
+        blog_id=blog.id,
+        is_followed=True
+    ))
+
+    db.session.commit()
+
+    return {'message': 'Followed the blog successfully'}
+
+
+@blog_routes.route('/<int:id>/unfollow', methods=["DELETE"])
 @login_required
 def unfollow_blog(id):
     blog = Blog.query.get(id)
@@ -147,7 +172,14 @@ def unfollow_blog(id):
     if blog is None:
         return jsonify({"error": "Blog not found"}), 404
 
-    current_user.followed_blogs.remove(blog)
+    followers.delete().where(
+        and_(
+            followers.c.user_id == current_user.id,
+            followers.c.blog_id == blog.id
+        )
+    )
+
+    db.session.connection().execute(followers.delete())
 
     db.session.commit()
 
