@@ -61,8 +61,12 @@ export const getAllBlogs = () => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
+
+    dispatch(getBlogs(data.blogs));  // <<--  Might need to be just "data"
+
     // const dataObj = normalizeData(data)
     dispatch(getBlogs(data.blogs));  // <<--  Might need to be just "data" not "data.blogs"
+
   }
 };
 
@@ -177,6 +181,8 @@ export default function blogsReducer(state = initialState, action) {
         ...state,
         blogs: newBlogs
       }
+
+
 
     case CREATE_BLOG:
       return {
