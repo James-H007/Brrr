@@ -1,18 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import heart from "../../assets/heart-regular.svg"
 import comment from "../../assets/comment-regular.svg"
 import share from "../../assets/share.svg"
 import pencil from "../../assets/pencil-solid.svg"
 import trash from "../../assets/trash-can-regular.svg"
 import "./post.css"
+import BlogPreview from "../BlogPreview/BlogPreview";
 
-const Post = () => {
+const Post = ({ data }) => {
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleHover = () => {
+        setIsHovered(true);
+    }
+
+    const handleMouseLeave = () => {
+        setIsHovered(false)
+    }
+
     return (
         <>
+
             <div className="post-container">
-                <div>
+                {isHovered && (<BlogPreview />)}
+                <div
+                    onMouseEnter={handleHover}
+                    onMouseLeave={handleMouseLeave}>
                     <header className="post-header">
-                        <div><img src="https://thelifeofyourtime.files.wordpress.com/2016/05/bloodroot.jpg" alt="flower" className="post-owner-icon" /> </div>
+                        <div>
+                            <img src="https://thelifeofyourtime.files.wordpress.com/2016/05/bloodroot.jpg" alt="flower" className="post-owner-icon" />
+                        </div>
+
                         <div className="post-owner-time">
                             <div className="post-owner">
                                 Post Owner
@@ -45,7 +63,7 @@ const Post = () => {
                         </div>
                     </footer>
                 </div>
-            </div>
+            </div >
         </>
     )
 }
