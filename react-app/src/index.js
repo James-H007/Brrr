@@ -9,6 +9,7 @@ import * as sessionActions from "./store/session";
 import * as blogActions from "./store/blogs"
 import * as userActions from "./store/users"
 import * as likeActions from "./store/likes"
+import * as postActions from "./store/posts"
 import App from "./App";
 
 import "./index.css";
@@ -20,7 +21,8 @@ if (process.env.NODE_ENV !== "production") {
 	window.sessionActions = sessionActions;
 	window.blogActions = blogActions;
 	window.userActions = userActions;
-	window.likeActions = likeActions
+	window.likeActions = likeActions;
+	window.postActions = postActions;
 }
 
 // Wrap the application with the Modal provider and render the Modal component
