@@ -172,7 +172,7 @@ export const fetchFollowedBlogs = () => async (dispatch) => {
   })
 
   if (response.ok) {
-    const { followedBlogs } = await response.json()
+    const { followed_blogs } = await response.json()
     /*
     followedBlogs returns:
         {
@@ -184,8 +184,8 @@ export const fetchFollowedBlogs = () => async (dispatch) => {
             ]
         }
     */
-    dispatch(getFollowedBlogs(followedBlogs))
-    return followedBlogs
+    dispatch(getFollowedBlogs(followed_blogs))
+    return followed_blogs
   }
 }
 
