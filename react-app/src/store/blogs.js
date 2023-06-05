@@ -173,17 +173,8 @@ export const fetchFollowedBlogs = () => async (dispatch) => {
 
   if (response.ok) {
     const { followed_blogs } = await response.json()
-    /*
-    followedBlogs returns:
-        {
-          "followed_blogs": [
-               {
-                "blog_avatar": "https://64.media.tumblr.com/ac46b069c7bb24e2ee5bf368a32b84fe/5c65a2189e2d73b7-9d/s540x810/384c42854b3fca915f79ffcb8dc711665b7c3519.jpg",
-                "blog_name": "Turkey"
-              }
-            ]
-        }
-    */
+    console.log(followed_blogs);
+
     dispatch(getFollowedBlogs(followed_blogs))
     return followed_blogs
   }

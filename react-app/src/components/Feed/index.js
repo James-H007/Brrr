@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PostOpenModalButton from "../PostOpenModalButton";
 import PostFormModal from "../PostFormModal";
 import TextPostForm from "../PostFormModal/TextPostForm";
@@ -10,11 +10,52 @@ import image from "../../assets/image.svg"
 import link from "../../assets/link.svg"
 import video from "../../assets/video.svg"
 import Post from '../Post'
+import { fetchFollowedBlogs } from "../../store/blogs";
+import { getAllPosts } from "../../store/posts";
 
 const Feed = () => {
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
+    const dispatch = useDispatch()
+    const currentUsersFollowedBlogs = useSelector(state => Object.values(state.blogs.followedBlogs))
+    const allPosts = useSelector(state => Object.values(state.posts.allPosts))
 
+    // When you query, do this:
+        // currentUsersFollowedBlogs.map((i) => i.id === allPosts.blogId)
+
+
+    useEffect(() => {
+        dispatch(fetchFollowedBlogs())
+        /*
+         currentUsersFollowedBlogs === [ { blog_avatar: 'djsbbkbkjbkbkjkdvd.png', blog_name: 'Marnie', id: 2 } ]
+        */
+    }, [dispatch])
+
+
+
+    useEffect(() => {
+        dispatch(getAllPosts())
+         /*
+         allPosts ===
+         {
+            blogId: 2,
+            comments: [],
+            createdAt: 'Thu, 01 Jun 2023 02:28:32 GMT',
+            id: 4,
+            imageEmbedCode: 'svbjskbsvdjsv.png',
+            likes: 0,
+            notes: null,
+            postDescription: 'ldskndsvklsdvdvs',
+            postImages: [],
+            postTitle: 'Test',
+            postType: 'image',
+            reblogs: null,
+            updatedAt: 'Thu, 01 Jun 2023 02:28:32 GMT',
+            userId: 2,
+            videoEmbedCode: 'jdskbvkjdvsbsdvj'
+        },
+        */
+    }, dispatch)
 
 
 
@@ -42,9 +83,9 @@ const Feed = () => {
             <div className='main-feed'>
                 <div>
                 //-------------Data We Need -------------
-    // 1. All the blogs that the user follows
-    // 2. Grab all the posts from those blogs and then combine them
-    // 3. Sort the posts from most recent to oldest
+    // 1. All the blogs that the user follows ✅
+    // 2. Grab all the posts from those blogs and then combine them ✅
+    // 3. Sort the posts from most recent to oldest ----You do that-----
     // 4. Pass it in as data inside of the <Post /> component
                 </div>
                 <div className='main-post-area'>

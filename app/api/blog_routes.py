@@ -109,7 +109,7 @@ def blog_follows():
 
      user = User.query.get(userId)
 
-     followed_blogs = [{"blog_name": blog.blog_name, "blog_avatar": blog.blog_avatar_url} for blog in user.user_follows]
+     followed_blogs = [{"id":blog.id, "blog_name": blog.blog_name, "blog_avatar": blog.blog_avatar_url} for blog in user.user_follows]
 
      return {'followed_blogs': followed_blogs}, 200
 
