@@ -52,22 +52,22 @@ const Feed = () => {
                         <PostOpenModalButton
                             buttonText="Text"
                             iconType={text}
-                            modalComponent={<TextPostForm postType="TEXT" />}
+                            modalComponent={<TextPostForm postType="text" />}
                         />
                         <PostOpenModalButton
                             buttonText="Image"
                             iconType={image}
-                            modalComponent={<ImagePostForm postType="IMAGE" />}
+                            modalComponent={<ImagePostForm postType="image" />}
                         />
                         <PostOpenModalButton
                             buttonText="Link"
                             iconType={link}
-                            modalComponent={<PostFormModal postType="LINK" />}
+                            modalComponent={<PostFormModal postType="link" />}
                         />
                         <PostOpenModalButton
                             buttonText="Video"
                             iconType={video}
-                            modalComponent={<ImagePostForm postType="VIDEO" />}
+                            modalComponent={<ImagePostForm postType="video" />}
                         />
                     </div>
                     <div className='post-comp'>
