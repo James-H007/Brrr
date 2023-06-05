@@ -1,0 +1,24 @@
+.explore-page {
+    margin: 0px auto;
+    width: 100%;
+}
+
+.explore-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+
+}
+
+.explore-preview {
+    width: 400px;
+    height: 250px;
+    background-color: rgb(187, 187, 187);
+    border: 2px solid black;
+    margin: 40px;
+    border-radius: 2px;
+    animation: jumpIn 0.5s;
+    cursor: pointer;
+}
