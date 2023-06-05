@@ -4,7 +4,7 @@
   flex-direction: row;
   align-items: center;
   list-style: none;
-  border-bottom: 1px solid lightgray;
+  /* border-bottom: 1px solid lightgray; */
   justify-content: space-between;
   background-color: black;
   margin-top: 0;
@@ -71,7 +71,7 @@
 }
 
 .search-button {
-  width: 10%;
+  width: 14%;
   height: 30px;
   border-radius: 10px;
   margin-left: 5px;

@@ -71,8 +71,7 @@ function ProfileButton({ user }) {
         {user ? (
           <>
             <div className="logout-container" onClick={handleLogout}>
-              Account &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Log
-              Out
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Log Out
             </div>
             <li
               className="likes-container"
