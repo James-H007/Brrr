@@ -40,50 +40,44 @@ function Navigation({ isLoaded }) {
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <ul className="navBar">
-        <div className="logoSearch">
-          <li className="searchArea">
-            <img
-              src={MagnifyingGlass}
-              alt="magnifying-glass"
-              className="searchLogo"
-            />
-            <form className="searchForm">
-              <input
-                type="text"
-                name="search"
-                placeholder="Search..."
-                className="searchInput"
-              ></input>
-              <button type="submit" className="search-button">
-                Search
-              </button>
-            </form>
-          </li>
-        </div>
-
-        <div className="loggedInNavIndo">
-          <>
-            <li>
-              <ProfileButton user={sessionUser} />
-            </li>
-          </>
-        </div>
-      </ul>
+      <>
+        <li className="searchArea">
+          <img
+            src={MagnifyingGlass}
+            alt="magnifying-glass"
+            className="searchLogo"
+          />
+          <form className="searchForm">
+            <input
+              type="text"
+              name="search"
+              placeholder="Search..."
+              className="searchInput"
+            ></input>
+            <button type="submit" className="search-button">
+              Search
+            </button>
+          </form>
+        </li>
+      </>
     );
   } else {
     sessionLinks = (
       <>
-        <OpenModalButton
-          buttonText="Log In"
-          onItemClick={closeMenu}
-          modalComponent={<LoginFormModal />}
-        />
-        <OpenModalButton
-          buttonText="Sign Up"
-          onItemClick={closeMenu}
-          modalComponent={<SignupFormModal />}
-        />
+        <div>
+          <OpenModalButton
+            className="log_in_button"
+            buttonText="Log In"
+            onItemClick={closeMenu}
+            modalComponent={<LoginFormModal />}
+          />
+          <OpenModalButton
+            className="sign_up_button"
+            buttonText="Sign Up"
+            onItemClick={closeMenu}
+            modalComponent={<SignupFormModal />}
+          />
+        </div>
       </>
     );
   }
@@ -96,8 +90,13 @@ function Navigation({ isLoaded }) {
             <img src={Snowflake} alt="logo" className="logo" />
           </NavLink>
         </li>
+        {isLoaded && sessionLinks}
       </div>
-      {isLoaded && sessionLinks}
+      {isLoaded && sessionUser && (
+        <li>
+          <ProfileButton user={sessionUser} />
+        </li>
+      )}
     </ul>
   );
 }
