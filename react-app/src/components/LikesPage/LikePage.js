@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Post from "../Post";
 import "../Feed/Feed.css";
+import "./LikesPage.css"
 
 const LikesPage = () => {
   //   const [likedPosts, setLikedPosts] = useState([]);
@@ -22,7 +23,9 @@ const LikesPage = () => {
   return (
     <div className="main-feed">
       <div className="main-post-area">
-        <div className="post-select"></div>
+        <div className="like-header">
+          Likes ❤️
+        </div>
         <div className="post-comp">
           {/* {likedPosts.map((post) => (
             <Post key={post.id} {...post} />

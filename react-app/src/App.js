@@ -9,6 +9,8 @@ import Feed from "./components/Feed";
 import FollowingPage from "./components/FollowingPage";
 import "./App.css";
 import LikesPage from "./components/LikesPage/LikePage";
+import Blog from "./components/Blog";
+import Explore from "./components/Explore/Explore";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +39,12 @@ function App() {
             </Route>
             <Route path="/my-likes">
               <LikesPage />
+            </Route>
+            <Route path="/blog">
+              <Blog />
+            </Route>
+            <Route path="/explore">
+              <Explore />
             </Route>
           </Switch>
         )}

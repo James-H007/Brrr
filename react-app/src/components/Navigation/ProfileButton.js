@@ -104,7 +104,7 @@ function ProfileButton({ user }) {
                 <img src={explore} alt="explore-icon" />
               </span>
               &nbsp;
-              <Link to="/feed">Explore Blogs</Link>
+              <Link to="/explore">Explore Blogs</Link>
             </li>
 
             <li

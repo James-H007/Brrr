@@ -15,6 +15,9 @@ const Feed = () => {
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
 
+
+
+
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(true);
@@ -37,6 +40,13 @@ const Feed = () => {
     return (
         <>
             <div className='main-feed'>
+                <div>
+                //-------------Data We Need -------------
+    // 1. All the blogs that the user follows
+    // 2. Grab all the posts from those blogs and then combine them
+    // 3. Sort the posts from most recent to oldest
+    // 4. Pass it in as data inside of the <Post /> component
+                </div>
                 <div className='main-post-area'>
                     <div className='post-select'>
                         <PostOpenModalButton
@@ -61,10 +71,6 @@ const Feed = () => {
                         />
                     </div>
                     <div className='post-comp'>
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
                         <Post />
                     </div>
                 </div>

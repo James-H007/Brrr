@@ -13,7 +13,9 @@ import { getAllBlogs } from "../../store/blogs";
 const Post = ({ data }) => {
     const [isHovered, setIsHovered] = useState(false);
     const dispatch = useDispatch()
-    // console.log(test)
+
+
+
     useEffect(() => {
         const test = dispatch(getAllBlogs())
         console.log(test)
@@ -33,6 +35,18 @@ const Post = ({ data }) => {
 
     return (
         <>
+            <div>
+
+    //------------Data We Need For Posts -----------------
+            // 1. Once we receive our data, we're going to grab the information from it
+            // 2. We're going to need a isLoaded useState
+            // 3. We are going to have to fetch the data from destructuring the data
+            // 4. Depending on the post-type inside data (aka data.postType) we're going to have different post structures
+            // 5. Key into the data and then it will be placed inside of the post
+
+            //------------Data We Need to Pass for Blog Preview -------
+            // 1. Just pass in the blogId associated with the post
+            </div>
             {isHovered && (<BlogPreview />)}
             <div className="post-container">
 
