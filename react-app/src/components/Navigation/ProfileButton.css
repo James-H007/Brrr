@@ -74,6 +74,9 @@ button {
 background-color: #EDEDED;
 color: 535353;
 }
+.logout-container:hover {
+    cursor: pointer;}
+
 .likes-container {
     display: flex;
     align-items: center;
