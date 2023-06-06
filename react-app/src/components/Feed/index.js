@@ -12,6 +12,7 @@ import video from "../../assets/video.svg"
 import Post from '../Post'
 import { fetchFollowedBlogs } from "../../store/blogs";
 import { getAllPosts } from "../../store/posts";
+import LinkPostForm from "../PostFormModal/LinkPostForm";
 
 const Feed = () => {
     const [showMenu, setShowMenu] = useState(false);
@@ -21,7 +22,7 @@ const Feed = () => {
     const allPosts = useSelector(state => Object.values(state.posts.allPosts))
 
     // When you query, do this:
-        // currentUsersFollowedBlogs.map((i) => i.id === allPosts.blogId)
+    // currentUsersFollowedBlogs.map((i) => i.id === allPosts.blogId)
 
 
     useEffect(() => {
@@ -35,26 +36,26 @@ const Feed = () => {
 
     useEffect(() => {
         dispatch(getAllPosts())
-         /*
-         allPosts ===
-         {
-            blogId: 2,
-            comments: [],
-            createdAt: 'Thu, 01 Jun 2023 02:28:32 GMT',
-            id: 4,
-            imageEmbedCode: 'svbjskbsvdjsv.png',
-            likes: 0,
-            notes: null,
-            postDescription: 'ldskndsvklsdvdvs',
-            postImages: [],
-            postTitle: 'Test',
-            postType: 'image',
-            reblogs: null,
-            updatedAt: 'Thu, 01 Jun 2023 02:28:32 GMT',
-            userId: 2,
-            videoEmbedCode: 'jdskbvkjdvsbsdvj'
-        },
-        */
+        /*
+        allPosts ===
+        {
+           blogId: 2,
+           comments: [],
+           createdAt: 'Thu, 01 Jun 2023 02:28:32 GMT',
+           id: 4,
+           imageEmbedCode: 'svbjskbsvdjsv.png',
+           likes: 0,
+           notes: null,
+           postDescription: 'ldskndsvklsdvdvs',
+           postImages: [],
+           postTitle: 'Test',
+           postType: 'image',
+           reblogs: null,
+           updatedAt: 'Thu, 01 Jun 2023 02:28:32 GMT',
+           userId: 2,
+           videoEmbedCode: 'jdskbvkjdvsbsdvj'
+       },
+       */
     }, dispatch)
 
 
@@ -103,7 +104,7 @@ const Feed = () => {
                         <PostOpenModalButton
                             buttonText="Link"
                             iconType={link}
-                            modalComponent={<PostFormModal postType="link" />}
+                            modalComponent={<LinkPostForm postType="link" />}
                         />
                         <PostOpenModalButton
                             buttonText="Video"
