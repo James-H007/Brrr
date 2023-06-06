@@ -102,3 +102,27 @@
 .post-icon:hover {
     cursor: pointer;
 }
+
+
+.post-title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 0;
+    text-align: left;
+}
+
+.post-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-description {
+    margin-left: 5px;
+}
