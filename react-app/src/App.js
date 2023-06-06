@@ -11,6 +11,7 @@ import "./App.css";
 import LikesPage from "./components/LikesPage/LikePage";
 import Blog from "./components/Blog";
 import Explore from "./components/Explore/Explore";
+import CreateBlogPage from "./components/CreateBlogPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,6 +46,9 @@ function App() {
             </Route>
             <Route path="/explore">
               <Explore />
+            </Route>
+            <Route path="/blogs/create">
+              <CreateBlogPage />
             </Route>
           </Switch>
         )}

@@ -111,7 +111,7 @@ function ProfileButton({ user }) {
               <span className="plus-icon">
                 <img src={plus} alt="plus-icon" />
               </span>
-              <Link to="/api/blogs/create">Create a Blog</Link>
+              <Link to="/blogs/create">Create a Blog</Link>
             </li>
 
             <li
