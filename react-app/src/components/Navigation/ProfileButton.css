@@ -28,7 +28,7 @@ button {
     height: 200px;
     font-family: 'Rubik';
     border: 1px solid lightgrey;
-    padding-bottom: 25px;
+    padding-bottom: 54px;
 
 }
 .user-dropdown li {
@@ -133,6 +133,19 @@ color: 535353;
     text-decoration: none;
 }
 .gift-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    width: 20px;
+}
+.my-blogs-container{
+    display: flex;
+    align-items: center;
+}
+.my-blogs-container a {
+    text-decoration: none;
+}
+.rectangle-icon{
     display: inline-block;
     vertical-align: middle;
     margin-right: 5px;

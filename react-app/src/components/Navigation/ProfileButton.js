@@ -12,6 +12,7 @@ import following from "../../assets/users-between-lines-solid.svg";
 import gift from "../../assets/gift-solid.svg";
 import explore from "../../assets/wpexplorer.svg";
 import plus from "../../assets/plus-solid.svg";
+import rectangle from "../../assets/users-rectangle-solid.svg";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -50,12 +51,9 @@ function ProfileButton({ user }) {
       alert("Feature coming soon!");
     } else {
       if (option === "Blogs") {
-        // Handle the "Blogs" click event
       } else if (option === "Likes") {
-        // Handle the "Likes" click event
       } else if (option === "Following") {
-        // Handle the "Following" click event
-      }
+      } else if (option === "My Blogs");
     }
   };
 
@@ -114,6 +112,17 @@ function ProfileButton({ user }) {
                 <img src={plus} alt="plus-icon" />
               </span>
               <Link to="/api/blogs/create">Create a Blog</Link>
+            </li>
+
+            <li
+              className="my-blogs-container"
+              onClick={() => handleClick("My Blogs")}
+            >
+              <span className="rectangle-icon">
+                <img src={rectangle} alt="rectangle-icon" />
+              </span>
+              &nbsp;
+              <Link to="/api/blogs/my-blogs">My Blogs</Link>
             </li>
 
             <li className="gift-container" onClick={() => handleClick("Gifts")}>
