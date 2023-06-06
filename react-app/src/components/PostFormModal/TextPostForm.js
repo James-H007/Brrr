@@ -1,7 +1,9 @@
 import "./PostFormModal.css";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const TextPostForm = ({ postType }) => {
+  const history = useHistory();
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [titleError, setTitleError] = useState("");
@@ -27,12 +29,13 @@ const TextPostForm = ({ postType }) => {
       return;
     }
 
-    // Perform form submission or further processing here
     // send the data to a backend server
 
     // Reset the form after submission
     setTitle("");
     setText("");
+    history.push("/feed");
+    window.location.reload();
   };
 
   return (
@@ -65,7 +68,7 @@ const TextPostForm = ({ postType }) => {
           />
           {textError && <div className="errors">{textError}</div>}
           <div className="close-post-buttons">
-            <button className="poster-button">Close</button>
+            {/* <button className="poster-button">Close</button> */}
             <button
               className="poster-button"
               type="submit"
