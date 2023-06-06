@@ -1,9 +1,3 @@
-
-
 const MyBlogCollection = () => {
-    return (
-        <div>
-
-        </div>
-    )
-}
+  return <div></div>;
+};
