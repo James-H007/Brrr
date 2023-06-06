@@ -91,6 +91,29 @@
   display: none;
 }
 
+.search-results {
+  border: 1px solid #ccc;
+  background-color: #a09e9e;
+  color: #333;
+  padding: 10px;
+  margin-top: 5px;
+  position: absolute;
+  width: 27%;
+  box-sizing: border-box;
+  z-index: 1;
+  max-height: 200px;
+  overflow: auto;
+  overflow-x: hidden;
+  list-style: none;
+  font-family: "Rubik";
+  cursor: pointer;
+}
+
+.search-li:hover {
+  color: #000000;
+  text-decoration: underline;
+}
+
 
 @keyframes shake {
   0% {
