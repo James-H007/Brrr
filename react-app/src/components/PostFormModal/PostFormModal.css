@@ -125,3 +125,13 @@ input[type="file"] {
 input[type="file"]:hover {
     cursor: pointer;
 }
+
+.errors{
+    color: red;
+    padding-bottom: 10px;
+}
+.preview-image{
+height: 300px;
+width: auto;
+padding: 10px;
+}
