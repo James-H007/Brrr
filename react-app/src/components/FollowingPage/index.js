@@ -98,13 +98,6 @@ const FollowingPage = () => {
 
     return (
         <div>
-            <div>
-            //---------Data We need for Following Page-----------
-            // 1. We need to find the current user
-            // 2. Find what blogs the current user follows
-            // 3. With that map out the blogs and grab the blog_avatar_url, blogname, createdAt
-
-            </div>
             <div className="following-feed">
                 <div className="main-following-area">
                     <div>

@@ -81,10 +81,6 @@ const LikesPage = () => {
             <Post key={post.id} {...post} />
           ))} */}
           <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
         </div>
       </div>
     </div>

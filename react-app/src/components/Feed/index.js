@@ -82,13 +82,6 @@ const Feed = () => {
     return (
         <>
             <div className='main-feed'>
-                <div>
-                //-------------Data We Need -------------
-    // 1. All the blogs that the user follows ✅
-    // 2. Grab all the posts from those blogs and then combine them ✅
-    // 3. Sort the posts from most recent to oldest ----You do that-----
-    // 4. Pass it in as data inside of the <Post /> component
-                </div>
                 <div className='main-post-area'>
                     <div className='post-select'>
                         <PostOpenModalButton

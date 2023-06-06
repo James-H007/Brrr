@@ -8,78 +8,72 @@ import { useEffect } from "react"
 
 const Explore = () => {
 
-    const dispatch = useDispatch()
-    const allBlogs = useSelector(state => state.blogs.blogs)
+  const dispatch = useDispatch()
+  const allBlogs = useSelector(state => state.blogs.blogs)
 
-    useEffect(() => {
-        dispatch(getAllBlogs())
-        /*
-        allBlogs ===
+  useEffect(() => {
+    dispatch(getAllBlogs())
+    /*
+    allBlogs ===
 
-         [
+     [
+        {
+          bannerImgUrl:
+            'https://img.freepik.com/premium-photo/wide-banner-with-many-random-square-hexagons-charcoal-dark-black-color_105589-1820.jpg',
+          blogAvatarUrl:
+            'https://64.media.tumblr.com/ac46b069c7bb24e2ee5bf368a32b84fe/5c65a2189e2d73b7-9d/s540x810/384c42854b3fca915f79ffcb8dc711665b7c3519.jpg',
+          blogName: 'Demo',
+          blogTitle: 'My Demo Blog',
+          createdAt: 'Wed, 31 May 2023 22:49:58 GMT',
+          defaultBlog: true,
+          description: 'This is Demo User\'s blog',
+          followerCount: 0,
+          id: 1,
+          ownerId: 1,
+          posts: [
             {
-              bannerImgUrl:
-                'https://img.freepik.com/premium-photo/wide-banner-with-many-random-square-hexagons-charcoal-dark-black-color_105589-1820.jpg',
-              blogAvatarUrl:
-                'https://64.media.tumblr.com/ac46b069c7bb24e2ee5bf368a32b84fe/5c65a2189e2d73b7-9d/s540x810/384c42854b3fca915f79ffcb8dc711665b7c3519.jpg',
-              blogName: 'Demo',
-              blogTitle: 'My Demo Blog',
+              blogId: 1,
+              comments: [],
               createdAt: 'Wed, 31 May 2023 22:49:58 GMT',
-              defaultBlog: true,
-              description: 'This is Demo User\'s blog',
-              followerCount: 0,
               id: 1,
-              ownerId: 1,
-              posts: [
+              imageEmbedCode: 'fake.url',
+              likes: 1,
+              notes: 0,
+              postDescription: 'Hello, Demo User here. It\'s my first post',
+              postImages: [
                 {
-                  blogId: 1,
-                  comments: [],
                   createdAt: 'Wed, 31 May 2023 22:49:58 GMT',
                   id: 1,
-                  imageEmbedCode: 'fake.url',
-                  likes: 1,
-                  notes: 0,
-                  postDescription: 'Hello, Demo User here. It\'s my first post',
-                  postImages: [
-                    {
-                      createdAt: 'Wed, 31 May 2023 22:49:58 GMT',
-                      id: 1,
-                      imageUrl:
-                        'https://www.state.gov/wp-content/uploads/2020/07/72-729738_youtube-red-circle-circle-youtube-logo-png-clipart.jpg',
-                      postId: 1,
-                      updatedAt: 'Wed, 31 May 2023 22:49:58 GMT'
-                    }
-                  ],
-                  postTitle: 'Demo User\'s First Post',
-                  postType: 'text',
-                  reblogs: 0,
-                  updatedAt: 'Wed, 31 May 2023 22:49:58 GMT',
-                  userId: 1,
-                  videoEmbedCode: 'fake.url'
+                  imageUrl:
+                    'https://www.state.gov/wp-content/uploads/2020/07/72-729738_youtube-red-circle-circle-youtube-logo-png-clipart.jpg',
+                  postId: 1,
+                  updatedAt: 'Wed, 31 May 2023 22:49:58 GMT'
                 }
               ],
-              updatedAt: 'Wed, 31 May 2023 22:49:58 GMT'
+              postTitle: 'Demo User\'s First Post',
+              postType: 'text',
+              reblogs: 0,
+              updatedAt: 'Wed, 31 May 2023 22:49:58 GMT',
+              userId: 1,
+              videoEmbedCode: 'fake.url'
+            }
+          ],
+          updatedAt: 'Wed, 31 May 2023 22:49:58 GMT'
 
-            }, {...}
+        }, {...}
 
-        */
-    }, [dispatch])
+    */
+  }, [dispatch])
 
 
 
-    return (
-        <div className="explore-page">
-            <div>
-                Data to Fetch -----------------------------------------------
-                1. Fetch all of the blogs
-                2. Map out the data and pass it as a prop
-                3. The Explore Blog will receive that data and display it
-            </div>
-            <div className="explore-container">
-                <ExploreBlog />
-            </div>
-        </div>
-    )
+  return (
+    <div className="explore-page">
+      <div className="explore-container">
+        <ExploreBlog />
+      </div>
+    </div>
+  )
 }
 
 export default Explore

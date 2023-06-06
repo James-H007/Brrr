@@ -18,7 +18,7 @@ const Blog = ({ data }) => {
     const blogById = useSelector(state => state.blogs.currentBlog)
 
     useEffect(() => {
-       dispatch(getBlogById(id))
+        dispatch(getBlogById(id))
 
         /*
 
@@ -64,12 +64,6 @@ const Blog = ({ data }) => {
 
     return (
         <div>
-            <div>
-                //Data we need ------------------
-            //1. The prop that will be passed through data is the blog id
-            //2. Using the blog id, we'll find the blog and all of it's posts
-            //3. We'll need all the posts, blog name, title, description, avatar, and url
-            </div>
             <div className="main-feed">
                 <div className="main-post-area">
                     <div className="blog-header">

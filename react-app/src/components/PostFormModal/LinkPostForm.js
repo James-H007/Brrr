@@ -15,7 +15,7 @@ const LinkPostForm = ({ postType }) => {
                     <input
                         type="text"
                         className="post-form-input-link"
-                        placeholder="Link"
+                        placeholder="Link..."
                         name="link"
                     />
                     <div className="close-post-buttons">
