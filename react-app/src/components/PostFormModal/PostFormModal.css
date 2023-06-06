@@ -1,6 +1,6 @@
 .post-form-container {
     width: 600px;
-    height: 400px;
+    height: 100%;
     margin: 0 auto;
     padding: 20px;
     border-radius: 10px;
@@ -43,6 +43,16 @@
     font-size: 25px;
 }
 
+.post-form-input-link {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    height: 30px;
+    border-radius: 4px;
+    font-size: 25px;
+    margin-top: 0 auto;
+}
+
 .post-form-input-text {
     padding: 10px;
     margin-bottom: 10px;
@@ -77,6 +87,7 @@
 .file-input-wrapper {
     position: relative;
     display: flex;
+    margin-bottom: 5px;
 }
 
 .custom-file-upload {
