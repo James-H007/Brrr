@@ -8,11 +8,66 @@ import trash from "../../assets/trash-can-regular.svg"
 import "./post.css"
 import BlogPreview from "../BlogPreview/BlogPreview";
 import { getAllBlogs } from "../../store/blogs";
+import stockVideo from "../../assets/stock.mp4"
 
 
 const Post = ({ data }) => {
     const [isHovered, setIsHovered] = useState(false);
     const dispatch = useDispatch()
+    const image = "https://pbs.twimg.com/media/Fx1uzZJacAEjHI4?format=jpg&name=small"
+    let postContent;
+    const postUrl = "youtube.com"
+    let postType = "video"
+    if (postType == "text") {
+        postContent = (
+            <div className="post-body">
+                <p className="post-title">
+                    Post Content
+                </p>
+                <p className="post-description">
+                    Post description
+                </p>
+            </div>
+        )
+    }
+
+    else if (postType == "image") {
+        postContent = (
+            <div>
+                <img src={image} alt="post-image" className="post-image" />
+                <p className="post-description">
+                    Post description
+                </p>
+            </div>
+
+        )
+    }
+
+    else if (postType == "link") {
+        postContent = (
+            <div className="post-body">
+                <a href={postUrl} className="post-url"> {postUrl}</a>
+                <p className="post-description">Click on our totally not suspicious link</p>
+            </div>
+        )
+    }
+
+    else if (postType == "video") {
+        postContent = (
+            <div>
+                <video controls className="post-video">
+                    <source src={stockVideo} type="video/mp4" />
+                    <source src={stockVideo} type="video/webm" />
+                </video>
+                <p className="post-description">
+                    Post description
+                </p>
+            </div>
+        )
+    }
+
+
+
 
 
 
@@ -73,14 +128,7 @@ const Post = ({ data }) => {
                             </div>
                         </div>
                     </header>
-                    <div className="post-body">
-                        <p className="post-content">
-                            Post Content
-                        </p>
-                        <p className="post-description">
-                            Post description
-                        </p>
-                    </div>
+                    {postContent}
                     <footer>
                         <div className="post-stats">
                             <p className="post-notes"># Notes</p>
