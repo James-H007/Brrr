@@ -238,7 +238,6 @@ export default function blogsReducer(state = initialState, action) {
       }
 
     case GET_BLOG_BY_ID:
-      console.log(...state);
       return {
         ...state,
         currentBlog: action.payload // <<-- state => state.blogs.currentBlogs

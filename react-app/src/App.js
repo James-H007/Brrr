@@ -40,7 +40,7 @@ function App() {
             <Route path="/my-likes">
               <LikesPage />
             </Route>
-            <Route path="/blog">
+            <Route path="/blog/:id">
               <Blog />
             </Route>
             <Route path="/explore">
