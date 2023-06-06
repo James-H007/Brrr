@@ -122,7 +122,7 @@ function ProfileButton({ user }) {
                 <img src={rectangle} alt="rectangle-icon" />
               </span>
               &nbsp;
-              <Link to="/api/blogs/my-blogs">My Blogs</Link>
+              <Link to="/my-blogs">My Blogs</Link>
             </li>
 
             <li className="gift-container" onClick={() => handleClick("Gifts")}>
