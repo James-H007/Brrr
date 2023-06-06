@@ -1,7 +1,7 @@
 
 import "./PostFormModal.css"
 
-const ImagePostForm = ({ postType }) => {
+const LinkPostForm = ({ postType }) => {
     //Should receive a prop of what the post type is based on the click
 
     return (
@@ -12,18 +12,11 @@ const ImagePostForm = ({ postType }) => {
                     Username
                 </header>
                 <form className="post-form">
-                    <div class="file-input-wrapper">
-                        <input type="file" id="fileInput" name="filename" />
-                        <label for="fileInput" class="custom-file-upload">
-                            Select a file
-                        </label>
-
-                    </div>
-                    <textarea
-                        type="textarea"
-                        className="post-form-input-text"
-                        placeholder="Maximum file size is 20mb..."
-                        name="text"
+                    <input
+                        type="text"
+                        className="post-form-input-link"
+                        placeholder="Link"
+                        name="link"
                     />
                     <div className="close-post-buttons">
                         <button className="poster-button">Close</button>
@@ -37,4 +30,4 @@ const ImagePostForm = ({ postType }) => {
     )
 }
 
-export default ImagePostForm
+export default LinkPostForm
