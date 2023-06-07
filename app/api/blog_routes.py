@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request, abort
 from flask_login import login_required, current_user
-from app.models import Blog, User, db, followers
+from app.models import Blog, User, db, Follower
 from app.forms.blog_form import BlogForm
 from sqlalchemy import and_
 
