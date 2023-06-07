@@ -109,7 +109,14 @@ def blog_follows():
 
      user = User.query.get(userId)
 
-     followed_blogs = [{"id":blog.id, "blog_name": blog.blog_name, "blog_avatar": blog.blog_avatar_url} for blog in user.user_follows]
+     followed_blogs = [
+        {
+            "id": follower.blog_id,
+            "blog_name": follower.blog.blog_name,
+            "blog_avatar": follower.blog.blog_avatar_url
+        }
+        for follower in user.blog_follows
+    ]
 
      return {'followed_blogs': followed_blogs}, 200
 
@@ -125,14 +132,14 @@ def blog_followers(id):
     if not selected_blog:
         return {'message': 'Blog not found'}, 404
 
-    followers = selected_blog.blog_follows
+    followers = selected_blog.followers
 
     return_format = [
         {
-            "id": follower.id,
-            "first_name": follower.first_name,
-            "last_name": follower.last_name,
-            "username": follower.username
+            "id": follower.user_id,
+            "first_name": follower.follower.first_name,
+            "last_name": follower.follower.last_name,
+            "username": follower.follower.username
         }
         for follower in followers
     ]
@@ -147,17 +154,8 @@ def follow_blog(id):
     if blog is None:
         return jsonify({"error": "Blog not found"}), 404
 
-    # followers.insert().values(
-    #     user_id=current_user.id,
-    #     blog_id=blog.id,
-    #     is_followed=True
-    # )
-
-    db.session.connection().execute(followers.insert().values(
-        user_id=current_user.id,
-        blog_id=blog.id,
-        is_followed=True
-    ))
+    new_follow = Follower(user_id=current_user.id, blog_id=blog.id)
+    db.session.add(new_follow)
 
     db.session.commit()
 
@@ -172,15 +170,10 @@ def unfollow_blog(id):
     if blog is None:
         return jsonify({"error": "Blog not found"}), 404
 
-    followers.delete().where(
-        and_(
-            followers.c.user_id == current_user.id,
-            followers.c.blog_id == blog.id
-        )
-    )
+    follow_to_delete = Follower.query.filter_by(user_id=current_user.id, blog_id=blog.id).first()
 
-    db.session.connection().execute(followers.delete())
-
-    db.session.commit()
+    if follow_to_delete is not None:
+        db.session.delete(follow_to_delete)
+        db.session.commit()
 
     return {'message': 'Unfollowed the blog successfully'}
