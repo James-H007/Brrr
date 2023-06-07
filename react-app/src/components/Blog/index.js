@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBlogById } from "../../store/blogs";
 
 const Blog = ({ data }) => {
-
+    const [isLoaded, setIsLoaded] = useState(false)
     const blog_banner = "https://images.squarespace-cdn.com/content/v1/5c524a52a9e0288eb5cfa3ee/1616108169603-VV7YD0OXJUPST28QPEKI/LofiVineyard-09+blank+Banner.jpg?format=2500w"
     const iconImage = "https://lofigirl.com/wp-content/uploads/2023/02/DAY_UPDATE_ILLU.jpg"
 
@@ -19,7 +19,7 @@ const Blog = ({ data }) => {
 
     useEffect(() => {
         dispatch(getBlogById(id))
-
+        setIsLoaded(true)
         /*
 
         blogById ===
@@ -58,37 +58,48 @@ const Blog = ({ data }) => {
         }
         */
 
-    }, [dispatch])
+    }, [dispatch, id])
 
 
 
     return (
-        <div>
-            <div className="main-feed">
-                <div className="main-post-area">
-                    <div className="blog-header">
-                        <div className="blog-icon-wrapper">
-                            <img
-                                src={iconImage}
-                                alt="icon"
-                                className="blog-avatar-icon"
-                            />
+        <>
+            {!isLoaded && (
+                <p>Loading...</p>
+            )}
+            {isLoaded && blogById && (
+                <div>
+                    <div className="main-feed">
+                        <div className="main-post-area">
+                            <div className="blog-header">
+                                <div className="blog-icon-wrapper">
+                                    <img
+                                        src={blogById.blogAvatarUrl}
+                                        alt="icon"
+                                        className="blog-avatar-icon"
+                                    />
+                                </div>
+                                <img src={blogById.bannerImgUrl} alt="blog-banner" className="blog-banner" />
+                                <p className="blog-title">{blogById.blogTitle}</p>
+                                <p className="blog-url">@{blogById.blogName}</p>
+                                <p className="blog-description">{blogById.description}</p>
+                            </div>
+                            <div className="post-comp">
+                                {blogById.posts.map((post, i) => (
+                                    <>
+                                        <Post post={post} />
+                                    </>
+                                ))}
+
+                            </div>
                         </div>
-                        <img src={blog_banner} alt="blog-banner" className="blog-banner" />
-                        <p className="blog-title">Blog Title</p>
-                        <p className="blog-url">@blogname</p>
-                        <p className="blog-description">Welcome to my blog!</p>
-                    </div>
-                    <div className="post-comp">
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
                     </div>
                 </div>
-            </div>
-        </div>
+            )
+
+            }
+        </>
+
     )
 }
 

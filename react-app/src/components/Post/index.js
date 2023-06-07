@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import heart from "../../assets/heart-regular.svg"
 import comment from "../../assets/comment-regular.svg"
 import share from "../../assets/share.svg"
@@ -9,23 +9,27 @@ import "./post.css"
 import BlogPreview from "../BlogPreview/BlogPreview";
 import { getAllBlogs } from "../../store/blogs";
 import stockVideo from "../../assets/stock.mp4"
+import { getBlogById } from "../../store/blogs";
 
 
-const Post = ({ data }) => {
+const Post = ({ post }) => {
     const [isHovered, setIsHovered] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false)
     const dispatch = useDispatch()
-    const image = "https://pbs.twimg.com/media/Fx1uzZJacAEjHI4?format=jpg&name=small"
+    console.log(post, "-----------------Here is the post!")
+    const { blogId, createdAt, imageEmbedCode, notes, postDescription, postTitle, postType, videoEmbedCode } = post
+    const blogById = useSelector(state => state.blogs.currentBlog)
+
     let postContent;
-    const postUrl = "youtube.com"
-    let postType = "video"
+
     if (postType == "text") {
         postContent = (
             <div className="post-body">
                 <p className="post-title">
-                    Post Content
+                    {postTitle}
                 </p>
                 <p className="post-description">
-                    Post description
+                    {postDescription}
                 </p>
             </div>
         )
@@ -34,9 +38,9 @@ const Post = ({ data }) => {
     else if (postType == "image") {
         postContent = (
             <div>
-                <img src={image} alt="post-image" className="post-image" />
+                <img src={imageEmbedCode} alt="post-image" className="post-image" />
                 <p className="post-description">
-                    Post description
+                    {postDescription}
                 </p>
             </div>
 
@@ -46,7 +50,7 @@ const Post = ({ data }) => {
     else if (postType == "link") {
         postContent = (
             <div className="post-body">
-                <a href={postUrl} className="post-url"> {postUrl}</a>
+                <a href={postDescription} className="post-url"> {postDescription}</a>
                 <p className="post-description">Click on our totally not suspicious link</p>
             </div>
         )
@@ -60,7 +64,7 @@ const Post = ({ data }) => {
                     <source src={stockVideo} type="video/webm" />
                 </video>
                 <p className="post-description">
-                    Post description
+                    {postDescription}
                 </p>
             </div>
         )
@@ -68,12 +72,15 @@ const Post = ({ data }) => {
 
 
 
-
+    useEffect(() => {
+        dispatch(getBlogById(blogId))
+        setIsLoaded(true)
+    }, [dispatch, blogId])
 
 
     useEffect(() => {
-        const test = dispatch(getAllBlogs())
-        console.log(test)
+        dispatch(getAllBlogs())
+
     }, [dispatch])
 
     const handleHover = () => {
@@ -90,48 +97,60 @@ const Post = ({ data }) => {
 
     return (
         <>
-            {isHovered && (<BlogPreview />)}
-            <div className="post-container">
+            {(!isLoaded || !blogById) && (
+                <p>
+                    Loading...
+                </p>
+            )}
+            {
+                isLoaded && blogById && (
+                    <>
+                        {isHovered && (<BlogPreview blogId={blogId} />)}
+                        <div className="post-container">
 
-                <div>
+                            <div>
 
-                    <header className="post-header">
-                        <div>
-                            <img
-                                src="https://thelifeofyourtime.files.wordpress.com/2016/05/bloodroot.jpg"
-                                alt="flower"
-                                className="post-owner-icon"
-                                onMouseEnter={handleHover}
-                                onMouseLeave={handleMouseLeave}
-                            />
-                        </div>
+                                <header className="post-header">
+                                    <div>
+                                        <img
+                                            src={blogById.blogAvatarUrl}
+                                            alt="blog-avatar"
+                                            className="post-owner-icon"
+                                            onMouseEnter={handleHover}
+                                            onMouseLeave={handleMouseLeave}
+                                        />
+                                    </div>
 
-                        <div className="post-owner-time">
-                            <div className="post-owner">
-                                Post Owner
-                                <div className="post-owner-follow">Follow</div>
+                                    <div className="post-owner-time">
+                                        <div className="post-owner">
+                                            {blogById.blogName}
+                                            <div className="post-owner-follow">Follow</div>
+                                        </div>
+                                        <div className="post-time">
+                                            {createdAt}
+                                        </div>
+                                    </div>
+                                </header>
+                                {postContent}
+                                <footer>
+                                    <div className="post-stats">
+                                        <p className="post-notes">{notes} Notes</p>
+                                        <div className="post-icons">
+                                            <div className="post-icon"><img src={trash} alt="trash-icon" /></div>
+                                            <div className="post-icon"><img src={pencil} alt="pencil-icon" /></div>
+                                            <div className="post-icon"><img src={share} alt="heart-icon" /></div>
+                                            <div className="post-icon"><img src={comment} alt="comment-icon" /></div>
+                                            <div className="post-icon"><img src={heart} alt="heart-icon" /></div>
+
+                                        </div>
+                                    </div>
+                                </footer>
                             </div>
-                            <div className="post-time">
-                                Post Time
-                            </div>
-                        </div>
-                    </header>
-                    {postContent}
-                    <footer>
-                        <div className="post-stats">
-                            <p className="post-notes"># Notes</p>
-                            <div className="post-icons">
-                                <div className="post-icon"><img src={trash} alt="trash-icon" /></div>
-                                <div className="post-icon"><img src={pencil} alt="pencil-icon" /></div>
-                                <div className="post-icon"><img src={share} alt="heart-icon" /></div>
-                                <div className="post-icon"><img src={comment} alt="comment-icon" /></div>
-                                <div className="post-icon"><img src={heart} alt="heart-icon" /></div>
+                        </div >
+                    </>
+                )
+            }
 
-                            </div>
-                        </div>
-                    </footer>
-                </div>
-            </div >
         </>
     )
 }
