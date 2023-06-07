@@ -27,8 +27,8 @@ const Feed = () => {
 
     const followedBlogsIds = currentUsersFollowedBlogs.map((blog) => blog.id)
     const currentFeed = allPosts.filter(post => followedBlogsIds.includes(post.blogId))
-    console.log(followedBlogsIds, "--------Array of followed blog ids")
-    console.log(currentFeed, "-------------LOOOK HERE CURRENT FEED")
+    // console.log(followedBlogsIds, "--------Array of followed blog ids")
+    // console.log(currentFeed, "-------------LOOOK HERE CURRENT FEED")
     useEffect(() => {
         dispatch(fetchFollowedBlogs())
         /*

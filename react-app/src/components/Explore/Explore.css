@@ -22,3 +22,9 @@
     animation: jumpIn 0.5s;
     cursor: pointer;
 }
+
+
+.explore-blog-card {
+    text-decoration: none;
+    color: black;
+}

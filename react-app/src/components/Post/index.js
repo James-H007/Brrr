@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import heart from "../../assets/heart-regular.svg"
+import filledHeart from "../../assets/heart-solid.svg"
 import comment from "../../assets/comment-regular.svg"
 import share from "../../assets/share.svg"
 import pencil from "../../assets/pencil-solid.svg"
@@ -10,15 +11,20 @@ import BlogPreview from "../BlogPreview/BlogPreview";
 import { getAllBlogs } from "../../store/blogs";
 import stockVideo from "../../assets/stock.mp4"
 import { getBlogById } from "../../store/blogs";
+import { getCurrentUser } from "../../store/users";
 
 
 const Post = ({ post }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false)
+    const [isLiked, setisLiked] = useState(false)
     const dispatch = useDispatch()
     console.log(post, "-----------------Here is the post!")
     const { blogId, createdAt, imageEmbedCode, notes, postDescription, postTitle, postType, videoEmbedCode } = post
     const blogById = useSelector(state => state.blogs.currentBlog)
+    const currentUser = useSelector(state => state.user.currentUser)
+
+    //If currentUser.id == blogById.ownerId
 
     let postContent;
 
@@ -74,14 +80,12 @@ const Post = ({ post }) => {
 
     useEffect(() => {
         dispatch(getBlogById(blogId))
+        dispatch(getCurrentUser())
+        dispatch(getAllBlogs())
         setIsLoaded(true)
     }, [dispatch, blogId])
 
 
-    useEffect(() => {
-        dispatch(getAllBlogs())
-
-    }, [dispatch])
 
     const handleHover = () => {
         setTimeout(() => {
@@ -95,6 +99,15 @@ const Post = ({ post }) => {
         }, 200); // Delay in milliseconds before hiding the Blog Preview
     }
 
+    const handleLike = () => {
+        if (!isLiked) {
+            setisLiked(true)
+        }
+        else {
+            setisLiked(false)
+        }
+    }
+
     return (
         <>
             {(!isLoaded || !blogById) && (
@@ -103,7 +116,7 @@ const Post = ({ post }) => {
                 </p>
             )}
             {
-                isLoaded && blogById && (
+                isLoaded && blogById && currentUser && (
                     <>
                         {isHovered && (<BlogPreview blogId={blogId} />)}
                         <div className="post-container">
@@ -136,12 +149,12 @@ const Post = ({ post }) => {
                                     <div className="post-stats">
                                         <p className="post-notes">{notes} Notes</p>
                                         <div className="post-icons">
-                                            <div className="post-icon"><img src={trash} alt="trash-icon" /></div>
-                                            <div className="post-icon"><img src={pencil} alt="pencil-icon" /></div>
+                                            {(currentUser.id == blogById.ownerId) && (<div className="post-icon"><img src={trash} alt="trash-icon" /></div>)}
+                                            {(currentUser.id == blogById.ownerId) && (<div className="post-icon"><img src={pencil} alt="pencil-icon" /></div>)}
                                             <div className="post-icon"><img src={share} alt="heart-icon" /></div>
                                             <div className="post-icon"><img src={comment} alt="comment-icon" /></div>
-                                            <div className="post-icon"><img src={heart} alt="heart-icon" /></div>
-
+                                            {!isLiked && (<div className="post-icon"><img src={heart} alt="heart-icon" onClick={handleLike} className="heart" /></div>)}
+                                            {isLiked && (<div className="post-icon"><img src={filledHeart} alt="heart-icon" onClick={handleLike} className="heart" /></div>)}
                                         </div>
                                     </div>
                                 </footer>
