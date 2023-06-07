@@ -126,3 +126,16 @@
 .post-description {
     margin-left: 5px;
 }
+
+.heart {
+    width: 30px;
+    height: 30px;
+    animation: pop 0.5s;
+}
+
+
+@keyframes pop {
+    50% {
+        transform: scale(1.2);
+    }
+}
