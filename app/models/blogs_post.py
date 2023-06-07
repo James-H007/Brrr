@@ -82,8 +82,22 @@ class Blog(db.Model):
             'description':self.description,
             'createdAt':self.created_at,
             'updatedAt':self.updated_at,
-            'posts':[post.to_dict() for post in self.posts]
+            'posts':[post.to_dict_no_blogs() for post in self.posts]
+        }
 
+    def to_dict_no_posts(self):
+        return {
+            'id': self.id,
+            'ownerId': self.owner_id,
+            'defaultBlog': self.default_blog,
+            'blogTitle':self.blog_title,
+            'bannerImgUrl': self.banner_img_url,
+            'blogAvatarUrl': self.blog_avatar_url,
+            'blogName': self.blog_name,
+            'followerCount': len(self.followers),
+            'description':self.description,
+            'createdAt':self.created_at,
+            'updatedAt':self.updated_at,
         }
 class Follower(db.Model):
     __tablename__ = "followers"
@@ -168,7 +182,26 @@ class Post(db.Model):
             'notes':self.notes,
             'createdAt':self.created_at,
             'updatedAt':self.updated_at,
-            'postImages': [image.to_dict() for image in self.post_images]
+            'postImages': [image.to_dict() for image in self.post_images],
+            'blog': self.blog.to_dict_no_posts()
+        }
+    def to_dict_no_blogs(self):
+        return {
+            'id':self.id,
+            'blogId':self.blog_id,
+            'userId':self.user_id,
+            'postTitle':self.post_title,
+            'postType':self.post_type,
+            'postDescription':self.post_description,
+            'videoEmbedCode':self.video_embed_code,
+            'imageEmbedCode':self.image_embed_code,
+            'likes':len(self.likes),
+            'reblogs':self.reblogs,
+            'comments':[comment.to_dict() for comment in self.comments],
+            'notes':self.notes,
+            'createdAt':self.created_at,
+            'updatedAt':self.updated_at,
+            'postImages': [image.to_dict() for image in self.post_images],
         }
 
 class PostImage(db.Model):

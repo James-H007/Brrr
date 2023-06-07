@@ -7,6 +7,13 @@ import { getBlogById } from "../../store/blogs";
 
 const Blog = ({ data }) => {
     const [isLoaded, setIsLoaded] = useState(false)
+    const [blogAvatar, setBlogAvatar] = useState("")
+    const [blogBanner, setBlogBanner] = useState("")
+    const [blogTitle, setBlogTitle] = useState("")
+    const [blogName, setBlogName] = useState("")
+    const [blogDescription, setBlogDescription] = useState("")
+    const [blogPosts, setBlogPosts] = useState([])
+
     const blog_banner = "https://images.squarespace-cdn.com/content/v1/5c524a52a9e0288eb5cfa3ee/1616108169603-VV7YD0OXJUPST28QPEKI/LofiVineyard-09+blank+Banner.jpg?format=2500w"
     const iconImage = "https://lofigirl.com/wp-content/uploads/2023/02/DAY_UPDATE_ILLU.jpg"
 
@@ -16,10 +23,11 @@ const Blog = ({ data }) => {
     // grab all posts from that blog
     const dispatch = useDispatch()
     const blogById = useSelector(state => state.blogs.currentBlog)
-
+    console.log(blogById, '-------------------HERE')
     useEffect(() => {
-        dispatch(getBlogById(id))
-        setIsLoaded(true)
+        // dispatch(getBlogById(id))
+        // setIsLoaded(true)
+        dispatch(getBlogById(id)).then(() => setIsLoaded(true))
         /*
 
         blogById ===
@@ -62,6 +70,7 @@ const Blog = ({ data }) => {
 
 
 
+
     return (
         <>
             {!isLoaded && (
@@ -87,7 +96,7 @@ const Blog = ({ data }) => {
                             <div className="post-comp">
                                 {blogById.posts.map((post, i) => (
                                     <>
-                                        <Post post={post} />
+                                        <Post post={post} key={i} />
                                     </>
                                 ))}
 

@@ -6,16 +6,17 @@ import "./LikesPage.css"
 import { getMyLikes } from "../../store/likes"
 
 const LikesPage = () => {
-  //   const [likedPosts, setLikedPosts] = useState([]);
+  const [likedPosts, setLikedPosts] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  //   useEffect(() => {
-  //     const fetchLikedPosts = async () => {
+  // useEffect(() => {
+  //   const fetchLikedPosts = async () => {
   //     // const likedPostsData = await get_user_liked_posts();
   //     setLikedPosts(likedPostsData);
-  //     };
+  //   };
 
-  //     fetchLikedPosts();
-  //   }, []);
+  //   fetchLikedPosts();
+  // }, []);
 
   //<------------------------------------------------->
   //  1. pull data with user's liked post
@@ -23,10 +24,11 @@ const LikesPage = () => {
 
   const dispatch = useDispatch()
   const currentUserLikes = useSelector(state => Object.values(state.likes.myLikes))
+  console.log(currentUserLikes, "-------------------")
 
   useEffect(() => {
     dispatch(getMyLikes())
-
+    setIsLoaded(true)
     /*
     currentUserLikes ===
         [
@@ -71,19 +73,26 @@ const LikesPage = () => {
 
 
   return (
-    <div className="main-feed">
-      <div className="main-post-area">
-        <div className="like-header">
-          Likes ❤️
-        </div>
-        <div className="post-comp">
-          {/* {likedPosts.map((post) => (
-            <Post key={post.id} {...post} />
-          ))} */}
-          <Post />
-        </div>
-      </div>
-    </div>
+    <>
+      {
+        isLoaded && (
+          <div className="main-feed">
+            <div className="main-post-area">
+              <div className="like-header">
+                Likes ❤️
+              </div>
+              <div className="post-comp">
+                {currentUserLikes.map((data) => (
+                  <Post key={data.id} post={data.post} />
+                ))}
+                {/* <Post /> */}
+              </div>
+            </div>
+          </div>
+        )
+      }
+
+    </>
   );
 };
 

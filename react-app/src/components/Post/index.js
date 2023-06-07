@@ -12,21 +12,52 @@ import { getAllBlogs } from "../../store/blogs";
 import stockVideo from "../../assets/stock.mp4"
 import { getBlogById } from "../../store/blogs";
 import { getCurrentUser } from "../../store/users";
+import { getMyLikes, likePostThunk, unlikePost } from "../../store/likes";
 
 
 const Post = ({ post }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false)
     const [isLiked, setisLiked] = useState(false)
+    // const [blogAvatar, setBlogAvatar] = useState("")
+    // const [blogName, setBlogName] = useState("")
     const dispatch = useDispatch()
-    console.log(post, "-----------------Here is the post!")
-    const { blogId, createdAt, imageEmbedCode, notes, postDescription, postTitle, postType, videoEmbedCode } = post
+    // console.log(post, "-----------------Here is the post!")
+
+    // console.log(post)
+    //If currentUser.id == blogById.ownerId
+    // console.log("User LIKES ARRAY--------------", userLikes)
+    const { blogId, createdAt, imageEmbedCode, notes, postDescription, postTitle, postType, videoEmbedCode, id, likes, blog } = post
     const blogById = useSelector(state => state.blogs.currentBlog)
     const currentUser = useSelector(state => state.user.currentUser)
-
-    //If currentUser.id == blogById.ownerId
+    const currentUserLikes = useSelector(state => Object.values(state.likes.myLikes))
+    const likesPostIds = currentUserLikes.map((like) => like.postId)
 
     let postContent;
+    let blogAvatarUrl
+    if (!blog) {
+        blogAvatarUrl = blogById.blogAvatarUrl
+    }
+    else if (blog) {
+        blogAvatarUrl = blog.blogAvatarUrl
+    }
+
+    let blogName;
+    if (!blog) {
+        blogName = blogById.blogName
+    }
+    else if (blog) {
+        blogName = blog.blogName
+    }
+
+    let ownerId;
+    if (!blog) {
+        ownerId = blogById.ownerId
+    }
+    else if (blog) {
+        ownerId = blog.ownerId
+    }
+
 
     if (postType == "text") {
         postContent = (
@@ -77,13 +108,16 @@ const Post = ({ post }) => {
     }
 
 
-
     useEffect(() => {
         dispatch(getBlogById(blogId))
         dispatch(getCurrentUser())
         dispatch(getAllBlogs())
+        dispatch(getMyLikes())
+        if (likesPostIds.includes(post.id)) {
+            setisLiked(true)
+        }
         setIsLoaded(true)
-    }, [dispatch, blogId])
+    }, [dispatch])
 
 
 
@@ -102,21 +136,23 @@ const Post = ({ post }) => {
     const handleLike = () => {
         if (!isLiked) {
             setisLiked(true)
+            likePostThunk(id)
         }
         else {
             setisLiked(false)
+            unlikePost(id)
         }
     }
 
     return (
         <>
-            {(!isLoaded || !blogById) && (
+            {(!isLoaded || !blog) && (
                 <p>
                     Loading...
                 </p>
             )}
             {
-                isLoaded && blogById && currentUser && (
+                isLoaded && currentUser && blogById && (
                     <>
                         {isHovered && (<BlogPreview blogId={blogId} />)}
                         <div className="post-container">
@@ -126,7 +162,7 @@ const Post = ({ post }) => {
                                 <header className="post-header">
                                     <div>
                                         <img
-                                            src={blogById.blogAvatarUrl}
+                                            src={blogAvatarUrl}
                                             alt="blog-avatar"
                                             className="post-owner-icon"
                                             onMouseEnter={handleHover}
@@ -136,7 +172,7 @@ const Post = ({ post }) => {
 
                                     <div className="post-owner-time">
                                         <div className="post-owner">
-                                            {blogById.blogName}
+                                            {blogName}
                                             <div className="post-owner-follow">Follow</div>
                                         </div>
                                         <div className="post-time">
@@ -147,10 +183,10 @@ const Post = ({ post }) => {
                                 {postContent}
                                 <footer>
                                     <div className="post-stats">
-                                        <p className="post-notes">{notes} Notes</p>
+                                        <p className="post-notes">{likes} Notes</p>
                                         <div className="post-icons">
-                                            {(currentUser.id == blogById.ownerId) && (<div className="post-icon"><img src={trash} alt="trash-icon" /></div>)}
-                                            {(currentUser.id == blogById.ownerId) && (<div className="post-icon"><img src={pencil} alt="pencil-icon" /></div>)}
+                                            {(currentUser.id == ownerId) && (<div className="post-icon"><img src={trash} alt="trash-icon" /></div>)}
+                                            {(currentUser.id == ownerId) && (<div className="post-icon"><img src={pencil} alt="pencil-icon" /></div>)}
                                             <div className="post-icon"><img src={share} alt="heart-icon" /></div>
                                             <div className="post-icon"><img src={comment} alt="comment-icon" /></div>
                                             {!isLiked && (<div className="post-icon"><img src={heart} alt="heart-icon" onClick={handleLike} className="heart" /></div>)}
