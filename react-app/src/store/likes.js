@@ -1,6 +1,8 @@
 // constants
 const GET_ALL_LIKES = "likes/GET_ALL_LIKES";
 const GET_MY_LIKES = "likes/GET_MY_LIKES";
+const LIKE_POST = "likes/LIKE_POST"
+const UNLIKE_POST = "likes/UNLIKE_POST"
 
 
 export const getLikes = (likes) => {
@@ -14,6 +16,20 @@ export const usersLikes = (likes) => {
   return {
     type: GET_MY_LIKES,
     payload: likes
+  }
+}
+
+export const likePost = (post) => {
+  return {
+    type: LIKE_POST,
+    payload: post
+  }
+}
+
+export const unlikePost = (post) => {
+  return {
+    type: UNLIKE_POST,
+    payload: post
   }
 }
 
@@ -48,6 +64,39 @@ export const getMyLikes = () => async (dispatch) => {
   }
 }
 
+// @like_routes.route('/<int:post_id>/like', methods=["POST"])
+export const likePostThunk = (postId) => async (dispatch) => {
+  const response = await fetch(`/api/likes/${postId}/like`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+
+  if (response.ok) {
+    const data = await response.json()
+    dispatch(likePost(data.post))
+    return data.post
+  }
+}
+
+
+// @like_routes.route('/<int:post_id>/unlike', methods=["POST"])
+export const unlikePostThunk = (postId) => async (dispatch) => {
+  const response = await fetch(`/api/likes/${postId}/unlike`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+
+  if (response.ok) {
+    const data = await response.json()
+    dispatch(unlikePost(data.post))
+    return data.post
+  }
+}
+
 
 const initialState = { allLikes: [], myLikes: [] };
 
@@ -63,6 +112,20 @@ export default function likesReducer(state = initialState, action) {
       return {
         ...state,
         myLikes: action.payload
+      }
+
+    case LIKE_POST:
+      return {
+        ...state,
+        myLikes: [...state.myLikes, action.payload],
+        allLikes: [...state.allLikes, action.payload]
+      }
+
+    case UNLIKE_POST:
+      return {
+        ...state,
+        myLikes: state.myLikes.filter(i => i.id !== action.payload.id),
+        allLikes: state.allLikes.filter(i => i.id !== action.payload.id)
       }
 
     default:
