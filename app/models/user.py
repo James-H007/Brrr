@@ -2,7 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
-from .blogs_post import followers, Blog, Post, PostImage
+from .blogs_post import Follower, Blog, Post, PostImage
 
 
 
@@ -33,11 +33,11 @@ class User(db.Model, UserMixin):
 
     # A user can follow many blogs
 
-    user_follows = db.relationship(
-        "Blog",
-        secondary=followers,
-        back_populates="blog_follows",
-    )
+    # user_follows = db.relationship(
+    #     "Blog",
+    #     secondary=followers,
+    #     back_populates="blog_follows",
+    # )
 
     # A user can leave many comments
     # CODE BLOCK BELOW
@@ -47,7 +47,7 @@ class User(db.Model, UserMixin):
     #     back_populates="post_comments",
 
     # )
-
+    blog_follows = db.relationship("Follower", back_populates='follower')
     #One side: A user can own many blogs
     blogs = db.relationship("Blog", back_populates='user', cascade='all, delete-orphan')
 

@@ -1,8 +1,9 @@
 from app.models import db, User, Blog , environment, SCHEMA
-from app.models.blogs_post import followers
+from app.models.blogs_post import Follower
 from sqlalchemy.sql import text
 
 def seed_followers():
+    pass
     terry = User(
         first_name='Terry',
         last_name='Ban',
@@ -21,10 +22,18 @@ def seed_followers():
         description="This is blog about Turkeys",
     )
 
-    turkey.blog_follows.append(terry)
+    # turkey.blog_follows.append(terry)
 
     db.session.add(terry)
     db.session.add(turkey)
+
+    db.session.commit()
+    print(terry.to_dict(), turkey.to_dict())
+    terry_follow = Follower(
+        blog = turkey,
+        follower = terry
+    )
+    db.session.add(terry_follow)
     db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't

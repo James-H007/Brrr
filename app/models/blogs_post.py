@@ -14,15 +14,15 @@ from datetime import datetime
 #     db.Column('created_at', db.DateTime, default=datetime.utcnow,  onupdate=datetime.utcnow)
 # )
 
-followers = db.Table(
-    'followers',
-    db.Model.metadata,
+# followers = db.Table(
+#     'followers',
+#     db.Model.metadata,
 
-    db.Column('user_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'))),
-    db.Column('blog_id', db.Integer, db.ForeignKey(add_prefix_for_prod('blogs.id'))),
-    db.Column('is_followed', db.Boolean)
+#     db.Column('user_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'))),
+#     db.Column('blog_id', db.Integer, db.ForeignKey(add_prefix_for_prod('blogs.id'))),
+#     db.Column('is_followed', db.Boolean)
 
-)
+# )
 
 # Comments does not need to be a join table (Code below is deprecated)
 # comments = db.Table(
@@ -60,11 +60,12 @@ class Blog(db.Model):
     user = db.relationship("User", back_populates="blogs")
 
     #Many to many: Followers to blogs, blogs can be followed by many users
-    blog_follows = db.relationship(
-        'User',
-        secondary=followers,
-        back_populates="user_follows"
-    )
+    # blog_follows = db.relationship(
+    #     'User',
+    #     secondary=followers,
+    #     back_populates="user_follows"
+    # )
+    followers = db.relationship("Follower", back_populates="blog")
 
     # @property
 
@@ -77,13 +78,29 @@ class Blog(db.Model):
             'bannerImgUrl': self.banner_img_url,
             'blogAvatarUrl': self.blog_avatar_url,
             'blogName': self.blog_name,
-            'followerCount': len(self.blog_follows),
+            'followerCount': len(self.followers),
             'description':self.description,
             'createdAt':self.created_at,
             'updatedAt':self.updated_at,
             'posts':[post.to_dict() for post in self.posts]
 
         }
+class Follower(db.Model):
+    __tablename__ = "followers"
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    # db.Column('user_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'))),
+    # db.Column('blog_id', db.Integer, db.ForeignKey(add_prefix_for_prod('blogs.id'))),
+    # db.Column('is_followed', db.Boolean)
+
+    # id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True)
+    blog_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('blogs.id')), primary_key=True)
+
+    follower = db.relationship("User", back_populates="blog_follows")
+    blog = db.relationship("Blog", back_populates="followers")
 
 class Post(db.Model):
     __tablename__ = "posts"
