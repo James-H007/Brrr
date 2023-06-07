@@ -1,0 +1,153 @@
+button {
+    background-color: none;
+}
+
+.profile-button {
+    width: 40px;
+    height: 40px;
+    margin-right: 50px;
+    background-color: none;
+    font-family: "Rubik";
+}
+
+.profile-button:hover {
+    cursor: pointer;
+    position: relative
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 10%;
+    right: 50px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin: 0;
+    padding: 0px;
+    width: 200px;
+    height: 200px;
+    font-family: 'Rubik';
+    border: 1px solid lightgrey;
+    padding-bottom: 54px;
+
+}
+.user-dropdown li {
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    list-style-type: none;
+}
+
+.user-dropdown li:hover {
+    background-color: #f1f1f1;
+}
+
+.user-dropdown .divider {
+    border-top: 1px solid #ccc;
+    margin: 8px 0;
+}
+
+.user-dropdown .user-details {
+    font-weight: bold;
+}
+
+.user-dropdown .user-email {
+    color: #888;
+    font-size: 14px;
+}
+
+.user-dropdown .logout-button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user-dropdown .logout-button:hover {
+    background-color: #c0392b;
+}
+
+.logout-container{
+background-color: #EDEDED;
+color: 535353;
+}
+.logout-container:hover {
+    cursor: pointer;}
+
+.likes-container {
+    display: flex;
+    align-items: center;
+}
+.likes-container a {
+    text-decoration: none;
+}
+.heart-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    width: 20px;
+}
+.explore-blogs-container{
+    display: flex;
+    align-items: center;
+}
+.explore-blogs-container a {
+    text-decoration: none;
+}
+.explore-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    width: 20px;
+}
+.following-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    width: 20px;
+}
+.create-blogs-container{
+    display: flex;
+    align-items: center;
+}
+.create-blogs-container a {
+    text-decoration: none;
+}
+.plus-icon{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    width: 20px;
+}
+.following-container a {
+    text-decoration: none;
+}
+.gift-container {
+    display: flex;
+    align-items: center;
+}
+.gift-container a {
+    text-decoration: none;
+}
+.gift-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    width: 20px;
+}
+.my-blogs-container{
+    display: flex;
+    align-items: center;
+}
+.my-blogs-container a {
+    text-decoration: none;
+}
+.rectangle-icon{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    width: 20px;
+}

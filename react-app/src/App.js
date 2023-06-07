@@ -5,6 +5,14 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import Feed from "./components/Feed";
+import FollowingPage from "./components/FollowingPage";
+import "./App.css";
+import LikesPage from "./components/LikesPage/LikePage";
+import Blog from "./components/Blog";
+import Explore from "./components/Explore/Explore";
+import CreateBlogPage from "./components/CreateBlogPage";
+import MyBlogCollection from "./components/MyBlogCollection";
 
 function App() {
   const dispatch = useDispatch();
@@ -15,17 +23,40 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route path="/login" >
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-        </Switch>
-      )}
+      <div className="entire-application">
+        <Navigation isLoaded={isLoaded} />
+        {isLoaded && (
+          <Switch>
+            <Route path="/login">
+              <LoginFormPage />
+            </Route>
+            <Route path="/signup">
+              <SignupFormPage />
+            </Route>
+            <Route path="/feed">
+              <Feed />
+            </Route>
+            <Route path="/following">
+              <FollowingPage />
+            </Route>
+            <Route path="/my-likes">
+              <LikesPage />
+            </Route>
+            <Route path="/blog/:id">
+              <Blog />
+            </Route>
+            <Route path="/explore">
+              <Explore />
+            </Route>
+            <Route path="/blogs/create">
+              <CreateBlogPage />
+            </Route>
+            <Route path="/my-blogs">
+              <MyBlogCollection />
+            </Route>
+          </Switch>
+        )}
+      </div>
     </>
   );
 }

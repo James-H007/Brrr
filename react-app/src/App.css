@@ -1,0 +1,17 @@
+body {
+    background-color: rgb(255, 255, 255);
+}
+button{
+    /* width: 20%; */
+    height: 30px;
+    border-radius: 10px;
+    margin-left: 10px;
+    font-family: 'Rubik';
+    border: none;
+}
+button:hover{
+    background-color: rgb(128, 128, 128);
+    cursor: pointer;
+    color: white;
+    box-shadow: none;
+}

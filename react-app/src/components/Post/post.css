@@ -1,0 +1,128 @@
+.post-container {
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    margin-top: 20px;
+    font-family: 'Rubik';
+}
+
+.post-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+
+.post-owner-time {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+    gap: 10px;
+    margin-left: 10px;
+}
+
+.post-owner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.post-owner-follow {
+    color: rgb(93, 209, 255);
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.post-owner-follow:hover {
+    color: rgb(33, 71, 173);
+    cursor: pointer;
+}
+
+.post-time {
+    opacity: .5;
+}
+
+
+.post-body {
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.post-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.post-notes {
+    border: 1px solid gray;
+    border-radius: 10px;
+    background-color: white;
+    padding: 5px;
+}
+
+.post-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+
+}
+
+
+.post-owner-icon {
+    height: 80px;
+    width: 80px;
+    margin-left: 10px;
+    margin-top: 10px;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+
+.post-icon {
+    width: 30px;
+    height: 30px;
+    padding-left: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.post-icon:hover {
+    cursor: pointer;
+}
+
+
+.post-title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 0;
+    text-align: left;
+}
+
+.post-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-description {
+    margin-left: 5px;
+}

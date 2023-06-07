@@ -4,6 +4,15 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import "./ProfileButton.css";
+import userIcon from "../../assets/user-solid.svg";
+import { Link, Redirect, useHistory } from "react-router-dom";
+import heart from "../../assets/heart-regular.svg";
+import following from "../../assets/users-between-lines-solid.svg";
+import gift from "../../assets/gift-solid.svg";
+import explore from "../../assets/wpexplorer.svg";
+import plus from "../../assets/plus-solid.svg";
+import rectangle from "../../assets/users-rectangle-solid.svg";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -37,18 +46,90 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
+  const handleClick = (option) => {
+    if (option === "Gifts") {
+      alert("Feature coming soon!");
+    } else {
+      if (option === "Blogs") {
+      } else if (option === "Likes") {
+      } else if (option === "Following") {
+      } else if (option === "My Blogs");
+    }
+  };
+
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
-      <ul className={ulClassName} ref={ulRef}>
+      <img
+        src={userIcon}
+        alt="userIcon"
+        className="profile-button"
+        onClick={openMenu}
+      />
+      <ul className={`user-menu ${ulClassName} user-dropdown`} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={handleLogout}>Log Out</button>
+            <div className="logout-container" onClick={handleLogout}>
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Log Out
+            </div>
+            <li
+              className="likes-container"
+              onClick={() => handleClick("Likes")}
+            >
+              <span className="heart-icon">
+                <img src={heart} alt="heart-icon" />
+              </span>
+              &nbsp;
+              <Link to="/my-likes">Likes</Link>
+            </li>
+
+            <li
+              className="following-container"
+              onClick={() => handleClick("Following")}
+            >
+              <span className="following-icon">
+                <img src={following} alt="following-icon" />
+              </span>
+              &nbsp;
+              <Link to="/following">Following</Link>
+            </li>
+
+            <li
+              className="explore-blogs-container"
+              onClick={() => handleClick("Explore Blogs")}
+            >
+              <span className="explore-icon">
+                <img src={explore} alt="explore-icon" />
+              </span>
+              &nbsp;
+              <Link to="/explore">Explore Blogs</Link>
+            </li>
+
+            <li
+              className="create-blogs-container"
+              onClick={() => handleClick("Create Blogs")}
+            >
+              <span className="plus-icon">
+                <img src={plus} alt="plus-icon" />
+              </span>
+              <Link to="/blogs/create">Create a Blog</Link>
+            </li>
+
+            <li
+              className="my-blogs-container"
+              onClick={() => handleClick("My Blogs")}
+            >
+              <span className="rectangle-icon">
+                <img src={rectangle} alt="rectangle-icon" />
+              </span>
+              &nbsp;
+              <Link to="/my-blogs">My Blogs</Link>
+            </li>
+
+            <li className="gift-container" onClick={() => handleClick("Gifts")}>
+              <span className="gift-icon">
+                <img src={gift} alt="gift-icon" />
+              </span>
+              &nbsp; Gifts
             </li>
           </>
         ) : (

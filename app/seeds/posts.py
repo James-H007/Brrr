@@ -8,10 +8,12 @@ def seed_posts():
         post_title="Demo User's First Post",
         post_type = "text",
         post_description="Hello, Demo User here. It's my first post",
-        likes=1,
+        video_embed_code="fake.url",
+        image_embed_code="fake.url",
+        likes_count=1,
         reblogs=0,
-        comments=0,
-        notes=0
+        comments_count=0,
+        notes=0,
     )
     marnie = Post(
         blog_id=2,
@@ -19,10 +21,12 @@ def seed_posts():
         post_title="Marnie's First Post",
         post_type = "text",
         post_description="Hello, Marnie here. It's my first post",
-        likes=1,
+        video_embed_code="fake.url",
+        image_embed_code="fake.url",
+        likes_count=1,
         reblogs=0,
-        comments=0,
-        notes=0
+        comments_count=0,
+        notes=0,
     )
     bobbie = Post(
         blog_id=3,
@@ -30,10 +34,12 @@ def seed_posts():
         post_title="Bobbie's First Post",
         post_type = "text",
         post_description="Hello, Bobbie here. It's my first post",
-        likes=0,
+        video_embed_code="fake.url",
+        image_embed_code="fake.url",
+        likes_count=0,
         reblogs=0,
-        comments=0,
-        notes=0
+        comments_count=0,
+        notes=0,
     )
 
     db.session.add(demo)
