@@ -3,12 +3,12 @@
   height: auto;
   width: 450px;
   border-radius: 50px;
-  margin: 0 auto; /* Add this line to center horizontally */
+  margin: 0 auto;
   margin-top: 100px;
   padding: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Add this line to center vertically */
+  justify-content: center;
 }
 .create_blog_button{
     margin: 30px;
