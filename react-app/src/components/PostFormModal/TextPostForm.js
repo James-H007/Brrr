@@ -1,9 +1,12 @@
 import "./PostFormModal.css";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { createPost } from "../../store/posts";
+import { useDispatch } from "react-redux";
 
 const TextPostForm = ({ postType }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [titleError, setTitleError] = useState("");
@@ -16,6 +19,7 @@ const TextPostForm = ({ postType }) => {
   const handleTextChange = (e) => {
     setText(e.target.value);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -28,14 +32,20 @@ const TextPostForm = ({ postType }) => {
       setTextError("Text should be between 1 and 1200 characters.");
       return;
     }
+    const payload = {
+      title,
+      text,
+    };
 
+    let createdTextPost = dispatch(createPost(payload));
     // send the data to a backend server
-
+    console.log(createdTextPost);
     // Reset the form after submission
     setTitle("");
     setText("");
-    history.push("/feed");
-    window.location.reload();
+    // if (createdTextPost) {
+    //   history.push("/feed");
+    // }
   };
 
   return (

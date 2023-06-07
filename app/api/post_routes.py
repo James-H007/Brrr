@@ -70,29 +70,29 @@ def create_post(blog_id):
 
         # We have to do this after ⬇ because we need the post.id
 
-        if 'file' in request.files:
-            file = request.files['file']
-            # if user does not select file, browser submits an empty part without a filename
-            if file.filename != '':
-                filename = secure_filename(file.filename)
-                file.save(filename)
+        # if 'file' in request.files:
+        #     file = request.files['file']
+        #     # if user does not select file, browser submits an empty part without a filename
+        #     if file.filename != '':
+        #         filename = secure_filename(file.filename)
+        #         file.save(filename)
 
-                # Upload the user's chosen file to AWS S3
-                s3.upload_file(
-                    Bucket='flaskbrrr',
-                    Filename=filename,
-                    Key=filename
-                )
+        #         # Upload the user's chosen file to AWS S3
+        #         s3.upload_file(
+        #             Bucket='flaskbrrr',
+        #             Filename=filename,
+        #             Key=filename
+        #         )
 
-                # Get the URL of the uploaded file
-                url = f"https://{bucket}.s3.us-east-2.amazonaws.com/{filename}"
+        #         # Get the URL of the uploaded file
+        #         url = f"https://{bucket}.s3.us-east-2.amazonaws.com/{filename}"
 
-                post_image = PostImage(
-                    post_id=post.id,
-                    image_url=url
-                )
-                db.session.add(post_image)
-                db.session.commit()
+        #         post_image = PostImage(
+        #             post_id=post.id,
+        #             image_url=url
+        #         )
+        #         db.session.add(post_image)
+        #         db.session.commit()
 
         return {'post': post.to_dict()}, 201
 
