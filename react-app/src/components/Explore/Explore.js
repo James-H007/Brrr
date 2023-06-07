@@ -3,16 +3,17 @@ import "./Explore.css"
 import ExploreBlog from "./ExploreBlog"
 import { getAllBlogs } from "../../store/blogs"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 
 const Explore = () => {
-
+  const [isLoaded, setIsLoaded] = useState(false)
   const dispatch = useDispatch()
   const allBlogs = useSelector(state => state.blogs.blogs)
 
   useEffect(() => {
     dispatch(getAllBlogs())
+    setIsLoaded(true)
     /*
     allBlogs ===
 
@@ -67,12 +68,30 @@ const Explore = () => {
 
 
 
-  return (
-    <div className="explore-page">
-      <div className="explore-container">
-        <ExploreBlog />
+  return (<>
+    {!isLoaded && (
+      <p>
+        Loading...
+      </p>
+    )}
+    {isLoaded && (
+      <div className="explore-page">
+        <div className="explore-container">
+          {
+            allBlogs.map((blog, i) => (
+              <>
+                <ExploreBlog blog={blog} />
+              </>
+            ))
+          }
+
+        </div>
       </div>
-    </div>
+    )}
+
+
+  </>
+
   )
 }
 

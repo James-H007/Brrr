@@ -23,8 +23,12 @@ const Feed = () => {
 
     // When you query, do this:
     // currentUsersFollowedBlogs.map((i) => i.id === allPosts.blogId)
+    // const currentFeed = currentUsersFollowedBlogs.map((i) => i.id === allPosts.blogId)
 
-
+    const followedBlogsIds = currentUsersFollowedBlogs.map((blog) => blog.id)
+    const currentFeed = allPosts.filter(post => followedBlogsIds.includes(post.blogId))
+    console.log(followedBlogsIds, "--------Array of followed blog ids")
+    console.log(currentFeed, "-------------LOOOK HERE CURRENT FEED")
     useEffect(() => {
         dispatch(fetchFollowedBlogs())
         /*
@@ -106,7 +110,14 @@ const Feed = () => {
                         />
                     </div>
                     <div className='post-comp'>
-                        <Post />
+                        {
+                            currentFeed.map((post, i) => (
+                                <>
+                                    <Post post={post} />
+                                </>
+                            ))
+                        }
+
                     </div>
                 </div>
             </div>
