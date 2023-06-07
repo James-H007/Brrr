@@ -36,10 +36,10 @@ def validate_image(form, field):
 
 class BlogForm(FlaskForm):
 
-    blog_title = StringField('Title', validators=[DataRequired(), Length(min=1, max=50, message='Blog title must be between 1 and 50 characters')])
-    default_blog = BooleanField("Default Blog", validators=[DataRequired()])
+    blog_title = StringField('Title', validators=[Length(min=1, max=50, message='Blog title must be between 1 and 50 characters')])
+    default_blog = BooleanField("Default Blog")
     banner_img_url = StringField('Banner Image', validators=[validate_image])
     blog_avatar_url = StringField('Blog Avatar', validators=[validate_image])
-    blog_name = StringField('Name', validators=[DataRequired(), Length(min=1, max=50, message='Blog Name must be between 1 and 50 characters')])
+    blog_name = StringField('Name', validators=[Length(min=1, max=50, message='Blog Name must be between 1 and 50 characters')])
     description = StringField("Description")
     submit = SubmitField('Create')

@@ -76,7 +76,6 @@ def blog_create():
     """
     Create a blog based on user id, for the first time
     """
-    print(current_user, "---------------------------------------------")
     userId = current_user.id
     form = BlogForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -95,6 +94,7 @@ def blog_create():
         return jsonify({'blog': blog.to_dict()})
 
     errors = form.errors
+    print(errors)
     return jsonify({'errors': errors}), 400
 
 
