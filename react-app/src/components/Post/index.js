@@ -136,11 +136,11 @@ const Post = ({ post }) => {
     const handleLike = () => {
         if (!isLiked) {
             setisLiked(true)
-            likePostThunk(id)
+            dispatch(likePostThunk(id))
         }
         else {
             setisLiked(false)
-            unlikePost(id)
+            dispatch(unlikePost(id))
         }
     }
 
