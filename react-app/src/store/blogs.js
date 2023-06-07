@@ -159,6 +159,7 @@ export const createBlog = (blog) => async (dispatch) => {
   if (response.ok) {
     const newBlog = await response.json()
     dispatch(createNewBlog(newBlog)) // or newBlog.blog
+    console.log("---Our New Blog---",newBlog);
     return newBlog
   }
 }
