@@ -96,6 +96,7 @@ def create_post(blog_id):
 
         return {'post': post.to_dict()}, 201
 
+    print(form.errors)
     return {"error": form.errors}, 404 # <<-- change this after testing
 
 

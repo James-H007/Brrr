@@ -76,7 +76,7 @@ export const getMyPosts = () => async (dispatch) => {
 
   if (response.ok) {
     const { posts } = await response.json()
-    dispatch(getMyPosts(posts))
+    dispatch(getUsersPosts(posts))
     return posts
   }
 }
@@ -91,7 +91,7 @@ export const getAllPostImages = () => async (dispatch) => {
 
   if (response.ok) {
     const { post_images } = await response.json()
-    dispatch(getAllPostImages(post_images))
+    dispatch(getPostImages(post_images))
     return post_images
   }
 }

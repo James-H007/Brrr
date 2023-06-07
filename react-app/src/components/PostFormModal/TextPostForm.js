@@ -1,8 +1,9 @@
 import "./PostFormModal.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { createPost } from "../../store/posts";
-import { useDispatch } from "react-redux";
+import { createNewPost } from "../../store/posts";
+import { getCurrentUser } from "../../store/users";
+import { useDispatch, useSelector } from "react-redux";
 
 const TextPostForm = ({ postType }) => {
   const history = useHistory();
@@ -12,6 +13,20 @@ const TextPostForm = ({ postType }) => {
   const [titleError, setTitleError] = useState("");
   const [textError, setTextError] = useState("");
 
+  const user = useSelector(state => state.user.currentUser)
+
+  useEffect(() => {
+    dispatch(getCurrentUser())
+  }, [dispatch])
+
+  useEffect(() => {
+    console.log(user);
+  }, [user])
+
+  const blogId = 2
+
+
+
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
@@ -20,7 +35,7 @@ const TextPostForm = ({ postType }) => {
     setText(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (title.length < 1 || title.length > 225) {
@@ -32,20 +47,26 @@ const TextPostForm = ({ postType }) => {
       setTextError("Text should be between 1 and 1200 characters.");
       return;
     }
-    const payload = {
-      title,
-      text,
-    };
 
-    let createdTextPost = dispatch(createPost(payload));
-    // send the data to a backend server
-    console.log(createdTextPost);
-    // Reset the form after submission
-    setTitle("");
-    setText("");
-    // if (createdTextPost) {
-    //   history.push("/feed");
-    // }
+
+    const formData = new FormData();
+
+    formData.append('post_title', title);
+    formData.append('post_description', text);
+    formData.append('post_type', postType)
+
+    try {
+      let createdTextPost = await dispatch(createNewPost(blogId, formData));
+
+      setTitle("");
+      setText("");
+
+      if (createdTextPost) {
+        history.push("/feed");
+      }
+    } catch (error) {
+      console.log("Error creating post:", error);
+    }
   };
 
   return (
