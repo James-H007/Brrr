@@ -1,6 +1,6 @@
 .login_modal {
   position: relative;
-  top: 140px;
+  /* top: 140px; */
   margin: 0 auto;
   width: 400px;
   background-color: #f8f8f8;
@@ -11,8 +11,9 @@
 }
 
   .landing-page {
-    position: relative;
-    height: 100vh;
+    position: absolute;
+    height: 92.9vh;
+    width: 183.7vh;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -33,6 +34,7 @@
     flex-direction: column;
     margin-top: 10px;
     top: 100px
+
   }
 
   .login_errors {

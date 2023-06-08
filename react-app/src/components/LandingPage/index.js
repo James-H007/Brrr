@@ -20,7 +20,7 @@ import brrWP13 from "../../assets/brrWP13.jpg";
 import brrWP14 from "../../assets/brrWP14.jpg";
 import brrWP15 from "../../assets/brrWP15.jpg";
 import brrWP16 from "../../assets/brrWP14.jpg";
-import "./landingPage.css"
+import "./landingPage.css";
 
 function LandingPage() {
   const dispatch = useDispatch();
@@ -96,46 +96,49 @@ function LandingPage() {
         className="landing-page"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       >
-        <div className="login_modal">
-          <h1 className="login_h1">Brrr</h1>
-          <form className="login_modal_form" onSubmit={handleSubmit}>
-            <ul className="login_errors">
-              {errors.map((error, idx) => (
-                <li key={idx}>{error}</li>
-              ))}
-            </ul>
-            <label className="login_input">
-              <input
-                className="login_input"
-                placeholder="Email"
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </label>
-            <label>
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </label>
-            <button className="submit_button" type="submit">
-              Log In
-            </button>
-            <button className="demoLoginButton" onClick={handleDemo}>
-              Demo Login
-            </button>
-            <label className="login_h2">
-              New To Brrr?{" "}
-              <span className="signup_clickable" onClick={handleSignUpClick}>
-                Sign Up!
-              </span>
-            </label>
-          </form>
+        <div className="move-it-down">
+          <div className="login_modal">
+            <h1 className="login_h1">Brrr</h1>
+
+            <form className="login_modal_form" onSubmit={handleSubmit}>
+              <ul className="login_errors">
+                {errors.map((error, idx) => (
+                  <li key={idx}>{error}</li>
+                ))}
+              </ul>
+              <label className="login_input">
+                <input
+                  className="login_input"
+                  placeholder="Email"
+                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </label>
+              <label>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </label>
+              <button className="submit_button" type="submit">
+                Log In
+              </button>
+              <button className="demoLoginButton" onClick={handleDemo}>
+                Demo Login
+              </button>
+              <label className="login_h2">
+                New To Brrr?{" "}
+                <span className="signup_clickable" onClick={handleSignUpClick}>
+                  Sign Up!
+                </span>
+              </label>
+            </form>
+          </div>
         </div>
       </div>
     </>
