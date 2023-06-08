@@ -33,17 +33,19 @@ const Feed = () => {
     // console.log(followedBlogsIds, "--------Array of followed blog ids")
     // console.log(currentFeed, "-------------LOOOK HERE CURRENT FEED")
     // console.log(sortedCurrentFeed, "=-----------------SORTED CURRENT FEED")
-    useEffect(() => {
-        dispatch(fetchFollowedBlogs())
-        /*
-         currentUsersFollowedBlogs === [ { blog_avatar: 'djsbbkbkjbkbkjkdvd.png', blog_name: 'Marnie', id: 2 } ]
-        */
-    }, [dispatch])
+    // useEffect(() => {
+
+    /*
+     currentUsersFollowedBlogs === [ { blog_avatar: 'djsbbkbkjbkbkjkdvd.png', blog_name: 'Marnie', id: 2 } ]
+    */
+    // }, [dispatch])
 
 
 
     useEffect(() => {
-        dispatch(getAllPosts()).then(() => { setIsLoaded(true) })
+        dispatch(getAllPosts())
+            .then(() => dispatch(fetchFollowedBlogs()))
+            .then(() => { setIsLoaded(true) })
         /*
         allPosts ===
         {

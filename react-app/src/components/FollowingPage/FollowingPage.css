@@ -45,6 +45,7 @@
 .followed-blog-link {
     color: black;
     text-decoration: none;
+    animation: jumpIn 1s;
 }
 
 .following-blog-comp:hover {

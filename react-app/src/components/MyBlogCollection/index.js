@@ -14,7 +14,7 @@ const MyBlogCollection = () => {
 
     useEffect(() => {
         dispatch(getCurrentUser())
-        setIsLoaded(true)
+            .then(() => setIsLoaded(true))
     }, [dispatch])
 
     return (

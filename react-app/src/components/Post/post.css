@@ -3,6 +3,7 @@
     border-radius: 5px;
     margin-top: 20px;
     font-family: 'Rubik';
+    animation: jumpIn 1s;
 }
 
 .post-header {

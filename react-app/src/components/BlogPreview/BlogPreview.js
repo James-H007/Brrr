@@ -13,17 +13,14 @@ const BlogPreview = ({ blogId }) => {
     const blogById = useSelector(state => state.blogs.currentBlog)
     useEffect(() => {
         dispatch(getBlogById(blogId))
-        setIsLoaded(true)
+            .then(() => (setIsLoaded(true)))
+
     }, [dispatch])
 
 
     return (
         <>
-            {(!isLoaded || !blogById) && (
-                <>
-                    Loading...
-                </>
-            )}
+
             {
                 isLoaded && blogById && (
                     <div className="blog-preview">

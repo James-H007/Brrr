@@ -1,7 +1,7 @@
 import Post from "../Post"
 import "./Blog.css"
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { followABlog, getBlogById, getBlogFollowers, unFollowABlog } from "../../store/blogs";
 import loadingCat from "../../assets/cat.gif"
@@ -41,8 +41,10 @@ const Blog = ({ data }) => {
         // dispatch(getBlogById(id))
         // setIsLoaded(true)
         dispatch(getCurrentUser())
-        dispatch(getBlogFollowers(id))
-        dispatch(getBlogById(id)).then(() => setIsLoaded(true))
+            .then(() => dispatch(getBlogFollowers(id)))
+            .then(() => dispatch(getBlogFollowers(id)))
+            .then(() => dispatch(getBlogById(id)))
+            .then(() => setIsLoaded(true))
         /*
 
         blogById ===
@@ -105,7 +107,7 @@ const Blog = ({ data }) => {
 
                 </>
             )}
-            {isLoaded && blogById && currentUser && (
+            {isLoaded && blogById && currentUser && id && (
                 <div>
                     <div className="main-feed">
                         <div className="main-post-area">
@@ -139,7 +141,10 @@ const Blog = ({ data }) => {
                                 {
                                     (currentUser.id === blogById.ownerId) && (
                                         <div className="blog-icons">
-                                            <img src={pencil} alt="pencil" className="blog-edit" />
+                                            <Link>
+                                                <img src={pencil} alt="pencil" className="blog-edit" />
+                                            </Link>
+
                                             <img src={trash} alt="trash" className="blog-edit" />
                                         </div>
                                     )

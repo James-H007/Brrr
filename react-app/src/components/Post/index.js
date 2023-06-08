@@ -113,11 +113,11 @@ const Post = ({ post }) => {
 
     useEffect(() => {
         dispatch(getBlogById(blogId))
-        dispatch(getCurrentUser())
-        dispatch(getAllBlogs())
-        dispatch(getMyLikes())
-        dispatch(fetchFollowedBlogs())
-        setIsLoaded(true)
+            .then(() => dispatch(getCurrentUser()))
+            .then(() => dispatch(getAllBlogs()))
+            .then(() => dispatch(getMyLikes()))
+            .then(() => dispatch(fetchFollowedBlogs()))
+            .then(() => setIsLoaded(true))
     }, [dispatch, isLiked])
 
     useEffect(() => {
