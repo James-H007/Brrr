@@ -13,7 +13,8 @@ import Blog from "./components/Blog";
 import Explore from "./components/Explore/Explore";
 import CreateBlogPage from "./components/CreateBlogPage";
 import MyBlogCollection from "./components/MyBlogCollection";
-import EditBlogPage from "./components/EditBlogPage"
+import EditBlogPage from "./components/EditBlogPage";
+import Home from "./components/LandingPageWrapper";
 
 function App() {
   const dispatch = useDispatch();
@@ -57,6 +58,9 @@ function App() {
             </Route>
             <Route path="/:blogId/edit">
               <EditBlogPage />
+            </Route>
+            <Route path="/">
+              <Home />
             </Route>
           </Switch>
         )}
