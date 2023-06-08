@@ -3,6 +3,7 @@ import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
+import * as sessionActions from "../../store/session";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -10,6 +11,18 @@ function LoginFormModal() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
+
+  const handleDemo = async (e) => {
+    e.preventDefault();
+    let demoEmail = "demo@aa.io";
+    let demoPass = "password";
+    const data = await dispatch(login(demoEmail, demoPass));
+    if (data) {
+      setErrors(data);
+    } else {
+      closeModal();
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +37,7 @@ function LoginFormModal() {
   return (
     <>
       <div className="login_modal">
-        {/* <h1 className="login_h1">Log In</h1> */}
+        <h1 className="login_h1">Log In</h1>
         <form className="login_modal_form" onSubmit={handleSubmit}>
           <ul className="login_errors">
             {errors.map((error, idx) => (
@@ -52,6 +65,9 @@ function LoginFormModal() {
           </label>
           <button className="submit_button" type="submit">
             Log In
+          </button>
+          <button className="demoLoginButton" onClick={handleDemo}>
+            Demo Login
           </button>
         </form>
       </div>
