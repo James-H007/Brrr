@@ -112,7 +112,7 @@ const TextPostForm = ({ postType }) => {
                 alt="flower"
                 className="post-maker-icon"
               />
-              <p className="post-form-header-name">{blogName} ˅</p>
+              <p className="post-form-header-name">{blogName} 🠋</p>
               {blogDropdown && (
                 <ul className="blog-dropdown">
                   {user.blogs.map((blog) => (

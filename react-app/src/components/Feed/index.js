@@ -14,6 +14,7 @@ import { fetchFollowedBlogs } from "../../store/blogs";
 import { getAllPosts } from "../../store/posts";
 import LinkPostForm from "../PostFormModal/LinkPostForm";
 import loadingCat from "../../assets/cat.gif"
+import { getCurrentUser } from "../../store/users";
 
 const Feed = () => {
     const [showMenu, setShowMenu] = useState(false);
@@ -30,6 +31,8 @@ const Feed = () => {
     const followedBlogsIds = currentUsersFollowedBlogs.map((blog) => blog.id)
     const currentFeed = allPosts.filter(post => followedBlogsIds.includes(post.blogId))
     const sortedCurrentFeed = currentFeed.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    const user = useSelector(state => state.user.currentUser)
+    // console.log(user, "USER USER")
     // console.log(followedBlogsIds, "--------Array of followed blog ids")
     // console.log(currentFeed, "-------------LOOOK HERE CURRENT FEED")
     // console.log(sortedCurrentFeed, "=-----------------SORTED CURRENT FEED")
@@ -40,7 +43,15 @@ const Feed = () => {
     */
     // }, [dispatch])
 
+    const notLoggedIn = "https://media.tenor.com/nDrR1iOWmn0AAAAC/pulp-fiction-ahh.gif"
 
+    useEffect(() => {
+        dispatch(getCurrentUser())
+    }, [dispatch])
+
+    useEffect(() => {
+        console.log(user, "------------")
+    }, [user])
 
     useEffect(() => {
         dispatch(getAllPosts())
@@ -91,6 +102,14 @@ const Feed = () => {
 
     return (
         <>
+            {(Object.values(user).length == 0) && (
+                <>
+                    <img src={notLoggedIn} alt="gif" className="no-likes-gif" />
+                    <p className="no-likes">
+                        Hey. You're not logged in.
+                    </p>
+                </>
+            )}
             {(!isLoaded || !currentFeed || !sortedCurrentFeed) && (
                 <>
                     <div className="loading-box">
@@ -99,7 +118,7 @@ const Feed = () => {
                     </div>
                 </>
             )}
-            {isLoaded && currentFeed && sortedCurrentFeed && (
+            {isLoaded && currentFeed && sortedCurrentFeed && user && (Object.values(user).length > 0) && (
                 <div className='main-feed'>
                     <div className='main-post-area'>
                         <div className='post-select'>

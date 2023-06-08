@@ -20,6 +20,7 @@ import brrWP13 from "../../assets/brrWP13.jpg";
 import brrWP14 from "../../assets/brrWP14.jpg";
 import brrWP15 from "../../assets/brrWP15.jpg";
 import brrWP16 from "../../assets/brrWP14.jpg";
+import "./landingPage.css"
 
 function LandingPage() {
   const dispatch = useDispatch();
