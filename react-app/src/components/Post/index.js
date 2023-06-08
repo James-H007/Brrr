@@ -33,6 +33,9 @@ const Post = ({ post }) => {
     const blogById = useSelector(state => state.blogs.currentBlog)
     const currentUser = useSelector(state => state.user.currentUser)
     const currentUserLikes = useSelector(state => Object.values(state.likes.myLikes))
+
+
+
     const likesPostIds = currentUserLikes.map((like) => like.postId)
     const initialLikeState = likesPostIds.includes(post.id)
     console.log(currentUser, "---------------LOOKIE HERE")

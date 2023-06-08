@@ -43,7 +43,62 @@ def all_post_images():
     return {'post_images': [post_image.to_dict() for post_image in post_images]}, 200
 
 
+# ------------------------------------------------------------------------------------------------------
+# @post_routes.route('/create/<int:blog_id>', methods=["GET","POST"])
+# @login_required
+# def create_post(blog_id):
+#     """
+#     Route to post to a blog
+#     """
+#     userId = current_user.id
 
+#     form = PostTypeForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+#     if form.validate_on_submit():
+#         post = Post (
+#             blog_id = blog_id,
+#             user_id = userId,
+#             post_title = form.data["post_title"],
+#             post_type = form.data["post_type"],
+#             post_description = form.data["post_description"],
+#             video_embed_code = form.data["video_embed_code"],
+#             image_embed_code = form.data["image_embed_code"],
+#         )
+
+#         db.session.add(post)
+#         db.session.commit()
+
+#         # We have to do this after ⬇ because we need the post.id
+
+#         if 'file' in request.files:
+#             file = request.files['file']
+#             # if user does not select file, browser submits an empty part without a filename
+#             if file.filename != '':
+#                 filename = secure_filename(file.filename)
+#                 file.save(filename)
+
+#                 # Upload the user's chosen file to AWS S3
+#                 s3.upload_file(
+#                     Bucket='flaskbrrr',
+#                     Filename=filename,
+#                     Key=filename
+#                 )
+
+#                 # Get the URL of the uploaded file
+#                 url = f"https://{bucket}.s3.us-east-2.amazonaws.com/{filename}"
+
+#                 post_image = PostImage(
+#                     post_id=post.id,
+#                     image_url=url
+#                 )
+#                 db.session.add(post_image)
+#                 db.session.commit()
+
+#         return {'post': post.to_dict()}, 201
+
+#     print(form.errors)
+#     return {"error": form.errors}, 404 # <<-- change this after testing
+# ------------------------------------------------------------------------------------------------------
 @post_routes.route('/create/<int:blog_id>', methods=["GET","POST"])
 @login_required
 def create_post(blog_id):
@@ -51,10 +106,47 @@ def create_post(blog_id):
     Route to post to a blog
     """
     userId = current_user.id
+    decscription = request.form.get('description', ' ')
 
     form = PostTypeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
+
+    if 'file' in request.files:
+        file = request.files['file']
+        if file.filename == '':
+            return {"error": "No file selected"}, 400
+
+        post = Post(
+            blog_id=blog_id,
+            user_id=userId,
+            post_type="image",
+            post_title="Image post",
+            post_description=decscription
+        )
+
+        db.session.add(post)
+        db.session.commit()
+
+        filename = secure_filename(file.filename)
+        file.save(filename)
+
+        s3.upload_file(
+            Bucket='flaskbrrr',
+            Filename=filename,
+            Key=filename
+        )
+
+        url = f"https://{bucket}.s3.us-east-2.amazonaws.com/{filename}"
+
+        post_image = PostImage(
+            post_id=post.id,
+            image_url=url
+        )
+        db.session.add(post_image)
+        db.session.commit()
+
+        return {'post': post.to_dict()}, 201
+    elif form.validate_on_submit():
         post = Post (
             blog_id = blog_id,
             user_id = userId,
@@ -62,42 +154,15 @@ def create_post(blog_id):
             post_type = form.data["post_type"],
             post_description = form.data["post_description"],
             video_embed_code = form.data["video_embed_code"],
-            image_embed_code = form.data["image_embed_code"],
         )
 
         db.session.add(post)
         db.session.commit()
 
-        # We have to do this after ⬇ because we need the post.id
-
-        # if 'file' in request.files:
-        #     file = request.files['file']
-        #     # if user does not select file, browser submits an empty part without a filename
-        #     if file.filename != '':
-        #         filename = secure_filename(file.filename)
-        #         file.save(filename)
-
-        #         # Upload the user's chosen file to AWS S3
-        #         s3.upload_file(
-        #             Bucket='flaskbrrr',
-        #             Filename=filename,
-        #             Key=filename
-        #         )
-
-        #         # Get the URL of the uploaded file
-        #         url = f"https://{bucket}.s3.us-east-2.amazonaws.com/{filename}"
-
-        #         post_image = PostImage(
-        #             post_id=post.id,
-        #             image_url=url
-        #         )
-        #         db.session.add(post_image)
-        #         db.session.commit()
-
-        return {'post': post.to_dict()}, 201
-
-    print(form.errors)
-    return {"error": form.errors}, 404 # <<-- change this after testing
+        return {'post': post.to_dict(), 'post_image': post_image.to_dict()}, 201
+    else:
+        print(form.errors)
+        return {"error": form.errors}, 404
 
 
 @post_routes.route('/<int:post_id>/edit', methods=["PUT"])
