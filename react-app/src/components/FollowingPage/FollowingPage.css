@@ -22,8 +22,9 @@
     border-radius: 50px;
 }
 
-.following-icon-users {
+.following-info {
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: center;
 }
@@ -37,12 +38,14 @@
     border: 2px solid black;
     padding: 10px;
     border-radius: 20px;
+}
 
-
+.followed-blog-link {
+    color: black;
+    text-decoration: none;
 }
 
 .following-blog-comp:hover {
-
     cursor: pointer;
 }
 
@@ -53,13 +56,28 @@
     display: flex;
     font-size: 18px;
     flex-direction: column;
+    justify-content: center;
+    text-align: center;
     padding: 10px;
     margin-bottom: 35px;
 }
 
-.following-blog-name {
+.following-blog-title {
     font-weight: bold;
+    margin-top: 0px auto;
+}
 
+.following-blog-name {
+    opacity: .8;
+
+}
+
+.following-blog-banner-prev {
+    background-color: red;
+    height: 200px;
+    width: 80%;
+
+    border-radius: 10px;
 }
 
 .following-unfollow {

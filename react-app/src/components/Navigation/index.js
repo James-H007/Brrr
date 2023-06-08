@@ -9,7 +9,9 @@ import Snowflake from "../../assets/snowflake-regular.svg";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+
 import { getAllBlogs } from "../../store/blogs";
+
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -29,9 +31,11 @@ function Navigation({ isLoaded }) {
   const handleSearch = (e) => {
     setSearchText(e.target.value);
 
-    if (e.target.value === "") {
-      setSearchResults([]);
-      return;
+
+    if (e.target.value === '') {
+      setSearchResults([])
+      return
+
     }
 
     const results = allBlogs.filter((i) =>
@@ -138,7 +142,7 @@ function Navigation({ isLoaded }) {
     <ul className="navBar">
       <div className="logoSearch">
         <li>
-          <NavLink exact to="/">
+          <NavLink exact to="/feed">
             <img src={Snowflake} alt="logo" className="logo" />
           </NavLink>
         </li>

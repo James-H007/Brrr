@@ -4,6 +4,7 @@ import ExploreBlog from "./ExploreBlog"
 import { getAllBlogs } from "../../store/blogs"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
+import loadingCat from "../../assets/cat.gif"
 
 
 const Explore = () => {
@@ -12,8 +13,8 @@ const Explore = () => {
   const allBlogs = useSelector(state => state.blogs.blogs)
 
   useEffect(() => {
-    dispatch(getAllBlogs())
-    setIsLoaded(true)
+    dispatch(getAllBlogs()).then(() => setIsLoaded(true))
+    // setIsLoaded(true)
     /*
     allBlogs ===
 
@@ -70,9 +71,12 @@ const Explore = () => {
 
   return (<>
     {!isLoaded && (
-      <p>
-        Loading...
-      </p>
+      <>
+        <div className="loading-box">
+          <img src={loadingCat} alt="loading-cat" className="loading-cat" />
+          <p className="loading-message">Loading...</p>
+        </div>
+      </>
     )}
     {isLoaded && (
       <div className="explore-page">

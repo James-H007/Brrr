@@ -4,6 +4,7 @@ import ExploreBlog from "../Explore/ExploreBlog"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getCurrentUser } from "../../store/users"
+import loadingCat from "../../assets/cat.gif"
 
 const MyBlogCollection = () => {
     const [isLoaded, setIsLoaded] = useState(false)
@@ -18,6 +19,14 @@ const MyBlogCollection = () => {
 
     return (
         <>
+            {(!isLoaded || !currentUserBlogs) && (
+                <>
+                    <div className="loading-box">
+                        <img src={loadingCat} alt="loading-cat" className="loading-cat" />
+                        <p className="loading-message">Loading...</p>
+                    </div>
+                </>
+            )}
             {isLoaded && currentUserBlogs && (
                 <div>
                     <div className="explore-page">

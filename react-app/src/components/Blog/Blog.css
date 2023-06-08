@@ -19,6 +19,29 @@
     border-radius: 10px 10px 0px 0px;
 }
 
+.blog-follow-button-wrapper {
+    position: absolute;
+    right: 560px;
+    margin-top: 5px;
+}
+
+.blog-follow-button {
+    background-color: black;
+    font-family: 'Rubik';
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    width: 100px;
+    height: 50px;
+}
+
+.blog-follow-button:hover {
+    background-color: white;
+    color: black;
+}
+
 .blog-icon-wrapper {
     position: absolute;
     top: 26%;
@@ -57,4 +80,23 @@
     width: 100%;
     height: 100%;
 
+}
+
+.blog-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.blog-edit {
+    height: 30px;
+    width: 30px;
+    margin-top: 0 auto;
+    margin-bottom: 10px;
+    margin-right: 5px;
+}
+
+.blog-edit:hover {
+    cursor: pointer;
 }

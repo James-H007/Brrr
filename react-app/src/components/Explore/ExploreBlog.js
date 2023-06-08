@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import "./Explore.css"
 import { Link } from "react-router-dom"
+import loadingCat from "../../assets/cat.gif"
 
 const ExploreBlog = ({ blog }) => {
     const [isLoaded, setIsLoaded] = useState()
@@ -12,6 +13,15 @@ const ExploreBlog = ({ blog }) => {
     }, [blog])
     return (
         <>
+            {(!isLoaded || !blog) && (
+                <>
+                    <div className="loading-box">
+                        <img src={loadingCat} alt="loading-cat" className="loading-cat" />
+                        <p className="loading-message">Loading...</p>
+                    </div>
+
+                </>
+            )}
             {
                 isLoaded && blog && (
                     <Link to={`/blog/${id}`} className="explore-blog-card" >

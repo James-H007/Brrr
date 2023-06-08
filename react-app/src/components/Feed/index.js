@@ -13,9 +13,11 @@ import Post from '../Post'
 import { fetchFollowedBlogs } from "../../store/blogs";
 import { getAllPosts } from "../../store/posts";
 import LinkPostForm from "../PostFormModal/LinkPostForm";
+import loadingCat from "../../assets/cat.gif"
 
 const Feed = () => {
     const [showMenu, setShowMenu] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false)
     const ulRef = useRef();
     const dispatch = useDispatch()
     const currentUsersFollowedBlogs = useSelector(state => Object.values(state.blogs.followedBlogs))
@@ -27,8 +29,10 @@ const Feed = () => {
 
     const followedBlogsIds = currentUsersFollowedBlogs.map((blog) => blog.id)
     const currentFeed = allPosts.filter(post => followedBlogsIds.includes(post.blogId))
+    const sortedCurrentFeed = currentFeed.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     // console.log(followedBlogsIds, "--------Array of followed blog ids")
     // console.log(currentFeed, "-------------LOOOK HERE CURRENT FEED")
+    // console.log(sortedCurrentFeed, "=-----------------SORTED CURRENT FEED")
     useEffect(() => {
         dispatch(fetchFollowedBlogs())
         /*
@@ -39,7 +43,7 @@ const Feed = () => {
 
 
     useEffect(() => {
-        dispatch(getAllPosts())
+        dispatch(getAllPosts()).then(() => { setIsLoaded(true) })
         /*
         allPosts ===
         {
@@ -85,42 +89,53 @@ const Feed = () => {
 
     return (
         <>
-            <div className='main-feed'>
-                <div className='main-post-area'>
-                    <div className='post-select'>
-                        <PostOpenModalButton
-                            buttonText="Text"
-                            iconType={text}
-                            modalComponent={<TextPostForm postType="text" />}
-                        />
-                        <PostOpenModalButton
-                            buttonText="Image"
-                            iconType={image}
-                            modalComponent={<ImagePostForm postType="image" />}
-                        />
-                        <PostOpenModalButton
-                            buttonText="Link"
-                            iconType={link}
-                            modalComponent={<LinkPostForm postType="link" />}
-                        />
-                        <PostOpenModalButton
-                            buttonText="Video"
-                            iconType={video}
-                            modalComponent={<ImagePostForm postType="video" />}
-                        />
+            {(!isLoaded || !currentFeed || !sortedCurrentFeed) && (
+                <>
+                    <div className="loading-box">
+                        <img src={loadingCat} alt="loading-cat" className="loading-cat" />
+                        <p className="loading-message">Loading...</p>
                     </div>
-                    <div className='post-comp'>
-                        {
-                            currentFeed.map((post, i) => (
-                                <>
-                                    <Post post={post} />
-                                </>
-                            ))
-                        }
+                </>
+            )}
+            {isLoaded && currentFeed && sortedCurrentFeed && (
+                <div className='main-feed'>
+                    <div className='main-post-area'>
+                        <div className='post-select'>
+                            <PostOpenModalButton
+                                buttonText="Text"
+                                iconType={text}
+                                modalComponent={<TextPostForm postType="text" />}
+                            />
+                            <PostOpenModalButton
+                                buttonText="Image"
+                                iconType={image}
+                                modalComponent={<ImagePostForm postType="image" />}
+                            />
+                            <PostOpenModalButton
+                                buttonText="Link"
+                                iconType={link}
+                                modalComponent={<LinkPostForm postType="link" />}
+                            />
+                            <PostOpenModalButton
+                                buttonText="Video"
+                                iconType={video}
+                                modalComponent={<ImagePostForm postType="video" />}
+                            />
+                        </div>
+                        <div className='post-comp'>
+                            {
+                                sortedCurrentFeed.map((post, i) => (
+                                    <>
+                                        <Post post={post} />
+                                    </>
+                                ))
+                            }
 
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
+
         </>
     )
 }
