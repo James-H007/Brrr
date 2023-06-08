@@ -58,3 +58,17 @@
   .submit_button:hover {
     background-color: lightgray;
   }
+.demoLoginButton{
+    width: 90%;
+    background-color: gray;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    padding-bottom: 10px;
+}
+.demoLoginButton:hover {
+    background-color: lightgray;
+  }
