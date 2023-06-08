@@ -12,18 +12,31 @@ const TextPostForm = ({ postType }) => {
   const [text, setText] = useState("");
   const [titleError, setTitleError] = useState("");
   const [textError, setTextError] = useState("");
+  const [blogName, setBlogName] = useState("")
+  const [blogAvatar, setBlogAvatar] = useState("")
+  const [isLoaded, setIsLoaded] = useState("false")
+  const [blogDropdown, setBlogDropdown] = useState(false)
+  const [selectedBlogId, setSelectedBlogId] = useState(null)
 
   const user = useSelector(state => state.user.currentUser)
+  // console.log("HERE IS THE USER", user)
 
   useEffect(() => {
     dispatch(getCurrentUser())
+    if (user) {
+      setBlogName(user.blogs[0].blogName)
+      setBlogAvatar(user.blogs[0].blogAvatarUrl)
+      setSelectedBlogId(user.blogs[0].id)
+    }
+    setIsLoaded(true)
+
   }, [dispatch])
 
   useEffect(() => {
     console.log(user);
   }, [user])
 
-  const blogId = 2
+  // const blogId = 2
 
 
 
@@ -56,7 +69,7 @@ const TextPostForm = ({ postType }) => {
     formData.append('post_type', postType)
 
     try {
-      let createdTextPost = await dispatch(createNewPost(blogId, formData));
+      let createdTextPost = await dispatch(createNewPost(selectedBlogId, formData));
 
       setTitle("");
       setText("");
@@ -69,48 +82,86 @@ const TextPostForm = ({ postType }) => {
     }
   };
 
+  const handleBlogSelect = () => {
+    if (blogDropdown) {
+      setBlogDropdown(false)
+    }
+    else {
+      setBlogDropdown(true)
+    }
+  }
+
   return (
-    <div className="post-form-container">
-      <div className="post-form-content">
-        <header className="post-form-header">
-          <img
-            src="https://thelifeofyourtime.files.wordpress.com/2016/05/bloodroot.jpg"
-            alt="flower"
-            className="post-maker-icon"
-          />
-          Username
-        </header>
-        <form className="post-form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            className="post-form-input-title"
-            placeholder="Title..."
-            name="title"
-            value={title}
-            onChange={handleTitleChange}
-          />
-          {titleError && <div className="errors">{titleError}</div>}
-          <textarea
-            className="post-form-input-text"
-            placeholder="Your post here..."
-            name="text"
-            value={text}
-            onChange={handleTextChange}
-          />
-          {textError && <div className="errors">{textError}</div>}
-          <div className="close-post-buttons">
-            {/* <button className="poster-button">Close</button> */}
-            <button
-              className="poster-button"
-              type="submit"
-              onClick={handleSubmit}
-            >
-              Post
-            </button>
+    <>
+      {!isLoaded && (
+        <p>
+          Loading...
+        </p>
+      )}
+      {!isLoaded && !user.blogs && (
+        <p>
+          YOU DON'T HAVE ANY BLOGS! MAKE ONE!
+        </p>
+      )}
+      {isLoaded && user.blogs && (
+        <div className="post-form-container">
+          <div className="post-form-content">
+            <header className="post-form-header" onClick={handleBlogSelect}>
+              <img
+                src={blogAvatar}
+                alt="flower"
+                className="post-maker-icon"
+              />
+              <p className="post-form-header-name">{blogName} ˅</p>
+              {blogDropdown && (
+                <ul className="blog-dropdown">
+                  {user.blogs.map((blog) => (
+                    <li className="blog-dropdown-select" key={blog.id} onClick={() => {
+                      setSelectedBlogId(blog.id)
+                      setBlogName(blog.blogName)
+                      setBlogAvatar(blog.blogAvatarUrl)
+                    }}>
+                      <img src={blog.blogAvatarUrl} alt="blog-icon" className="blog-select-icon" />
+                      {blog.blogTitle}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </header>
+            <form className="post-form" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                className="post-form-input-title"
+                placeholder="Title..."
+                name="title"
+                value={title}
+                onChange={handleTitleChange}
+              />
+              {titleError && <div className="errors">{titleError}</div>}
+              <textarea
+                className="post-form-input-text"
+                placeholder="Your post here..."
+                name="text"
+                value={text}
+                onChange={handleTextChange}
+              />
+              {textError && <div className="errors">{textError}</div>}
+              <div className="close-post-buttons">
+                {/* <button className="poster-button">Close</button> */}
+                <button
+                  className="poster-button"
+                  type="submit"
+                  onClick={handleSubmit}
+                >
+                  Post
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
-    </div>
+        </div>
+      )}
+    </>
+
   );
 };
 

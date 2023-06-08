@@ -112,8 +112,10 @@ def blog_follows():
      followed_blogs = [
         {
             "id": follower.blog_id,
+            "blog_title":follower.blog.blog_title,
             "blog_name": follower.blog.blog_name,
-            "blog_avatar": follower.blog.blog_avatar_url
+            "blog_avatar": follower.blog.blog_avatar_url,
+            "banner_img_url": follower.blog.banner_img_url
         }
         for follower in user.blog_follows
     ]
