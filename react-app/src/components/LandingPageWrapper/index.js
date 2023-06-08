@@ -5,17 +5,15 @@ import Feed from "../Feed/index";
 import LandingPage from "../LandingPage/index";
 
 function Home() {
-  const user = useSelector((state) => state.session.user);
+  const currentUser = useSelector((state) => state.session.user);
 
-  if (user) {
-    // User is already logged in, render the Feed component
+  if (currentUser) {
     return (
       <div>
         <Feed />
       </div>
     );
   } else {
-    // User is not logged in, render the LandingPage component
     return (
       <div>
         <LandingPage />

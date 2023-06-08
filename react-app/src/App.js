@@ -14,7 +14,7 @@ import Explore from "./components/Explore/Explore";
 import CreateBlogPage from "./components/CreateBlogPage";
 import MyBlogCollection from "./components/MyBlogCollection";
 import EditBlogPage from "./components/EditBlogPage";
-import LandingPageWrapper from "./components/LandingPageWrapper";
+import Home from "./components/LandingPageWrapper";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,9 +29,6 @@ function App() {
         <Navigation isLoaded={isLoaded} />
         {isLoaded && (
           <Switch>
-            <Route path="/">
-              <LandingPageWrapper />
-            </Route>
             <Route path="/login">
               <LoginFormPage />
             </Route>
@@ -61,6 +58,9 @@ function App() {
             </Route>
             <Route path="/:blogId/edit">
               <EditBlogPage />
+            </Route>
+            <Route path="/">
+              <Home />
             </Route>
           </Switch>
         )}
