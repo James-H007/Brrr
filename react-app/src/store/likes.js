@@ -81,10 +81,10 @@ export const likePostThunk = (postId) => async (dispatch) => {
 }
 
 
-// @like_routes.route('/<int:post_id>/unlike', methods=["POST"])
+// @like_routes.route('/<int:post_id>/unlike', methods=["DELETE"])
 export const unlikePostThunk = (postId) => async (dispatch) => {
   const response = await fetch(`/api/likes/${postId}/unlike`, {
-    method: "POST",
+    method: "DELETE",
     headers: {
       "Content-Type": "application/json"
     }

@@ -9,6 +9,7 @@ const LikesPage = () => {
   const [likedPosts, setLikedPosts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const noLikers = "https://media.tenor.com/V6viLE6UQPEAAAAC/john-travolta-where-are-you-guys.gif"
   // useEffect(() => {
   //   const fetchLikedPosts = async () => {
   //     // const likedPostsData = await get_user_liked_posts();
@@ -27,8 +28,7 @@ const LikesPage = () => {
   console.log(currentUserLikes, "-------------------")
 
   useEffect(() => {
-    dispatch(getMyLikes())
-    setIsLoaded(true)
+    dispatch(getMyLikes()).then(() => setIsLoaded(true))
     /*
     currentUserLikes ===
         [
@@ -74,8 +74,22 @@ const LikesPage = () => {
 
   return (
     <>
+      {!isLoaded && (
+        <p>
+          Loading...
+        </p>
+      )}
+      {isLoaded && (currentUserLikes == 0) && (
+        <>
+
+          <img src={noLikers} alt="gif" className="no-likes-gif" />
+          <p className="no-likes">
+            No likes are here. Try liking stuff first.
+          </p>
+        </>
+      )}
       {
-        isLoaded && (
+        isLoaded && (currentUserLikes.length > 0) && (
           <div className="main-feed">
             <div className="main-post-area">
               <div className="like-header">

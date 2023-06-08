@@ -12,7 +12,7 @@ import { getAllBlogs } from "../../store/blogs";
 import stockVideo from "../../assets/stock.mp4"
 import { getBlogById } from "../../store/blogs";
 import { getCurrentUser } from "../../store/users";
-import { getMyLikes, likePostThunk, unlikePost } from "../../store/likes";
+import { getMyLikes, likePostThunk, unlikePost, unlikePostThunk } from "../../store/likes";
 
 
 const Post = ({ post }) => {
@@ -27,12 +27,14 @@ const Post = ({ post }) => {
     // console.log(post)
     //If currentUser.id == blogById.ownerId
     // console.log("User LIKES ARRAY--------------", userLikes)
+
     const { blogId, createdAt, imageEmbedCode, notes, postDescription, postTitle, postType, videoEmbedCode, id, likes, blog } = post
     const blogById = useSelector(state => state.blogs.currentBlog)
     const currentUser = useSelector(state => state.user.currentUser)
     const currentUserLikes = useSelector(state => Object.values(state.likes.myLikes))
     const likesPostIds = currentUserLikes.map((like) => like.postId)
-
+    const initialLikeState = likesPostIds.includes(post.id)
+    // console.log(likesPostIds, "---------------LOOKIE HERE")
     let postContent;
     let blogAvatarUrl
     if (!blog) {
@@ -113,11 +115,13 @@ const Post = ({ post }) => {
         dispatch(getCurrentUser())
         dispatch(getAllBlogs())
         dispatch(getMyLikes())
-        if (likesPostIds.includes(post.id)) {
-            setisLiked(true)
-        }
         setIsLoaded(true)
-    }, [dispatch])
+    }, [dispatch, isLiked])
+
+    useEffect(() => {
+        setisLiked(initialLikeState);
+
+    }, [initialLikeState])
 
 
 
@@ -140,7 +144,7 @@ const Post = ({ post }) => {
         }
         else {
             setisLiked(false)
-            dispatch(unlikePost(id))
+            dispatch(unlikePostThunk(id))
         }
     }
 

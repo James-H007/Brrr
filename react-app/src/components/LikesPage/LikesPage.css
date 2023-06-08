@@ -20,6 +20,27 @@
     cursor: pointer;
 }
 
+.no-likes-gif {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 10%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.no-likes {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 30px;
+    font-family: "Rubik";
+    margin-top: 10px;
+}
+
 
 @keyframes pulse {
     0% {
