@@ -13,7 +13,7 @@ import stockVideo from "../../assets/stock.mp4"
 import { getBlogById } from "../../store/blogs";
 import { getCurrentUser } from "../../store/users";
 import { getMyLikes, likePostThunk, unlikePost, unlikePostThunk } from "../../store/likes";
-
+import { Link } from "react-router-dom"
 
 const Post = ({ post }) => {
     const [isHovered, setIsHovered] = useState(false);
@@ -165,13 +165,15 @@ const Post = ({ post }) => {
 
                                 <header className="post-header">
                                     <div>
-                                        <img
-                                            src={blogAvatarUrl}
-                                            alt="blog-avatar"
-                                            className="post-owner-icon"
-                                            onMouseEnter={handleHover}
-                                            onMouseLeave={handleMouseLeave}
-                                        />
+                                        <Link to={`/blog/${blogId}`}>
+                                            <img
+                                                src={blogAvatarUrl}
+                                                alt="blog-avatar"
+                                                className="post-owner-icon"
+                                                onMouseEnter={handleHover}
+                                                onMouseLeave={handleMouseLeave}
+                                            />
+                                        </Link>
                                     </div>
 
                                     <div className="post-owner-time">

@@ -1,17 +1,22 @@
 import "./FollowingPage.css"
 import { getCurrentUser } from "../../store/users"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
-
+import { useEffect, useState } from "react"
+import { fetchFollowedBlogs, getBlogById } from "../../store/blogs"
+import loadingCat from "../../assets/cat.gif"
+import { Link } from "react-router-dom"
 
 const FollowingPage = () => {
-
+    const [isLoaded, setIsLoaded] = useState(false)
     const dispatch = useDispatch()
     const currentUser = useSelector(state => state.user.currentUser)
+    const followedBlogs = useSelector(state => state.blogs.followedBlogs)
+
+    console.log("--------------------", followedBlogs)
 
     useEffect(() => {
         dispatch(getCurrentUser())
-
+        dispatch(fetchFollowedBlogs()).then(() => setIsLoaded(true))
         /*
         currentUser (marnie@aa.io) ===
             {
@@ -78,44 +83,53 @@ const FollowingPage = () => {
 
 
 
-    const test_data = [
-        {
-            image: "https://xsgames.co/randomusers/assets/images/favicon.png",
-            username: "Joe",
-            createdAt: "10/10/2000",
-        },
-        {
-            image: "https://www.harleytherapy.co.uk/counselling/wp-content/uploads/16297800391_5c6e812832.jpg",
-            username: "Lily",
-            createdAt: "11/10/2010"
-        },
-        {
-            image: "https://cdn.drawception.com/images/avatars/647493-B9E.png",
-            username: "CartoonMan",
-            createdAt: "08/10/2210"
-        }
-    ]
-
     return (
         <div>
-            <div className="following-feed">
-                <div className="main-following-area">
-                    <div>
-                        {test_data.map((blog, i) => (
-                            <div key={i} className={`following-blog-comp ${blog.loaded ? 'loaded' : ''}`}>
-                                <div className="following-icon-users">
-                                    <div ><img src={blog.image} alt="flower" className="post-owner-icon" /> </div>
-                                    <div className="following-stat-stack">
-                                        <span className="following-blog-name">{blog.username}</span>
-                                        <span>{blog.createdAt}</span>
-                                    </div>
-                                </div>
-                                <div className="following-unfollow">Unfollow</div>
-                            </div>
-                        ))}
+            {(!isLoaded || !followedBlogs) && (
+                <>
+                    <div className="loading-box">
+                        <img src={loadingCat} alt="loading-cat" className="loading-cat" />
+                        <p className="loading-message">Loading...</p>
                     </div>
-                </div>
-            </div>
+
+                </>
+            )}
+            {
+                isLoaded && followedBlogs && (
+                    <div className="following-feed">
+                        <div className="main-following-area">
+                            <div>
+                                {followedBlogs.map((blog, i) => (
+                                    <Link to={`/blog/${blog.id}`} className="followed-blog-link">
+                                        <div
+                                            key={i}
+                                            className='following-blog-comp'>
+
+                                            <div className="following-info">
+                                                <div ><img src={blog.blog_avatar} alt="blog-icon" className="post-owner-icon" /> </div>
+                                                <div className="following-stat-stack">
+                                                    <span className="following-blog-title">{blog.blog_title}</span>
+                                                    <span className="following-blog-name">@{blog.blog_name}</span>
+                                                </div>
+                                            </div>
+                                            <span className="following-blog-banner-prev"
+                                                style={{
+                                                    backgroundImage: `url(${blog.banner_img_url})`,
+                                                    backgroundSize: 'cover',
+                                                    backgroundPosition: 'center',
+                                                    backgroundColor: `rgba(0, 0, 0, 0.1)`,
+                                                }}
+                                            ></span>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+
+
         </div>
     )
 }

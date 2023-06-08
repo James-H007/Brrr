@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import "./BlogPreview.css"
 import { useDispatch, useSelector } from "react-redux"
 import { getBlogById } from "../../store/blogs"
+import loadingCat from "../../assets/cat.gif"
 
 
 const BlogPreview = ({ blogId }) => {
@@ -19,9 +20,9 @@ const BlogPreview = ({ blogId }) => {
     return (
         <>
             {(!isLoaded || !blogById) && (
-                <p>
+                <>
                     Loading...
-                </p>
+                </>
             )}
             {
                 isLoaded && blogById && (

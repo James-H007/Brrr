@@ -159,7 +159,7 @@ export const createBlog = (blog) => async (dispatch) => {
   if (response.ok) {
     const newBlog = await response.json()
     dispatch(createNewBlog(newBlog)) // or newBlog.blog
-    console.log("---Our New Blog---",newBlog);
+    console.log("---Our New Blog---", newBlog);
     return newBlog
   }
 }
@@ -174,7 +174,7 @@ export const fetchFollowedBlogs = () => async (dispatch) => {
 
   if (response.ok) {
     const { followed_blogs } = await response.json()
-    console.log(followed_blogs);
+    // console.log(followed_blogs);
 
     dispatch(getFollowedBlogs(followed_blogs))
     return followed_blogs

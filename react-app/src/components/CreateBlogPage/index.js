@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createBlog } from "../../store/blogs";
 import { getCurrentUser } from "../../store/users";
 import "./CreateBlogPage.css";
+import loadingCat from "../../assets/cat.gif"
 
 const CreateBlogPage = () => {
   const [blogTitle, setBlogTitle] = useState("");
@@ -19,13 +20,13 @@ const CreateBlogPage = () => {
   const [titleError, setTitleError] = useState("");
   const [blogNameError, setBlogNameError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
-
+  const [isLoaded, setIsLoaded] = useState(false)
   const user = useSelector((state) => state.user.currentUser);
   const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCurrentUser());
+    dispatch(getCurrentUser()).then(() => { setIsLoaded(true) });
   }, [dispatch]);
 
   useEffect(() => {
@@ -64,8 +65,8 @@ const CreateBlogPage = () => {
   const validateForm = () => {
     let isValid = true;
 
-    if (blogTitle.length === 0 || blogTitle.length > 255) {
-      setTitleError("Title must be between 1 and 255 characters");
+    if (blogTitle.length === 0 || blogTitle.length > 24) {
+      setTitleError("Title must be between 1 and 24 characters");
       isValid = false;
     } else {
       setTitleError("");
@@ -89,56 +90,68 @@ const CreateBlogPage = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="create-blog-form">
-      <div className="create_blog_container">
-        <h1 className="create_blog_h1">Create a new blog</h1>
-        <div className="create-blog-input-container">
-          <label className="create_blog_label" htmlFor="title">
-            Title: &nbsp;
-          </label>
-          <input
-            className="create_blog_input"
-            type="text"
-            id="title"
-            value={blogTitle}
-            onChange={(e) => setBlogTitle(e.target.value)}
-          />
-          {titleError && <p className="errors">{titleError}</p>}
-        </div>
+    <>
+      {!isLoaded && (
+        <>
+          <div className="loading-box">
+            <img src={loadingCat} alt="loading-cat" className="loading-cat" />
+            <p className="loading-message">Loading...</p>
+          </div>
+        </>
+      )}
+      {isLoaded && (
+        <form onSubmit={handleSubmit} className="create-blog-form">
+          <div className="create_blog_container">
+            <h1 className="create_blog_h1">Create a new blog</h1>
+            <div className="create-blog-input-container">
+              <label className="create_blog_label" htmlFor="title">
+                Title: &nbsp;
+              </label>
+              <input
+                className="create_blog_input"
+                type="text"
+                id="title"
+                value={blogTitle}
+                onChange={(e) => setBlogTitle(e.target.value)}
+              />
+              {titleError && <p className="errors">{titleError}</p>}
+            </div>
 
-        <div className="create-blog-input-container">
-          <label className="create_blog_label" htmlFor="blogName">
-            Blog Name: &nbsp;
-          </label>
-          <input
-            className="create_blog_input"
-            type="text"
-            id="blogName"
-            value={blogName}
-            onChange={(e) => setBlogName(e.target.value)}
-          />
-          {blogNameError && <p className="errors">{blogNameError}</p>}
-        </div>
+            <div className="create-blog-input-container">
+              <label className="create_blog_label" htmlFor="blogName">
+                Blog Name: &nbsp;
+              </label>
+              <input
+                className="create_blog_input"
+                type="text"
+                id="blogName"
+                value={blogName}
+                onChange={(e) => setBlogName(e.target.value)}
+              />
+              {blogNameError && <p className="errors">{blogNameError}</p>}
+            </div>
 
-        <div className="create-blog-input-container">
-          <label className="create_blog_label" htmlFor="description">
-            Description: &nbsp;
-          </label>
-          <input
-            className="create_blog_input"
-            type="text"
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          {descriptionError && <p className="errors">{descriptionError}</p>}
-        </div>
+            <div className="create-blog-input-container">
+              <label className="create_blog_label" htmlFor="description">
+                Description: &nbsp;
+              </label>
+              <input
+                className="create_blog_input"
+                type="text"
+                id="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              {descriptionError && <p className="errors">{descriptionError}</p>}
+            </div>
+            <button className="create_blog_button" type="submit">
+              Create Blog
+            </button>
+          </div>
+        </form>
+      )}
 
-        <button className="create_blog_button" type="submit">
-          Create Blog
-        </button>
-      </div>
-    </form>
+    </>
   );
 };
 

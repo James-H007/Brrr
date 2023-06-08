@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getBlogById } from "../../store/blogs";
+import loadingCat from "../../assets/cat.gif"
+import pencil from "../../assets/pencil-solid.svg"
+import trash from "../../assets/trash-can-regular.svg"
+import { getCurrentUser } from "../../store/users";
 
 const Blog = ({ data }) => {
     const [isLoaded, setIsLoaded] = useState(false)
@@ -22,11 +26,13 @@ const Blog = ({ data }) => {
     // blog by id
     // grab all posts from that blog
     const dispatch = useDispatch()
+    const currentUser = useSelector(state => state.user.currentUser)
     const blogById = useSelector(state => state.blogs.currentBlog)
-    console.log(blogById, '-------------------HERE')
+    // console.log(blogById, '-------------------HERE')
     useEffect(() => {
         // dispatch(getBlogById(id))
         // setIsLoaded(true)
+        dispatch(getCurrentUser())
         dispatch(getBlogById(id)).then(() => setIsLoaded(true))
         /*
 
@@ -70,10 +76,16 @@ const Blog = ({ data }) => {
 
     return (
         <>
-            {!isLoaded && (
-                <p>Loading...</p>
+            {(!isLoaded || !blogById || !currentUser) && (
+                <>
+                    <div className="loading-box">
+                        <img src={loadingCat} alt="loading-cat" className="loading-cat" />
+                        <p className="loading-message">Loading...</p>
+                    </div>
+
+                </>
             )}
-            {isLoaded && blogById && (
+            {isLoaded && blogById && currentUser && (
                 <div>
                     <div className="main-feed">
                         <div className="main-post-area">
@@ -89,6 +101,17 @@ const Blog = ({ data }) => {
                                 <p className="blog-title">{blogById.blogTitle}</p>
                                 <p className="blog-url">@{blogById.blogName}</p>
                                 <p className="blog-description">{blogById.description}</p>
+
+                                {
+                                    (currentUser.id === blogById.ownerId) && (
+                                        <div className="blog-icons">
+                                            <img src={pencil} alt="pencil" className="blog-edit" />
+                                            <img src={trash} alt="trash" className="blog-edit" />
+                                        </div>
+                                    )
+                                }
+
+
                             </div>
                             <div className="post-comp">
                                 {blogById.posts.map((post, i) => (
