@@ -7,8 +7,11 @@ import "./SignupForm.css";
 function SignupFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
+  const [first_name, setFirst] = useState("");
+  const [last_name, setLast] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [profile_pic_url, setProfile_pic_url] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
@@ -16,7 +19,16 @@ function SignupFormModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(
+        signUp(
+          first_name,
+          last_name,
+          username,
+          email,
+          profile_pic_url,
+          password
+        )
+      );
       if (data) {
         setErrors(data);
       } else {
@@ -48,11 +60,38 @@ function SignupFormModal() {
             />
           </label>
           <label className="sign_up_input">
+            First Name
+            <input
+              type="text"
+              value={first_name}
+              onChange={(e) => setFirst(e.target.value)}
+              required
+            />
+          </label>
+          <label className="sign_up_input">
+            Last Name
+            <input
+              type="text"
+              value={last_name}
+              onChange={(e) => setLast(e.target.value)}
+              required
+            />
+          </label>
+          <label className="sign_up_input">
             Username
             <input
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </label>
+          <label className="sign_up_input">
+            Profile Picture
+            <input
+              type="text"
+              value={profile_pic_url}
+              onChange={(e) => setProfile_pic_url(e.target.value)}
               required
             />
           </label>
