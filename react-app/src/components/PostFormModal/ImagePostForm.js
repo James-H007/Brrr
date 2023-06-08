@@ -20,11 +20,11 @@ const ImagePostForm = ({ postType }) => {
   }, [dispatch])
 
 
-  useEffect(() => {
-    console.log(users.blogs[0].id);
-  }, [users])
+  // useEffect(() => {
+  //   console.log(users.blogs[0].id);
+  // }, [users])
 
-  const blogId = users.blogs[0].id
+  const blogId = 2
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -65,7 +65,7 @@ const ImagePostForm = ({ postType }) => {
     // send data to backend
     const formData = new FormData()
     formData.append('file', selectedFile)
-
+    formData.append('post_type', postType)
     formData.append('image_embed_code', imageEmbedCode);
 
     dispatch(createNewPost(blogId, formData));

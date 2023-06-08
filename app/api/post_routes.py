@@ -6,6 +6,7 @@ from app.forms.post_forms import PostTypeForm
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.utils import secure_filename
 from ..aws_s3_bucket import s3, bucket
+import os
 
 post_routes = Blueprint('posts', __name__)
 
@@ -106,7 +107,7 @@ def create_post(blog_id):
     Route to post to a blog
     """
     userId = current_user.id
-    decscription = request.form.get('description', ' ')
+    decscription = request.form.get('description', '')
 
     form = PostTypeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -145,7 +146,16 @@ def create_post(blog_id):
         db.session.add(post_image)
         db.session.commit()
 
+                # Delete the local file after uploading to S3
+        try:
+            os.remove(filename)
+        except Exception as e:
+            print(f"Error occurred while deleting file: {e}")
+            # you might want to add more error handling here
+
         return {'post': post.to_dict()}, 201
+
+
     elif form.validate_on_submit():
         post = Post (
             blog_id = blog_id,
