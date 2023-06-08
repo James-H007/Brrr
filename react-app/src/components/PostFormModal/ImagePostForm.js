@@ -1,10 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import {useHistory} from "react-router-dom"
+import {useDispatch, useSelector} from "react-redux"
 import "./PostFormModal.css";
+import { createNewPost } from "../../store/posts";
+import { getCurrentUser } from "../../store/users"
 
 const ImagePostForm = ({ postType }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileSizeError, setFileSizeError] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
+  const [imageEmbedCode, setImageEmbedCode] = useState(null)
+
+  const dispatch = useDispatch()
+  const users = useSelector(state => state.user.currentUser);
+  const history = useHistory()
+
+  useEffect(() => {
+    dispatch(getCurrentUser())
+  }, [dispatch])
+
+
+  useEffect(() => {
+    console.log(users.blogs[0].id);
+  }, [users])
+
+  const blogId = users.blogs[0].id
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -43,6 +63,14 @@ const ImagePostForm = ({ postType }) => {
     }
 
     // send data to backend
+    const formData = new FormData()
+    formData.append('file', selectedFile)
+
+    formData.append('image_embed_code', imageEmbedCode);
+
+    dispatch(createNewPost(blogId, formData));
+
+
 
     setSelectedFile(null);
     setImagePreview(null);
