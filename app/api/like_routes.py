@@ -51,7 +51,7 @@ def like_post(post_id):
 
 
 
-@like_routes.route('/<int:post_id>/unlike', methods=["POST"])
+@like_routes.route('/<int:post_id>/unlike', methods=["DELETE"])
 @login_required
 def unlike_post(post_id):
     """

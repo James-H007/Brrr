@@ -68,9 +68,6 @@ const Blog = ({ data }) => {
 
     }, [dispatch, id])
 
-
-
-
     return (
         <>
             {!isLoaded && (
