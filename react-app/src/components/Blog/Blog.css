@@ -19,6 +19,29 @@
     border-radius: 10px 10px 0px 0px;
 }
 
+.blog-follow-button-wrapper {
+    position: absolute;
+    right: 560px;
+    margin-top: 5px;
+}
+
+.blog-follow-button {
+    background-color: black;
+    font-family: 'Rubik';
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    width: 100px;
+    height: 50px;
+}
+
+.blog-follow-button:hover {
+    background-color: white;
+    color: black;
+}
+
 .blog-icon-wrapper {
     position: absolute;
     top: 26%;

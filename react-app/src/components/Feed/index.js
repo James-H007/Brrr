@@ -29,8 +29,10 @@ const Feed = () => {
 
     const followedBlogsIds = currentUsersFollowedBlogs.map((blog) => blog.id)
     const currentFeed = allPosts.filter(post => followedBlogsIds.includes(post.blogId))
+    const sortedCurrentFeed = currentFeed.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     // console.log(followedBlogsIds, "--------Array of followed blog ids")
     // console.log(currentFeed, "-------------LOOOK HERE CURRENT FEED")
+    // console.log(sortedCurrentFeed, "=-----------------SORTED CURRENT FEED")
     useEffect(() => {
         dispatch(fetchFollowedBlogs())
         /*
@@ -87,7 +89,7 @@ const Feed = () => {
 
     return (
         <>
-            {(!isLoaded || !currentFeed) && (
+            {(!isLoaded || !currentFeed || !sortedCurrentFeed) && (
                 <>
                     <div className="loading-box">
                         <img src={loadingCat} alt="loading-cat" className="loading-cat" />
@@ -95,7 +97,7 @@ const Feed = () => {
                     </div>
                 </>
             )}
-            {isLoaded && currentFeed && (
+            {isLoaded && currentFeed && sortedCurrentFeed && (
                 <div className='main-feed'>
                     <div className='main-post-area'>
                         <div className='post-select'>
@@ -122,7 +124,7 @@ const Feed = () => {
                         </div>
                         <div className='post-comp'>
                             {
-                                currentFeed.map((post, i) => (
+                                sortedCurrentFeed.map((post, i) => (
                                     <>
                                         <Post post={post} />
                                     </>

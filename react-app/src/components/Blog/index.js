@@ -3,7 +3,7 @@ import "./Blog.css"
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getBlogById } from "../../store/blogs";
+import { followABlog, getBlogById, getBlogFollowers, unFollowABlog } from "../../store/blogs";
 import loadingCat from "../../assets/cat.gif"
 import pencil from "../../assets/pencil-solid.svg"
 import trash from "../../assets/trash-can-regular.svg"
@@ -17,6 +17,7 @@ const Blog = ({ data }) => {
     const [blogName, setBlogName] = useState("")
     const [blogDescription, setBlogDescription] = useState("")
     const [blogPosts, setBlogPosts] = useState([])
+    const [isFollowed, setIsFollowed] = useState(null)
 
     const blog_banner = "https://images.squarespace-cdn.com/content/v1/5c524a52a9e0288eb5cfa3ee/1616108169603-VV7YD0OXJUPST28QPEKI/LofiVineyard-09+blank+Banner.jpg?format=2500w"
     const iconImage = "https://lofigirl.com/wp-content/uploads/2023/02/DAY_UPDATE_ILLU.jpg"
@@ -28,11 +29,19 @@ const Blog = ({ data }) => {
     const dispatch = useDispatch()
     const currentUser = useSelector(state => state.user.currentUser)
     const blogById = useSelector(state => state.blogs.currentBlog)
-    // console.log(blogById, '-------------------HERE')
+    const blogFollowers = useSelector(state => state.blogs.followers)
+    console.log(blogFollowers, '-------------------HERE')
+    const initialFollowState = blogFollowers.some(follower => follower.id == currentUser.id)
+
+    useEffect(() => {
+        setIsFollowed(initialFollowState)
+    }, [initialFollowState])
+
     useEffect(() => {
         // dispatch(getBlogById(id))
         // setIsLoaded(true)
         dispatch(getCurrentUser())
+        dispatch(getBlogFollowers(id))
         dispatch(getBlogById(id)).then(() => setIsLoaded(true))
         /*
 
@@ -72,7 +81,18 @@ const Blog = ({ data }) => {
         }
         */
 
-    }, [dispatch, id])
+    }, [dispatch, id, isFollowed])
+
+    const handleFollow = () => {
+        if (!isFollowed) {
+            setIsFollowed(true)
+            dispatch(followABlog(id))
+        }
+        else {
+            setIsFollowed(false)
+            dispatch(unFollowABlog(id))
+        }
+    }
 
     return (
         <>
@@ -90,6 +110,20 @@ const Blog = ({ data }) => {
                     <div className="main-feed">
                         <div className="main-post-area">
                             <div className="blog-header">
+                                {isFollowed && (
+                                    <div className="blog-follow-button-wrapper">
+                                        <button className="blog-follow-button" onClick={handleFollow}>Unfollow</button>
+                                    </div>
+                                )}
+                                {
+                                    !isFollowed && (
+                                        <div className="blog-follow-button-wrapper">
+                                            <button className="blog-follow-button" onClick={handleFollow}>Follow</button>
+                                        </div>
+                                    )
+                                }
+
+
                                 <div className="blog-icon-wrapper">
                                     <img
                                         src={blogById.blogAvatarUrl}
