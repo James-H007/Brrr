@@ -14,7 +14,6 @@
 .main-following-area {
     display: flex;
     flex-direction: column;
-
     width: 70%;
     padding: 30px;
     margin-bottom: 20px;
@@ -27,6 +26,8 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    width: 35%;
+    height: 100%;
 }
 
 .following-blog-comp {
@@ -37,6 +38,7 @@
     margin-bottom: 20px;
     border: 2px solid black;
     padding: 10px;
+    margin: 10px;
     border-radius: 20px;
 }
 
@@ -75,7 +77,7 @@
 .following-blog-banner-prev {
     background-color: red;
     height: 200px;
-    width: 80%;
+    width: 65%;
 
     border-radius: 10px;
 }

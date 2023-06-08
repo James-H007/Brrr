@@ -12,7 +12,7 @@ const FollowingPage = () => {
     const currentUser = useSelector(state => state.user.currentUser)
     const followedBlogs = useSelector(state => state.blogs.followedBlogs)
 
-    console.log("--------------------", followedBlogs)
+    // console.log("--------------------", followedBlogs)
 
     useEffect(() => {
         dispatch(getCurrentUser())
@@ -128,8 +128,6 @@ const FollowingPage = () => {
                     </div>
                 )
             }
-
-
         </div>
     )
 }
