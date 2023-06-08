@@ -8,7 +8,7 @@ import pencil from "../../assets/pencil-solid.svg"
 import trash from "../../assets/trash-can-regular.svg"
 import "./post.css"
 import BlogPreview from "../BlogPreview/BlogPreview";
-import { getAllBlogs } from "../../store/blogs";
+import { fetchFollowedBlogs, getAllBlogs } from "../../store/blogs";
 import stockVideo from "../../assets/stock.mp4"
 import { getBlogById } from "../../store/blogs";
 import { getCurrentUser } from "../../store/users";
@@ -19,6 +19,7 @@ const Post = ({ post }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false)
     const [isLiked, setisLiked] = useState(false)
+    const [isFollowed, setisFollowed] = useState(false)
     // const [blogAvatar, setBlogAvatar] = useState("")
     // const [blogName, setBlogName] = useState("")
     const dispatch = useDispatch()
@@ -34,7 +35,7 @@ const Post = ({ post }) => {
     const currentUserLikes = useSelector(state => Object.values(state.likes.myLikes))
     const likesPostIds = currentUserLikes.map((like) => like.postId)
     const initialLikeState = likesPostIds.includes(post.id)
-    // console.log(likesPostIds, "---------------LOOKIE HERE")
+    console.log(currentUser, "---------------LOOKIE HERE")
     let postContent;
     let blogAvatarUrl
     if (!blog) {
@@ -115,6 +116,7 @@ const Post = ({ post }) => {
         dispatch(getCurrentUser())
         dispatch(getAllBlogs())
         dispatch(getMyLikes())
+        dispatch(fetchFollowedBlogs())
         setIsLoaded(true)
     }, [dispatch, isLiked])
 
@@ -179,7 +181,7 @@ const Post = ({ post }) => {
                                     <div className="post-owner-time">
                                         <div className="post-owner">
                                             {blogName}
-                                            <div className="post-owner-follow">Follow</div>
+                                            {/* <div className="post-owner-follow">Follow</div> */}
                                         </div>
                                         <div className="post-time">
                                             {createdAt}
