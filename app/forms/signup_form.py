@@ -20,10 +20,10 @@ def username_exists(form, field):
         raise ValidationError('Username is already in use.')
 
 
-def validate_image(form, field):
-    if field.data:
-        if not (field.data.endswith('.png') or field.data.endswith('.jpg') or field.data.endswith('.jpeg')):
-            raise ValidationError('Invalid image extension. We accept .jpg, .jpeg and .png.')
+# def validate_image(form, field):
+#     if field.data:
+#         if not (field.data.endswith('.png') or field.data.endswith('.jpg') or field.data.endswith('.jpeg')):
+#             raise ValidationError('Invalid image extension. We accept .jpg, .jpeg and .png.')
 
 
 class SignUpForm(FlaskForm):
@@ -33,5 +33,5 @@ class SignUpForm(FlaskForm):
         'Username', validators=[DataRequired(), username_exists])
     email = StringField('Email', validators=[DataRequired(), user_exists])
     password = StringField('Password', validators=[DataRequired()])
-    profile_pic_url = StringField('Upload Profile Picture', validators=[DataRequired(), validate_image])
+    profile_pic_url = StringField('Upload Profile Picture', validators=[DataRequired()])
     submit = SubmitField("Create")
