@@ -103,8 +103,8 @@ const Post = ({ post }) => {
         postContent = (
             <div>
                 <video controls className="post-video">
-                    <source src={stockVideo} type="video/mp4" />
-                    <source src={stockVideo} type="video/webm" />
+                    <source src={videoEmbedCode} type="video/mp4" />
+                    <source src={videoEmbedCode} type="video/webm" />
                 </video>
                 <p className="post-description">
                     {postDescription}
