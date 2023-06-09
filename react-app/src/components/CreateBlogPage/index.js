@@ -72,8 +72,8 @@ const CreateBlogPage = () => {
       setTitleError("");
     }
 
-    if (blogName.length === 0 || blogName.length > 255) {
-      setBlogNameError("Blog name must be between 1 and 255 characters");
+    if (blogName.length === 0 || blogName.length > 24) {
+      setBlogNameError("Blog name must be between 1 and 24 characters");
       isValid = false;
     } else {
       setBlogNameError("");
