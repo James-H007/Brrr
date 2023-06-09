@@ -1,3 +1,8 @@
-.move-it-down{
+.move-it-down {
     margin-top: 100px;
+}
+
+.landing-page {
+    width: 100%;
+    overflow-y: hidden;
 }
