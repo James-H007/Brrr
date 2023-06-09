@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -5,7 +6,29 @@ import { editAblog, getBlogById } from '../../store/blogs'
 import "./EditBlogPage.css"
 import loadingCat from "../../assets/cat.gif"
 import { currentUser, getCurrentUser } from '../../store/users'
+
 function EditBlogPage() {
+  const [blogTitle, setBlogTitle] = useState("");
+  const [bannerImg, setBannerImg] = useState("");
+  const [blogAvatar, setBlogAvatar] = useState("");
+  const [description, setDescription] = useState("");
+  const [defaultBlog, setDefaultBlog] = useState(true);
+
+
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const { blogId } = useParams();
+
+  useEffect(() => {
+    const fetchBlogData = async () => {
+      const blogData = await dispatch(getBlogById(blogId));
+
+      setBlogTitle(blogData.blog_title);
+      setBannerImg(blogData.banner_img_url);
+      setBlogAvatar(blogData.blog_avatar_url);
+      setDescription(blogData.description);
+    };
 
   const [blogTitle, setBlogTitle] = useState("")
   const [bannerImg, setBannerImg] = useState("")
@@ -54,9 +77,45 @@ function EditBlogPage() {
       .then(() => dispatch(getCurrentUser()))
       .then(() => setIsLoaded(true))
 
-  }, [dispatch, blogId])
+
+    fetchBlogData();
+  }, [dispatch, blogId]);
 
   const handleSubmit = async (e) => {
+
+    e.preventDefault();
+
+    const updatedBlog = {
+      blog_title: blogTitle,
+      banner_img_url: bannerImg,
+      blog_avatar_url: blogAvatar,
+      description: description,
+    };
+
+    const editedBlog = await dispatch(editAblog(blogId, updatedBlog));
+
+    if (editedBlog) {
+      history.push(`/blog/${editedBlog.id}`);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="create-blog-form">
+      <div className="create_blog_container">
+        <h1 className="create_blog_h1">Edit blog</h1>
+        <div className="create-blog-input-container">
+          <label className="create_blog_label" htmlFor="title">
+            Title: &nbsp;
+          </label>
+          <input
+            className="create_blog_input"
+            type="text"
+            id="title"
+            value={blogTitle}
+            onChange={(e) => setBlogTitle(e.target.value)}
+          />
+        </div>
+
     e.preventDefault()
     try {
       if (!isAuthorized) {
@@ -106,6 +165,7 @@ function EditBlogPage() {
     } else {
       setDescriptionError("");
     }
+
 
     if (!isImage(bannerImg)) {
       setBannerImgError("Not a valid image url. Must end in .jpg, .jpeg, .png, .webp, .avif, .gif, .svg")
@@ -231,8 +291,17 @@ function EditBlogPage() {
         </div>
       )}
 
+
+        <button className="create_blog_button" type="submit">
+          Create Blog
+        </button>
+      </div>
+    </form>
+  );
+
     </>
   )
+
 }
 
-export default EditBlogPage
+export default EditBlogPage;
