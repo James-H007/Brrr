@@ -25,8 +25,8 @@ function SignupFormModal() {
           last_name,
           username,
           email,
+          password,
           profile_pic_url,
-          password
         )
       );
       if (data) {
