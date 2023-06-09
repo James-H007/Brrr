@@ -23,7 +23,7 @@ const Feed = () => {
     const dispatch = useDispatch()
     const currentUsersFollowedBlogs = useSelector(state => Object.values(state.blogs.followedBlogs))
     const allPosts = useSelector(state => Object.values(state.posts.allPosts))
-
+    const noFeed = "https://gifdb.com/images/high/pulp-fiction-vincent-bathroom-break-s2qla4czbfiyqujn.gif"
     // When you query, do this:
     // currentUsersFollowedBlogs.map((i) => i.id === allPosts.blogId)
     // const currentFeed = currentUsersFollowedBlogs.map((i) => i.id === allPosts.blogId)
@@ -155,6 +155,15 @@ const Feed = () => {
                         </div>
                     </div>
                 </div>
+            )}
+            {isLoaded && user && sortedCurrentFeed && (Object.values(user).length > 0) && (sortedCurrentFeed.length == 0) && (
+                <>
+                    <p className="no-likes">
+                        Not following? No feed.
+                    </p>
+                    <img src={noFeed} alt="gif" className="no-feed-gif" />
+
+                </>
             )}
 
         </>

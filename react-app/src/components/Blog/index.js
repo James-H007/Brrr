@@ -141,7 +141,7 @@ const Blog = ({ data }) => {
                                 {
                                     (currentUser.id === blogById.ownerId) && (
                                         <div className="blog-icons">
-                                            <Link>
+                                            <Link to={`/blog/${id}/edit`}>
                                                 <img src={pencil} alt="pencil" className="blog-edit" />
                                             </Link>
 

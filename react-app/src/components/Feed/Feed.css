@@ -79,6 +79,16 @@
     font-family: 'Rubik';
 }
 
+.no-feed-gif {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 10px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
 
 @keyframes tilt-shaking {
     0% {

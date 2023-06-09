@@ -44,6 +44,9 @@ function App() {
             <Route path="/my-likes">
               <LikesPage />
             </Route>
+            <Route path="/blog/:blogId/edit">
+              <EditBlogPage />
+            </Route>
             <Route path="/blog/:id">
               <Blog />
             </Route>
@@ -56,9 +59,7 @@ function App() {
             <Route path="/my-blogs">
               <MyBlogCollection />
             </Route>
-            <Route path="/:blogId/edit">
-              <EditBlogPage />
-            </Route>
+
             <Route path="/">
               <Home />
             </Route>
