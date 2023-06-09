@@ -1,0 +1,17 @@
+.entire-edit-blog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.edit-blog-preview {
+    width: 400px;
+    height: 250px;
+    background-color: rgb(187, 187, 187);
+    border: 2px solid black;
+    margin-top: 22px;
+    border-radius: 2px;
+    animation: jumpIn 0.5s;
+}
