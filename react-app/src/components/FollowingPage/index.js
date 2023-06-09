@@ -11,7 +11,7 @@ const FollowingPage = () => {
     const dispatch = useDispatch()
     const currentUser = useSelector(state => state.user.currentUser)
     const followedBlogs = useSelector(state => state.blogs.followedBlogs)
-
+    const noFollowing = "https://thumbs.gfycat.com/AcrobaticScaryHare-size_restricted.gif"
     // console.log("--------------------", followedBlogs)
 
     useEffect(() => {
@@ -92,6 +92,15 @@ const FollowingPage = () => {
                         <p className="loading-message">Loading...</p>
                     </div>
 
+                </>
+            )}
+            {isLoaded && Object.values(followedBlogs).length == 0 && (
+                <>
+
+                    <img src={noFollowing} alt="gif" className="no-likes-gif" />
+                    <p className="no-likes">
+                        You aren't following anyone. Get out there.
+                    </p>
                 </>
             )}
             {

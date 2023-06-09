@@ -172,6 +172,7 @@ const Post = ({ post }) => {
           {isHovered && <BlogPreview blogId={blogId} />}
           <div className="post-container">
             <div>
+
               <header className="post-header">
                 <div>
                   <Link to={`/blog/${blogId}`}>
@@ -240,6 +241,15 @@ const Post = ({ post }) => {
                   </div>
                 </div>
               </footer>
+
+                <video controls className="post-video">
+                    <source src={videoEmbedCode} type="video/mp4" />
+                    <source src={videoEmbedCode} type="video/webm" />
+                </video>
+                <p className="post-description">
+                    {postDescription}
+                </p>
+
             </div>
           </div>
         </>

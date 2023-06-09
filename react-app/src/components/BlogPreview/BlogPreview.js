@@ -20,7 +20,6 @@ const BlogPreview = ({ blogId }) => {
 
     return (
         <>
-
             {
                 isLoaded && blogById && (
                     <div className="blog-preview">
