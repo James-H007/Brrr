@@ -64,7 +64,7 @@ const Post = ({ post }) => {
 
     const likesPostIds = currentUserLikes.map((like) => like.postId);
     const initialLikeState = likesPostIds.includes(post.id);
-    console.log(currentUser, "---------------LOOKIE HERE");
+    // console.log(currentUser, "---------------LOOKIE HERE");
     let postContent;
     let blogAvatarUrl;
     if (!blog) {
@@ -104,7 +104,7 @@ const Post = ({ post }) => {
     } else if (postType == "link") {
         postContent = (
             <div className="post-body">
-                <a href={postDescription} className="post-url">
+                <a href={postDescription} className="post-url" target="_blank" rel="noopener noreferrer">
                     {" "}
                     {postDescription}
                 </a>

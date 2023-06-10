@@ -5,7 +5,7 @@ from app.models import Post
 
 
 def validate_image(form, field):
-    if field.data:
+    if field.data and form.post_type.data != 'link':
         if not (field.data.endswith('.png') or field.data.endswith('.jpg') or field.data.endswith('.jpeg')):
             raise ValidationError('Invalid image extension. We accept .jpg, .jpeg and .png.')
 

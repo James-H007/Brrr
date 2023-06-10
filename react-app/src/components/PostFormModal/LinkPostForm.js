@@ -5,24 +5,26 @@ import { useModal } from "../../context/Modal";
 import { getCurrentUser } from "../../store/users";
 import { createNewPost } from "../../store/posts";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const LinkPostForm = ({ postType }) => {
   const history = useHistory();
-
-  const [link, setLink] = useState("");
-  const [linkError, setLinkError] = useState("");
+  const dispatch = useDispatch();
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+  const [titleError, setTitleError] = useState("");
+  const [textError, setTextError] = useState("");
+  const [blogName, setBlogName] = useState("")
+  const [blogAvatar, setBlogAvatar] = useState("")
   const [isLoaded, setIsLoaded] = useState("false")
   const [blogDropdown, setBlogDropdown] = useState(false)
   const [selectedBlogId, setSelectedBlogId] = useState(null)
-  const [blogName, setBlogName] = useState("")
-  const [blogAvatar, setBlogAvatar] = useState("")
   const { closeModal } = useModal();
 
-  const dispatch = useDispatch()
-  const user = useSelector(state => state.user.currentUser);
+  const user = useSelector(state => state.user.currentUser)
+  // console.log("HERE IS THE USER", user)
 
   useEffect(() => {
-
     dispatch(getCurrentUser())
     if (user) {
       setBlogName(user.blogs[0].blogName)
@@ -30,48 +32,58 @@ const LinkPostForm = ({ postType }) => {
       setSelectedBlogId(user.blogs[0].id)
     }
     setIsLoaded(true)
+
   }, [dispatch])
 
+  useEffect(() => {
+    console.log(user);
+  }, [user])
 
-  const handleLinkChange = (e) => {
-    const checkLink = e.target.value
-    setLink(e.target.value);
-    // setLinkError(validateLink(checkLink) ? "" : "Invalid link format.");
+  // const blogId = 2
+
+
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
   };
 
-  const validateLink = (enteredLink) => {
-    const urlChecker = /^(ftp|http|https):\/\/[^ "]+$/;
-    return urlChecker.test(enteredLink);
+  const handleTextChange = (e) => {
+    setText(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!link) {
-      setLinkError("Link cannot be empty.");
+    if (title.length < 1 || title.length > 225) {
+      setTitleError("Title should be between 1 and 225 characters.");
       return;
     }
 
-    if (!validateLink(link)) {
-      setLinkError("Invalid link format.");
+    if (text.length < 1 || text.length > 1200) {
+      setTextError("Text should be between 1 and 1200 characters.");
       return;
     }
-    console.log("Our link", link)
-    //send data to the backend
-    const formData = new FormData()
+
+
+    const formData = new FormData();
+
+    formData.append('post_title', title);
+    formData.append('post_description', text);
     formData.append('post_type', postType)
-    formData.append('post_description', link)
-    formData.append('description', link)
 
-    console.log("Form data", formData)
+    try {
+      let createdTextPost = await dispatch(createNewPost(selectedBlogId, formData));
 
-    dispatch(createNewPost(selectedBlogId, formData))
+      setTitle("");
+      setText("");
+      closeModal();
 
-    // Reset the form
-    setLink("");
-    closeModal();
-    history.push(`/blog/${selectedBlogId}`)
-
+      if (createdTextPost) {
+        history.push(`/blog/${selectedBlogId}`);
+      }
+    } catch (error) {
+      console.log("Error creating post:", error);
+    }
   };
 
   const handleBlogSelect = () => {
@@ -84,49 +96,79 @@ const LinkPostForm = ({ postType }) => {
   }
 
   return (
-    <div className="post-form-container">
-      <div className="post-form-content">
-        <header className="post-form-header" onClick={handleBlogSelect}>
-          <img
-            src={blogAvatar}
-            alt="flower"
-            className="post-maker-icon"
-          />
-          <p className="post-form-header-name">{blogName} 🠋</p>
-          {blogDropdown && (
-            <ul className="blog-dropdown-link">
-              {user.blogs.map((blog) => (
-                <li className="blog-dropdown-select" key={blog.id} onClick={() => {
-                  setSelectedBlogId(blog.id)
-                  setBlogName(blog.blogName)
-                  setBlogAvatar(blog.blogAvatarUrl)
-                }}>
-                  <img src={blog.blogAvatarUrl} alt="blog-icon" className="blog-select-icon" />
-                  {blog.blogTitle}
-                </li>
-              ))}
-            </ul>
-          )}
-        </header>
-        <form className="post-form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            className="post-form-input-link"
-            placeholder="Link..."
-            name="link"
-            value={link}
-            onChange={handleLinkChange}
-          />
-          {linkError && <div className="errors">{linkError}</div>}
-          <div className="close-post-buttons">
-            {/* <button className="poster-button">Close</button> */}
-            <button className="poster-button" type="submit">
-              Post
-            </button>
+    <>
+      {!isLoaded && (
+        <p>
+          Loading...
+        </p>
+      )}
+      {!isLoaded && !user.blogs && (
+        <p>
+          YOU DON'T HAVE ANY BLOGS! MAKE ONE!
+        </p>
+      )}
+      {isLoaded && user.blogs && (
+        <div className="post-form-container">
+          <div className="post-form-content">
+            <header className="post-form-header" onClick={handleBlogSelect}>
+              <img
+                src={blogAvatar}
+                alt="flower"
+                className="post-maker-icon"
+              />
+              <p className="post-form-header-name">{blogName} 🠋</p>
+              {blogDropdown && (
+                <ul className="blog-dropdown">
+                  {user.blogs.map((blog) => (
+                    <li className="blog-dropdown-select" key={blog.id} onClick={() => {
+                      setSelectedBlogId(blog.id)
+                      setBlogName(blog.blogName)
+                      setBlogAvatar(blog.blogAvatarUrl)
+                    }}>
+                      <img src={blog.blogAvatarUrl} alt="blog-icon" className="blog-select-icon" />
+                      {blog.blogTitle}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </header>
+            <form className="post-form" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                className="post-form-input-title"
+                placeholder="Title..."
+                name="title"
+                value={title}
+                onChange={handleTitleChange}
+              />
+              {titleError && <div className="errors">{titleError}</div>}
+              <textarea
+                className="post-form-input-text"
+                placeholder="Your post here..."
+                name="text"
+                value={text}
+                onChange={handleTextChange}
+              />
+              { text &&
+                 <p>Link preview: <a href={text} target="_blank" rel="noopener noreferrer">{text}</a></p>
+              }
+              {textError && <div className="errors">{textError}</div>}
+              <div className="close-post-buttons">
+                {/* <button className="poster-button">Close</button> */}
+                <button
+                  className="poster-button"
+                  type="submit"
+                  onClick={handleSubmit}
+                >
+                  Post
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
-    </div>
+        </div>
+      )}
+    </>
+
   );
 };
 
