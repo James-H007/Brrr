@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { createNewPost } from "../../store/posts";
 import { getCurrentUser } from "../../store/users";
 import { useDispatch, useSelector } from "react-redux";
+import { useModal } from "../../context/Modal";
 
 const TextPostForm = ({ postType }) => {
   const history = useHistory();
@@ -17,6 +18,7 @@ const TextPostForm = ({ postType }) => {
   const [isLoaded, setIsLoaded] = useState("false")
   const [blogDropdown, setBlogDropdown] = useState(false)
   const [selectedBlogId, setSelectedBlogId] = useState(null)
+  const { closeModal } = useModal();
 
   const user = useSelector(state => state.user.currentUser)
   // console.log("HERE IS THE USER", user)
@@ -73,9 +75,10 @@ const TextPostForm = ({ postType }) => {
 
       setTitle("");
       setText("");
+      closeModal();
 
       if (createdTextPost) {
-        history.push("/feed");
+        history.push(`/blog/${selectedBlogId}`);
       }
     } catch (error) {
       console.log("Error creating post:", error);

@@ -153,7 +153,7 @@ const Blog = ({ data }) => {
 
                             </div>
                             <div className="post-comp">
-                                {blogById.posts.map((post, i) => (
+                                {blogById.posts.slice().reverse().map((post, i) => (
                                     <>
                                         <Post post={post} key={i} />
                                     </>

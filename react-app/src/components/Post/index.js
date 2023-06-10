@@ -29,6 +29,7 @@ const Post = ({ post }) => {
     const [isLiked, setisLiked] = useState(false);
     const [isFollowed, setisFollowed] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
+    const [postLikes, setPostLikes] = useState(null)
 
     // const [blogAvatar, setBlogAvatar] = useState("")
     // const [blogName, setBlogName] = useState("")
@@ -129,11 +130,15 @@ const Post = ({ post }) => {
             .then(() => dispatch(getMyLikes()))
             .then(() => dispatch(fetchFollowedBlogs()))
             .then(() => setIsLoaded(true));
-    }, [dispatch, isLiked]);
+    }, [dispatch]);
 
     useEffect(() => {
         setisLiked(initialLikeState);
     }, [initialLikeState]);
+
+    useEffect(() => {
+        setPostLikes(likes)
+    }, [likes])
 
     const handleHover = () => {
         setTimeout(() => {
@@ -149,12 +154,20 @@ const Post = ({ post }) => {
 
     const handleLike = () => {
         if (!isLiked) {
-            setisLiked(true);
+
             dispatch(likePostThunk(id));
         } else {
-            setisLiked(false);
+
             dispatch(unlikePostThunk(id));
         }
+
+        setisLiked(!isLiked)
+
+        let updatedLikesCount = isLiked ? likes - 1 : likes + 1;
+        if (updatedLikesCount < 0) {
+            updatedLikesCount = 0;
+        }
+        setPostLikes(updatedLikesCount)
     };
 
     const handleEdit = () => {
@@ -197,7 +210,7 @@ const Post = ({ post }) => {
                             {postContent}
                             <footer>
                                 <div className="post-stats">
-                                    <p className="post-notes">{likes} Notes</p>
+                                    <p className="post-notes">{postLikes} Notes</p>
                                     <div className="post-icons">
                                         {currentUser.id == ownerId && (
                                             <div className="post-icon">

@@ -4,6 +4,7 @@ import PostOpenModalButton from "../PostOpenModalButton";
 import PostFormModal from "../PostFormModal";
 import TextPostForm from "../PostFormModal/TextPostForm";
 import ImagePostForm from "../PostFormModal/ImagePostForm";
+import VideoPostForm from "../PostFormModal/VideoPostForm";
 import "./Feed.css"
 import text from "../../assets/font-solid.svg"
 import image from "../../assets/image.svg"
@@ -140,7 +141,7 @@ const Feed = () => {
                             <PostOpenModalButton
                                 buttonText="Video"
                                 iconType={video}
-                                modalComponent={<ImagePostForm postType="video" />}
+                                modalComponent={<VideoPostForm postType="video" />}
                             />
                         </div>
                         <div className='post-comp'>
