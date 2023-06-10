@@ -160,17 +160,25 @@ const Post = ({ post }) => {
     };
 
     const handleLike = () => {
+        let updatedLikesCount;
         if (!isLiked) {
 
             dispatch(likePostThunk(id));
         } else {
 
             dispatch(unlikePostThunk(id));
+
         }
 
         setisLiked(!isLiked)
 
-        let updatedLikesCount = isLiked ? likes - 1 : likes + 1;
+        if (initialLikeState) {
+            updatedLikesCount = isLiked ? likes - 1 : likes;
+        }
+        else {
+            updatedLikesCount = isLiked ? likes - 1 : likes + 1;
+        }
+        // let updatedLikesCount = isLiked ? likes - 1 : likes + 1;
         if (updatedLikesCount < 0) {
             updatedLikesCount = 0;
         }
@@ -236,6 +244,7 @@ const Post = ({ post }) => {
                                                     iconType={pencil}
                                                     modalComponent={<EditTextFormModal postData={post} />}
                                                     smallerIcon={true}
+
                                                 />
                                             </div>
                                         )}
@@ -244,6 +253,7 @@ const Post = ({ post }) => {
                                                 <PostOpenModalButton
                                                     iconType={pencil}
                                                     modalComponent={<EditImageFormModal postData={post} />}
+                                                    smallerIcon={true}
                                                 />
                                             </div>
                                         )}
@@ -252,6 +262,7 @@ const Post = ({ post }) => {
                                                 <PostOpenModalButton
                                                     iconType={pencil}
                                                     modalComponent={<EditVideoFormModal postData={post} />}
+                                                    smallerIcon={true}
                                                 />
                                             </div>
                                         )}
@@ -260,6 +271,7 @@ const Post = ({ post }) => {
                                                 <PostOpenModalButton
                                                     iconType={pencil}
                                                     modalComponent={<EditVideoFormModal postData={post} />}
+                                                    smallerIcon={true}
                                                 />
                                             </div>
                                         )}

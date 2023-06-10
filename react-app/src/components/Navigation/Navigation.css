@@ -109,7 +109,28 @@
   cursor: pointer;
   border-radius: 10px;
   font-size: 20px;
+
 }
+
+a {
+  text-decoration: none;
+}
+
+.search-li {
+  height: 60px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.search-title {
+  position: relative;
+  left: 70px;
+  bottom: 60px;
+  text-decoration: none;
+  color: black;
+
+}
+
 
 .search-li:hover {
   color: #000000;

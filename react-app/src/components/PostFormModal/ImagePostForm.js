@@ -24,11 +24,12 @@ const ImagePostForm = ({ postType }) => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user.currentUser);
   const history = useHistory()
+  const noBlog = "https://media.tenor.com/mjKlCBWywDgAAAAC/sarcastic-bob.gif"
   // console.log(user.blogs)
 
   useEffect(() => {
     dispatch(getCurrentUser())
-    if (user) {
+    if (user && (user.blogs.length > 0)) {
       setBlogName(user.blogs[0].blogName)
       setBlogAvatar(user.blogs[0].blogAvatarUrl)
       setSelectedBlogId(user.blogs[0].id)
@@ -132,10 +133,19 @@ const ImagePostForm = ({ postType }) => {
           Loading...
         </p>
       )}
-      {isLoaded && (user.blogs.length == 0) && (
-        <p>
-          YOU DON'T HAVE ANY BLOGS! MAKE ONE!
-        </p>
+      {isLoaded && (user.blogs.length === 0) && (
+        <>
+
+          <div className="post-form-container">
+            <div className="delete-form-container">
+              <h2>Hey. You don't even have a blog.</h2>
+
+              <img src={noBlog} alt="delete-gif" className="delete-image" />
+
+            </div>
+
+          </div>
+        </>
       )}
       {isLoaded && (user.blogs.length > 0) && (
         <div className="post-form-container">
@@ -156,7 +166,7 @@ const ImagePostForm = ({ postType }) => {
                       setBlogAvatar(blog.blogAvatarUrl)
                     }}>
                       <img src={blog.blogAvatarUrl} alt="blog-icon" className="blog-select-icon" />
-                      {blog.blogTitle}
+                      {blog.blogName}
                     </li>
                   ))}
                 </ul>
@@ -176,7 +186,7 @@ const ImagePostForm = ({ postType }) => {
               </div>
               {fileSizeError && <div className="errors">{fileSizeError}</div>}
               {/* {fileTypeError && <div className="errors">{fileTypeError}</div>} */}
-              {imagePreview && !fileSizeError &&(
+              {imagePreview && !fileSizeError && (
                 <div className="image-preview">
                   <img src={imagePreview} alt="Preview" className="preview-image" />
                 </div>

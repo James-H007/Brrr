@@ -101,7 +101,8 @@ function Navigation({ isLoaded }) {
                         setSearchText("");
                       }}
                     >
-                      {i.blogTitle}
+                      <img src={i.blogAvatarUrl} alt='blog-icon' className="blog-select-icon" />
+                      <p className="search-title">{i.blogTitle}</p>
                     </Link>
                   </li>
                 ))}
