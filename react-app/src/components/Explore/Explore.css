@@ -28,3 +28,13 @@
     text-decoration: none;
     color: black;
 }
+
+.blog-container {
+    position: relative;
+  }
+
+  .delete-blog {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }

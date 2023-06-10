@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request, abort
 from flask_login import login_required, current_user
-from app.models import Blog, User, db, Follower
+from app.models import Blog, User, db, Follower, Post
 from app.forms.blog_form import BlogForm
 from sqlalchemy import and_
 
@@ -14,7 +14,7 @@ def blogs():
     blogs = Blog.query.all()
     return {'blogs': [blog.to_dict() for blog in blogs]}
 
-@blog_routes.route('/<int:id>', methods = ["GET", "DELETE"])  #🟨🟨🟨🟨🟨 Error's out with PUT
+@blog_routes.route('/<int:id>', methods = ["GET"])  #🟨🟨🟨🟨🟨 Error's out with PUT
 @login_required
 def blog(id):
     blog = Blog.query.get(id)
@@ -28,14 +28,27 @@ def blog(id):
         print(blog.to_dict())
         return blog.to_dict()
 
-    elif request.method == "DELETE":
-        """
-        Delete a blog based on id
-        """
+@blog_routes.route('/<int:id>', methods=["DELETE"])
+@login_required
+def blog_delete(id):
+    """
+    Delete a blog based on id
+    """
+    blog = Blog.query.get(id)
+    print('----------------------HIT DELETE ROUTE')
+
+    if blog is None:
+        return {'error': 'Blog not found'}, 404
+
+    if request.method == "DELETE":
+        print('------------------------------------>HIT DELETE ROUTE!')
+
+        Follower.query.filter_by(blog_id=id).delete()
+        Post.query.filter_by(blog_id=id).delete()
 
         db.session.delete(blog)
         db.session.commit()
-        return {'Successfully deleted'}
+        return {'message': 'Successfully deleted'}
 
 
 @blog_routes.route('/<int:id>/edit', methods = ["PUT"])  #🟨🟨🟨🟨🟨 Error's out with PUT

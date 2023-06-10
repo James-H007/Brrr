@@ -1,9 +1,9 @@
 import Post from "../Post"
 import "./Blog.css"
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { followABlog, getBlogById, getBlogFollowers, unFollowABlog } from "../../store/blogs";
+import { followABlog, getBlogById, getBlogFollowers, unFollowABlog, removeBlogById } from "../../store/blogs";
 import loadingCat from "../../assets/cat.gif"
 import pencil from "../../assets/pencil-solid.svg"
 import trash from "../../assets/trash-can-regular.svg"
@@ -23,6 +23,7 @@ const Blog = ({ data }) => {
     const iconImage = "https://lofigirl.com/wp-content/uploads/2023/02/DAY_UPDATE_ILLU.jpg"
 
     const { id } = useParams()
+    const history = useHistory()
 
     // blog by id
     // grab all posts from that blog
@@ -30,8 +31,11 @@ const Blog = ({ data }) => {
     const currentUser = useSelector(state => state.user.currentUser)
     const blogById = useSelector(state => state.blogs.currentBlog)
     const blogFollowers = useSelector(state => state.blogs.followers)
-    console.log(blogFollowers, '-------------------HERE')
     const initialFollowState = blogFollowers.some(follower => follower.id == currentUser.id)
+
+    console.log(blogById,"----------------------------BlogbyId");
+
+
 
     useEffect(() => {
         setIsFollowed(initialFollowState)
@@ -96,6 +100,14 @@ const Blog = ({ data }) => {
         }
     }
 
+    const handleDelete = async () => {
+        if (currentUser.id === blogById.ownerId) {
+            dispatch(removeBlogById(blogById.id))
+            .then(() => dispatch(getBlogById(id)))
+            .then(() => history.push("/my-blogs"))
+        }
+    }
+
     return (
         <>
             {(!isLoaded || !blogById || !currentUser) && (
@@ -107,7 +119,7 @@ const Blog = ({ data }) => {
 
                 </>
             )}
-            {isLoaded && blogById && currentUser && id && (
+            {isLoaded && blogById && currentUser && id &&(
                 <div>
                     <div className="main-feed">
                         <div className="main-post-area">
@@ -145,7 +157,7 @@ const Blog = ({ data }) => {
                                                 <img src={pencil} alt="pencil" className="blog-edit" />
                                             </Link>
 
-                                            <img src={trash} alt="trash" className="blog-edit" />
+                                            <img src={trash} alt="trash" className="blog-edit" onClick={handleDelete}/>
                                         </div>
                                     )
                                 }
