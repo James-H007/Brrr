@@ -21,7 +21,13 @@ import {
 import { Link } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import EditTextFormModal from "../editPostFormModal/editTextFormModal";
+
 import DeleteFormModal from "../DeletePostModal";
+
+import EditImageFormModal from "../editPostFormModal/EditImageFormModal"
+import EditVideoFormModal from "../editPostFormModal/EditVideoFormModal";
+import EditLinkFormModal from "../editPostFormModal/EditLinkFormModal";
+
 import PostOpenModalButton from "../PostOpenModalButton";
 
 const Post = ({ post }) => {
@@ -63,7 +69,7 @@ const Post = ({ post }) => {
 
     const likesPostIds = currentUserLikes.map((like) => like.postId);
     const initialLikeState = likesPostIds.includes(post.id);
-    console.log(currentUser, "---------------LOOKIE HERE");
+    // console.log(currentUser, "---------------LOOKIE HERE");
     let postContent;
     let blogAvatarUrl;
     if (!blog) {
@@ -103,7 +109,7 @@ const Post = ({ post }) => {
     } else if (postType == "link") {
         postContent = (
             <div className="post-body">
-                <a href={postDescription} className="post-url">
+                <a href={postDescription} className="post-url" target="_blank" rel="noopener noreferrer">
                     {" "}
                     {postDescription}
                 </a>
@@ -224,12 +230,36 @@ const Post = ({ post }) => {
 
                                             </div>
                                         )}
-                                        {currentUser.id == ownerId && (
+                                        {currentUser.id == ownerId && postType == "text" && (
                                             <div className="post-icon">
                                                 <PostOpenModalButton
                                                     iconType={pencil}
                                                     modalComponent={<EditTextFormModal postData={post} />}
                                                     smallerIcon={true}
+                                                />
+                                            </div>
+                                        )}
+                                        {currentUser.id == ownerId && postType == "image" && (
+                                            <div className="post-icon">
+                                                <PostOpenModalButton
+                                                    iconType={pencil}
+                                                    modalComponent={<EditImageFormModal postData={post} />}
+                                                />
+                                            </div>
+                                        )}
+                                        {currentUser.id == ownerId && postType == "video" && (
+                                            <div className="post-icon">
+                                                <PostOpenModalButton
+                                                    iconType={pencil}
+                                                    modalComponent={<EditVideoFormModal postData={post} />}
+                                                />
+                                            </div>
+                                        )}
+                                        {currentUser.id == ownerId && postType == "link" && (
+                                            <div className="post-icon">
+                                                <PostOpenModalButton
+                                                    iconType={pencil}
+                                                    modalComponent={<EditVideoFormModal postData={post} />}
                                                 />
                                             </div>
                                         )}

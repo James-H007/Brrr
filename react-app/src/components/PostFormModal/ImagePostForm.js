@@ -175,8 +175,8 @@ const ImagePostForm = ({ postType }) => {
                 </label>
               </div>
               {fileSizeError && <div className="errors">{fileSizeError}</div>}
-              {fileTypeError && <div className="errors">{fileTypeError}</div>}
-              {imagePreview && !fileSizeError(
+              {/* {fileTypeError && <div className="errors">{fileTypeError}</div>} */}
+              {imagePreview && !fileSizeError &&(
                 <div className="image-preview">
                   <img src={imagePreview} alt="Preview" className="preview-image" />
                 </div>

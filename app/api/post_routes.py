@@ -51,8 +51,10 @@ def create_post(blog_id):
     """
     Route to post to a blog
     """
+    print('Received request to create post for blog id:', blog_id)
+
     userId = current_user.id
-    description = request.form.get('description', ' ')
+    description = request.form.get('description', None)
 
     form = PostTypeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
