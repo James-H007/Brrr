@@ -21,6 +21,7 @@ import {
 import { Link } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import EditTextFormModal from "../editPostFormModal/editTextFormModal";
+import DeleteFormModal from "../DeletePostModal";
 import PostOpenModalButton from "../PostOpenModalButton";
 
 const Post = ({ post }) => {
@@ -214,7 +215,13 @@ const Post = ({ post }) => {
                                     <div className="post-icons">
                                         {currentUser.id == ownerId && (
                                             <div className="post-icon">
-                                                <img src={trash} alt="trash-icon" />
+                                                {/* <img src={trash} alt="trash-icon" /> */}
+                                                <PostOpenModalButton
+                                                    iconType={trash}
+                                                    modalComponent={<DeleteFormModal postData={post} />}
+                                                    smallerIcon={true}
+                                                />
+
                                             </div>
                                         )}
                                         {currentUser.id == ownerId && (
@@ -222,6 +229,7 @@ const Post = ({ post }) => {
                                                 <PostOpenModalButton
                                                     iconType={pencil}
                                                     modalComponent={<EditTextFormModal postData={post} />}
+                                                    smallerIcon={true}
                                                 />
                                             </div>
                                         )}
