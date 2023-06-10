@@ -23,6 +23,7 @@ import OpenModalButton from "../OpenModalButton";
 import EditTextFormModal from "../editPostFormModal/editTextFormModal";
 import EditImageFormModal from "../editPostFormModal/EditImageFormModal"
 import EditVideoFormModal from "../editPostFormModal/EditVideoFormModal";
+import EditLinkFormModal from "../editPostFormModal/EditLinkFormModal";
 import PostOpenModalButton from "../PostOpenModalButton";
 
 const Post = ({ post }) => {
@@ -236,6 +237,14 @@ const Post = ({ post }) => {
                                             </div>
                                         )}
                                         {currentUser.id == ownerId && postType == "video" && (
+                                            <div className="post-icon">
+                                                <PostOpenModalButton
+                                                    iconType={pencil}
+                                                    modalComponent={<EditVideoFormModal postData={post} />}
+                                                />
+                                            </div>
+                                        )}
+                                        {currentUser.id == ownerId && postType == "link" && (
                                             <div className="post-icon">
                                                 <PostOpenModalButton
                                                     iconType={pencil}
