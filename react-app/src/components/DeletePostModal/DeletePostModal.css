@@ -1,0 +1,34 @@
+.delete-post-modal {
+    width: 500px;
+    height: 500px;
+    background-color: red;
+}
+
+
+.delete-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.delete-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.delete-form-buttons {
+    padding-top: 10px;
+}
+
+.delete-button {
+    border-radius: 5px;
+    height: 50px;
+    width: 200px;
+    background-color: black;
+    color: white;
+    font-family: 'Rubik';
+    font-weight: bold;
+}

@@ -45,9 +45,28 @@
     animation: fadeIn 2s;
 }
 
+.post-type-box-small {
+    width: 0 auto;
+    height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+
+}
+
 .post-type-icon {
     width: 45px;
     height: 45px;
+}
+
+.post-icon-small {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding-right: 60px;
+
 }
 
 .post-type-button {
@@ -70,6 +89,7 @@
 .post-type-button:hover {
     animation: tilt-shaking 0.3s;
     animation-iteration-count: 2;
+    background-color: transparent;
 }
 
 .post-type-text {
