@@ -23,10 +23,11 @@ const VideoPostForm = ({ postType }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
   const history = useHistory();
+  const noBlog = "https://media.tenor.com/mjKlCBWywDgAAAAC/sarcastic-bob.gif"
 
   useEffect(() => {
     dispatch(getCurrentUser());
-    if (user) {
+    if (user && (user.blogs.length > 0)) {
       setBlogName(user.blogs[0].blogName)
       setBlogAvatar(user.blogs[0].blogAvatarUrl)
       setSelectedBlogId(user.blogs[0].id)
@@ -126,10 +127,19 @@ const VideoPostForm = ({ postType }) => {
           Loading...
         </p>
       )}
-      {isLoaded && (user.blogs.length == 0) && (
-        <p>
-          YOU DON'T HAVE ANY BLOGS! MAKE ONE!
-        </p>
+      {isLoaded && (user.blogs.length === 0) && (
+        <>
+
+          <div className="post-form-container">
+            <div className="delete-form-container">
+              <h2>Hey. You don't even have a blog.</h2>
+
+              <img src={noBlog} alt="delete-gif" className="delete-image" />
+
+            </div>
+
+          </div>
+        </>
       )}
       {isLoaded && (user.blogs.length > 0) && (<div className="post-form-container">
         <div className="post-form-content">
@@ -149,7 +159,7 @@ const VideoPostForm = ({ postType }) => {
                     setBlogAvatar(blog.blogAvatarUrl)
                   }}>
                     <img src={blog.blogAvatarUrl} alt="blog-icon" className="blog-select-icon" />
-                    {blog.blogTitle}
+                    {blog.blogName}
                   </li>
                 ))}
               </ul>
