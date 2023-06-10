@@ -5,12 +5,15 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getCurrentUser } from "../../store/users"
 import loadingCat from "../../assets/cat.gif"
+import { Link } from "react-router-dom/cjs/react-router-dom.min"
 
 const MyBlogCollection = () => {
     const [isLoaded, setIsLoaded] = useState(false)
     const dispatch = useDispatch()
     const currentUserBlogs = useSelector(state => state.user.currentUser.blogs)
     console.log(currentUserBlogs)
+
+    const noBlogs = "https://media.tenor.com/KO7gk7WEvkAAAAAC/bob-ross-pointing.gif"
 
     useEffect(() => {
         dispatch(getCurrentUser())
@@ -27,7 +30,7 @@ const MyBlogCollection = () => {
                     </div>
                 </>
             )}
-            {isLoaded && currentUserBlogs && (
+            {isLoaded && currentUserBlogs && currentUserBlogs.length > 0 ? (
                 <div>
                     <div className="explore-page">
                         <div className="explore-container">
@@ -41,6 +44,15 @@ const MyBlogCollection = () => {
                         </div>
                     </div>
                 </div>
+            ) : (
+                <>
+                    <img src={noBlogs} alt="gif" className="no-likes-gif" />
+                    <p className="no-likes">
+                        You have no blogs...
+                        Get out there and create something!
+                    </p>
+                    <Link to="/blogs/create" className="create-blog">Create a Blog</Link>
+                </>
             )}
         </>
 
