@@ -29,6 +29,7 @@ button {
     font-family: 'Rubik';
     border: 1px solid lightgrey;
     padding-bottom: 54px;
+    z-index: 50;
 
 }
 .user-dropdown li {
