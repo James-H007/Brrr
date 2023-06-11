@@ -14,9 +14,27 @@ def seed_likes():
         post_id=1,
         is_liked=True
     )
+    james = Like(
+        user_id=5,
+        post_id=1,
+        is_liked=True
+    )
+    matt = Like(
+        user_id=4,
+        post_id=2,
+        is_liked=True
+    )
+    sterling = Like(
+        user_id=6,
+        post_id=1,
+        is_liked=True
+    )
 
     db.session.add(demo)
     db.session.add(marnie)
+    db.session.add(james)
+    db.session.add(matt)
+    db.session.add(sterling)
     db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
