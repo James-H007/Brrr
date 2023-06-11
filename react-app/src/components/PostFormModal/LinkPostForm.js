@@ -11,7 +11,7 @@ const LinkPostForm = ({ postType }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
+  const [text, setText] = useState("TEST");
   const [titleError, setTitleError] = useState("");
   const [textError, setTextError] = useState("");
   const [blogName, setBlogName] = useState("")
@@ -55,15 +55,15 @@ const LinkPostForm = ({ postType }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (title.length < 1 || title.length > 225) {
+    if (title.trim().length < 1 || title.length > 225) {
       setTitleError("Title should be between 1 and 225 characters.");
       return;
     }
 
-    if (text.length < 1 || text.length > 1200) {
-      setTextError("Text should be between 1 and 1200 characters.");
-      return;
-    }
+    // if (text.length < 1 || text.length > 1200) {
+    //   setTextError("Text should be between 1 and 1200 characters.");
+    //   return;
+    // }
 
 
     const formData = new FormData();
@@ -146,13 +146,13 @@ const LinkPostForm = ({ postType }) => {
               <input
                 type="text"
                 className="post-form-input-title"
-                placeholder="Title..."
-                name="title"
+                placeholder="Link..."
+                name="link"
                 value={title}
                 onChange={handleTitleChange}
               />
               {titleError && <div className="errors">{titleError}</div>}
-              <textarea
+              {/* <textarea
                 className="post-form-input-text"
                 placeholder="Your post here..."
                 name="text"
@@ -161,7 +161,7 @@ const LinkPostForm = ({ postType }) => {
               />
               {text &&
                 <p>Link preview: <a href={text} target="_blank" rel="noopener noreferrer">{text}</a></p>
-              }
+              } */}
               {textError && <div className="errors">{textError}</div>}
               <div className="close-post-buttons">
                 {/* <button className="poster-button">Close</button> */}

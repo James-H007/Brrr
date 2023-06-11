@@ -5,6 +5,7 @@ import { editAblog, getBlogById } from '../../store/blogs'
 import "./EditBlogPage.css"
 import loadingCat from "../../assets/cat.gif"
 import { currentUser, getCurrentUser } from '../../store/users'
+import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 function EditBlogPage() {
 
   const [blogTitle, setBlogTitle] = useState("")
@@ -26,8 +27,9 @@ function EditBlogPage() {
   const blogData = useSelector(state => state.blogs.currentBlog)
   const user = useSelector((state) => state.user.currentUser)
   const notAccessGif = "https://media1.giphy.com/media/Rk6prl6CKYy52/giphy.gif?cid=6c09b952ldqwj5w6yo7puysa1i90hzbfbxrk0glyern3e78m&ep=v1_gifs_search&rid=giphy.gif&ct=g"
-  console.log(blogData, "BLOG DATA")
-  console.log(user, "USER DATA")
+  const noBlogGif = "https://media.tenor.com/5MibLt95scAAAAAC/%ED%98%BC%ED%8C%8C%EB%A7%9D-%ED%94%BC%EC%9E%90.gif"
+  // console.log(blogData, "BLOG DATA")
+  // console.log(user, "USER DATA")
   useEffect(() => {
     if (isLoaded && blogData && user) {
       setBlogTitle(blogData.blogTitle)
@@ -123,7 +125,7 @@ function EditBlogPage() {
 
   return (
     <>
-      {(!isLoaded || !blogData) && (
+      {(!isLoaded) && (
         <>
           <div className="loading-box">
             <img src={loadingCat} alt="loading-cat" className="loading-cat" />
@@ -132,6 +134,19 @@ function EditBlogPage() {
 
         </>
       )}
+      {isLoaded && !blogData && (
+        <>
+          <img src={noBlogGif} alt="gif" className="no-likes-gif" />
+          <p className="no-likes">
+            This blog does not exist.
+          </p>
+          <Link to="/feed">
+            <button className='redirect-button'>Take me back home</button>
+          </Link>
+
+        </>
+      )}
+
       {isLoaded && blogData && !isAuthorized && (
         <>
           <img src={notAccessGif} alt="gif" className="no-likes-gif" />

@@ -55,12 +55,12 @@ const TextPostForm = ({ postType }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (title.length < 1 || title.length > 225) {
+    if (title.trim().length < 1 || title.length > 225) {
       setTitleError("Title should be between 1 and 225 characters.");
       return;
     }
 
-    if (text.length < 1 || text.length > 1200) {
+    if (text.trim().length < 1 || text.length > 1200) {
       setTextError("Text should be between 1 and 1200 characters.");
       return;
     }

@@ -178,6 +178,7 @@ const ImagePostForm = ({ postType }) => {
                   type="file"
                   id="fileInput"
                   name="filename"
+                  accept="image/*"
                   onChange={handleFileChange}
                 />
                 <label htmlFor="fileInput" className="custom-file-upload">
