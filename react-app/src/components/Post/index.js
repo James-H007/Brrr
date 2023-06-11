@@ -109,13 +109,10 @@ const Post = ({ post }) => {
     } else if (postType == "link") {
         postContent = (
             <div className="post-body">
-                <a href={postDescription} className="post-url" target="_blank" rel="noopener noreferrer">
+                <a href={postTitle} className="post-url" target="_blank" rel="noopener noreferrer">
                     {" "}
-                    {postDescription}
+                    {postTitle}
                 </a>
-                <p className="post-description">
-                    Click on our totally not suspicious link
-                </p>
             </div>
         );
     } else if (postType == "video") {

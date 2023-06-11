@@ -171,6 +171,7 @@ const VideoPostForm = ({ postType }) => {
                 type="file"
                 id="fileInput"
                 name="filename"
+                accept="video/mp4,video/x-m4v,video/*"
                 onChange={handleFileChange}
               />
               <label htmlFor="fileInput" className="custom-file-upload">
