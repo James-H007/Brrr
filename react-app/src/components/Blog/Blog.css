@@ -105,3 +105,18 @@
 .blog-edit:hover {
     cursor: pointer;
 }
+
+.no-blog-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    top: 90px;
+}
+
+.john-travolta-p {
+    font-size: 24px;
+    font-family: 'Rubik';
+}
