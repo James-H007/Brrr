@@ -21,6 +21,7 @@ const Blog = ({ data }) => {
 
     const blog_banner = "https://images.squarespace-cdn.com/content/v1/5c524a52a9e0288eb5cfa3ee/1616108169603-VV7YD0OXJUPST28QPEKI/LofiVineyard-09+blank+Banner.jpg?format=2500w"
     const iconImage = "https://lofigirl.com/wp-content/uploads/2023/02/DAY_UPDATE_ILLU.jpg"
+    const johnTravolta = "https://media.tenor.com/lx2WSGRk8bcAAAAC/pulp-fiction-john-travolta.gif"
 
     const { id } = useParams()
     const history = useHistory()
@@ -108,9 +109,14 @@ const Blog = ({ data }) => {
         }
     }
 
+    const handleClick = async (e) => {
+        e.preventDefault()
+        return history.push("/feed")
+    }
+
     return (
         <>
-            {(!isLoaded || !blogById || !currentUser) && (
+            {(!isLoaded || !currentUser) && (
                 <>
                     <div className="loading-box">
                         <img src={loadingCat} alt="loading-cat" className="loading-cat" />
@@ -119,6 +125,18 @@ const Blog = ({ data }) => {
 
                 </>
             )}
+
+            {(!blogById && isLoaded) && (
+                <>
+                    <div className="no-blog-page">
+                        <img src={johnTravolta} alt="gif" className="john-travolta-gif" />
+                         <p className="john-travolta-p">This blog does not exist.</p>
+                         <button onClick={handleClick} className="feed-button">Return to feed</button>
+                    </div>
+                </>
+            )}
+
+
             {isLoaded && blogById && currentUser && id &&(
                 <div>
                     <div className="main-feed">

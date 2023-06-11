@@ -20,7 +20,7 @@ function Navigation({ isLoaded }) {
   const ulRef = useRef();
 
   // Search functionality -----------------------------------------------------------------------------
-  const allBlogs = useSelector((state) => state.blogs.blogs);
+  const allBlogs = useSelector((state) => state.blogs.blogs) || [];
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
