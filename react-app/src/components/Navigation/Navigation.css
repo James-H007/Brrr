@@ -185,3 +185,9 @@ a {
     transform: translate(1px, -2px) rotate(-1deg);
   }
 }
+
+@media screen and (max-width: 1150px) {
+  .searchInput, .search-button {
+    display: none;
+  }
+}
