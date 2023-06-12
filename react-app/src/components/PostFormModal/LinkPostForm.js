@@ -11,7 +11,7 @@ const LinkPostForm = ({ postType }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
+  const [text, setText] = useState("TEST");
   const [titleError, setTitleError] = useState("");
   const [textError, setTextError] = useState("");
   const [blogName, setBlogName] = useState("")
@@ -22,11 +22,12 @@ const LinkPostForm = ({ postType }) => {
   const { closeModal } = useModal();
 
   const user = useSelector(state => state.user.currentUser)
+  const noBlog = "https://media.tenor.com/mjKlCBWywDgAAAAC/sarcastic-bob.gif"
   // console.log("HERE IS THE USER", user)
 
   useEffect(() => {
     dispatch(getCurrentUser())
-    if (user) {
+    if (user && (user.blogs.length > 0)) {
       setBlogName(user.blogs[0].blogName)
       setBlogAvatar(user.blogs[0].blogAvatarUrl)
       setSelectedBlogId(user.blogs[0].id)
@@ -54,15 +55,15 @@ const LinkPostForm = ({ postType }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (title.length < 1 || title.length > 225) {
+    if (title.trim().length < 1 || title.length > 225) {
       setTitleError("Title should be between 1 and 225 characters.");
       return;
     }
 
-    if (text.length < 1 || text.length > 1200) {
-      setTextError("Text should be between 1 and 1200 characters.");
-      return;
-    }
+    // if (text.length < 1 || text.length > 1200) {
+    //   setTextError("Text should be between 1 and 1200 characters.");
+    //   return;
+    // }
 
 
     const formData = new FormData();
@@ -102,12 +103,21 @@ const LinkPostForm = ({ postType }) => {
           Loading...
         </p>
       )}
-      {!isLoaded && !user.blogs && (
-        <p>
-          YOU DON'T HAVE ANY BLOGS! MAKE ONE!
-        </p>
+      {isLoaded && (user.blogs.length === 0) && (
+        <>
+
+          <div className="post-form-container">
+            <div className="delete-form-container">
+              <h2>Hey. You don't even have a blog.</h2>
+
+              <img src={noBlog} alt="delete-gif" className="delete-image" />
+
+            </div>
+
+          </div>
+        </>
       )}
-      {isLoaded && user.blogs && (
+      {isLoaded && (user.blogs.length > 0) && (
         <div className="post-form-container">
           <div className="post-form-content">
             <header className="post-form-header" onClick={handleBlogSelect}>
@@ -126,7 +136,7 @@ const LinkPostForm = ({ postType }) => {
                       setBlogAvatar(blog.blogAvatarUrl)
                     }}>
                       <img src={blog.blogAvatarUrl} alt="blog-icon" className="blog-select-icon" />
-                      {blog.blogTitle}
+                      {blog.blogName}
                     </li>
                   ))}
                 </ul>
@@ -136,13 +146,13 @@ const LinkPostForm = ({ postType }) => {
               <input
                 type="text"
                 className="post-form-input-title"
-                placeholder="Title..."
-                name="title"
+                placeholder="Link..."
+                name="link"
                 value={title}
                 onChange={handleTitleChange}
               />
               {titleError && <div className="errors">{titleError}</div>}
-              <textarea
+              {/* <textarea
                 className="post-form-input-text"
                 placeholder="Your post here..."
                 name="text"
@@ -151,7 +161,11 @@ const LinkPostForm = ({ postType }) => {
               />
               {text &&
                 <p>Link preview: <a href={text} target="_blank" rel="noopener noreferrer">{text}</a></p>
+
               }
+
+              } */}
+
               {textError && <div className="errors">{textError}</div>}
               <div className="close-post-buttons">
                 {/* <button className="poster-button">Close</button> */}

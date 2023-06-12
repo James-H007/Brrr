@@ -11,7 +11,7 @@ function SignupFormModal() {
   const [last_name, setLast] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [profile_pic_url, setProfile_pic_url] = useState("");
+  const [profile_pic_url, setProfile_pic_url] = useState("https://64.media.tumblr.com/d713916b3661f9cae54f9f880168a2f2/tumblr_ny5vbt2nLA1umv52oo2_500.png");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
@@ -86,7 +86,7 @@ function SignupFormModal() {
               required
             />
           </label>
-          <label className="sign_up_input">
+          {/* <label className="sign_up_input">
             Profile Picture
             <input
               type="text"
@@ -94,7 +94,7 @@ function SignupFormModal() {
               onChange={(e) => setProfile_pic_url(e.target.value)}
               required
             />
-          </label>
+          </label> */}
           <label className="sign_up_input">
             Password
             <input

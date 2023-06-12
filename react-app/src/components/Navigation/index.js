@@ -20,7 +20,7 @@ function Navigation({ isLoaded }) {
   const ulRef = useRef();
 
   // Search functionality -----------------------------------------------------------------------------
-  const allBlogs = useSelector((state) => state.blogs.blogs);
+  const allBlogs = useSelector((state) => state.blogs.blogs) || [];
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
@@ -101,7 +101,8 @@ function Navigation({ isLoaded }) {
                         setSearchText("");
                       }}
                     >
-                      {i.blogTitle}
+                      <img src={i.blogAvatarUrl} alt='blog-icon' className="blog-select-icon" />
+                      <p className="search-title">{i.blogTitle}</p>
                     </Link>
                   </li>
                 ))}

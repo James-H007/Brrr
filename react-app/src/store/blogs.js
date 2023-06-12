@@ -247,10 +247,11 @@ export default function blogsReducer(state = initialState, action) {
     case DELETE_BLOG_BY_ID:
       return {
         ...state,
-        blogs: state.blogs.filter(i => i.id !== action.payload)
+        blogs: state.blogs.filter(i => i.id !== action.payload),
         /*
-          Or we could do this, by adding it under "blogs":
-          currentBlog: state.currentBlog && state.currentBlog.id === action.payload ? null : state.currentBlog
+        Or we could do this, by adding it under "blogs":
+
+        currentBlog: state.currentBlog && state.currentBlog.id === action.payload ? null : state.currentBlog
 
           This code is setting currentBlog back to null when the currently viewed blog is deleted.
               -This could avoid bugs down the line, so maybe go back and add this.

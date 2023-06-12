@@ -136,7 +136,7 @@ const CreateBlogPage = () => {
               <label className="create_blog_label" htmlFor="description">
                 Description: &nbsp;
               </label>
-              <input
+              <textarea
                 className="create_blog_input"
                 type="text"
                 id="description"

@@ -29,10 +29,50 @@ def seed_blogs():
         blog_name="Bobbie",
         description="This is Bobbie's blog",
     )
+    matt = Blog(
+        owner_id=4,
+        default_blog=True,
+        blog_title="Matts's Blog",
+        banner_img_url="https://media3.giphy.com/media/ZSvAC5c9RkW4g/giphy.gif",
+        blog_avatar_url="https://i.pinimg.com/originals/56/2c/3a/562c3ab491bf2eae2a6754aa9ff3426d.gif",
+        blog_name="Matt",
+        description="This is Matt's blog",
+    )
+    james = Blog(
+        owner_id=5,
+        default_blog=False,
+        blog_title="James",
+        banner_img_url="https://storage.googleapis.com/sticker-prod/NWMoyrnHU5eHTWIOh0bf/4.png",
+        blog_avatar_url="https://storage.googleapis.com/sticker-prod/dRrf1qBdTGkY4YAmrLxL/0.png",
+        blog_name="James_22",
+        description="This is James' blog",
+    )
+    sterling = Blog(
+        owner_id=6,
+        default_blog=True,
+        blog_title="Sterling",
+        banner_img_url="https://media.tenor.com/0HECqkoCIgcAAAAC/the-fairly-odd-parents-timmy-turner.gif",
+        blog_avatar_url="https://i.pinimg.com/originals/dd/82/fb/dd82fb0eb26c9045722b0a4e72d1d3f7.gif",
+        blog_name="Sterling",
+        description="This is Sterling's blog",
+    )
+    anime = Blog(
+        owner_id=7,
+        default_blog=False,
+        blog_title="Anime",
+        banner_img_url="https://cdn.shopify.com/s/files/1/0559/4788/6783/files/Cowboy_Bebop.gif",
+        blog_avatar_url="https://giffiles.alphacoders.com/398/3987.gif",
+        blog_name="Anime_22",
+        description="This is an anime blog",
+    )
 
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
+    db.session.add(matt)
+    db.session.add(james)
+    db.session.add(sterling)
+    db.session.add(anime)
     db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't

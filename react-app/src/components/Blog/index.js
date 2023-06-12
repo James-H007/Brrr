@@ -1,9 +1,9 @@
 import Post from "../Post"
 import "./Blog.css"
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { followABlog, getBlogById, getBlogFollowers, unFollowABlog } from "../../store/blogs";
+import { followABlog, getBlogById, getBlogFollowers, unFollowABlog, removeBlogById } from "../../store/blogs";
 import loadingCat from "../../assets/cat.gif"
 import pencil from "../../assets/pencil-solid.svg"
 import trash from "../../assets/trash-can-regular.svg"
@@ -19,10 +19,17 @@ const Blog = ({ data }) => {
     // const [blogPosts, setBlogPosts] = useState([])
     const [isFollowed, setIsFollowed] = useState(null)
 
+
     // const blog_banner = "https://images.squarespace-cdn.com/content/v1/5c524a52a9e0288eb5cfa3ee/1616108169603-VV7YD0OXJUPST28QPEKI/LofiVineyard-09+blank+Banner.jpg?format=2500w"
     // const iconImage = "https://lofigirl.com/wp-content/uploads/2023/02/DAY_UPDATE_ILLU.jpg"
 
+    const blog_banner = "https://images.squarespace-cdn.com/content/v1/5c524a52a9e0288eb5cfa3ee/1616108169603-VV7YD0OXJUPST28QPEKI/LofiVineyard-09+blank+Banner.jpg?format=2500w"
+    const iconImage = "https://lofigirl.com/wp-content/uploads/2023/02/DAY_UPDATE_ILLU.jpg"
+    const johnTravolta = "https://media.tenor.com/lx2WSGRk8bcAAAAC/pulp-fiction-john-travolta.gif"
+
+
     const { id } = useParams()
+    const history = useHistory()
 
     // blog by id
     // grab all posts from that blog
@@ -30,8 +37,16 @@ const Blog = ({ data }) => {
     const currentUser = useSelector(state => state.user.currentUser)
     const blogById = useSelector(state => state.blogs.currentBlog)
     const blogFollowers = useSelector(state => state.blogs.followers)
-    console.log(blogFollowers, '-------------------HERE')
-    const initialFollowState = blogFollowers.some(follower => follower.id === currentUser.id)
+
+//     console.log(blogFollowers, '-------------------HERE')
+//     const initialFollowState = blogFollowers.some(follower => follower.id === currentUser.id)
+
+    const initialFollowState = blogFollowers.some(follower => follower.id == currentUser.id)
+
+
+    console.log(blogById,"----------------------------BlogbyId");
+
+
 
     useEffect(() => {
         setIsFollowed(initialFollowState)
@@ -96,9 +111,22 @@ const Blog = ({ data }) => {
         }
     }
 
+    const handleDelete = async () => {
+        if (currentUser.id === blogById.ownerId) {
+            dispatch(removeBlogById(blogById.id))
+            .then(() => dispatch(getBlogById(id)))
+            .then(() => history.push("/my-blogs"))
+        }
+    }
+
+    const handleClick = async (e) => {
+        e.preventDefault()
+        return history.push("/feed")
+    }
+
     return (
         <>
-            {(!isLoaded || !blogById || !currentUser) && (
+            {(!isLoaded || !currentUser) && (
                 <>
                     <div className="loading-box">
                         <img src={loadingCat} alt="loading-cat" className="loading-cat" />
@@ -107,7 +135,19 @@ const Blog = ({ data }) => {
 
                 </>
             )}
-            {isLoaded && blogById && currentUser && id && (
+
+            {(!blogById && isLoaded) && (
+                <>
+                    <div className="no-blog-page">
+                        <img src={johnTravolta} alt="gif" className="john-travolta-gif" />
+                         <p className="john-travolta-p">This blog does not exist.</p>
+                         <button onClick={handleClick} className="feed-button">Return to feed</button>
+                    </div>
+                </>
+            )}
+
+
+            {isLoaded && blogById && currentUser && id &&(
                 <div>
                     <div className="main-feed">
                         <div className="main-post-area">
@@ -145,7 +185,7 @@ const Blog = ({ data }) => {
                                                 <img src={pencil} alt="pencil" className="blog-edit" />
                                             </Link>
 
-                                            <img src={trash} alt="trash" className="blog-edit" />
+                                            <img src={trash} alt="trash" className="blog-edit" onClick={handleDelete}/>
                                         </div>
                                     )
                                 }

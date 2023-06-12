@@ -16,6 +16,7 @@ import { getAllPosts } from "../../store/posts";
 import LinkPostForm from "../PostFormModal/LinkPostForm";
 import loadingCat from "../../assets/cat.gif"
 import { getCurrentUser } from "../../store/users";
+import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
 const Feed = () => {
     const [showMenu, setShowMenu] = useState(false);
@@ -109,6 +110,9 @@ const Feed = () => {
                     <p className="no-likes">
                         Hey. You're not logged in.
                     </p>
+                    <Link to="/">
+                        <button className='redirect-button'>Take me back to the home page</button>
+                    </Link>
                 </>
             )}
             {(!isLoaded || !currentFeed || !sortedCurrentFeed) && (
