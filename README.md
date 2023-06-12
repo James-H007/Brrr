@@ -19,6 +19,8 @@ User authorization, blogs, posts retaining to blogs, blog follows, post likes, i
    ```bash
    npm install
    pipenv install -r requirements.txt
+   npm install aws-sdk
+   pipenv install boto3
    ```
 
 3. Create a **.env** file based on the example with proper settings for your
