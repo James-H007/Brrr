@@ -87,7 +87,7 @@ const VideoPostForm = ({ postType }) => {
   }
 
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!selectedFile) {
@@ -111,7 +111,7 @@ const VideoPostForm = ({ postType }) => {
     formData.append("post_type", postType)
     formData.append("description", description)
 
-    dispatch(createNewPost(selectedBlogId, formData)); // <<-- HARDCODED NEEDS CHANGED
+    await dispatch(createNewPost(selectedBlogId, formData)); // <<-- HARDCODED NEEDS CHANGED
 
     setSelectedFile(null);
     setVideoPreview(null);

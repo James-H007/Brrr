@@ -80,7 +80,7 @@ const ImagePostForm = ({ postType }) => {
     setDescription(e.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!selectedFile) {
@@ -106,7 +106,7 @@ const ImagePostForm = ({ postType }) => {
     formData.append('image_embed_code', imageEmbedCode);
 
 
-    dispatch(createNewPost(selectedBlogId, formData));
+    await dispatch(createNewPost(selectedBlogId, formData));
 
 
 
