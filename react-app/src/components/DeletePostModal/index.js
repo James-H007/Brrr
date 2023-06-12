@@ -1,7 +1,7 @@
 // import "./PostFormModal.css";
 import React, { useState, useEffect } from "react";
-// import { useHistory } from "react-router-dom";
-import { deleteMyPost } from "../../store/posts";
+import { useHistory } from "react-router-dom";
+import { deleteMyPost, getAllPosts } from "../../store/posts";
 import { getCurrentUser } from "../../store/users";
 import { useDispatch, useSelector } from "react-redux";
 // import { editMyPost } from "../../store/posts";
@@ -11,7 +11,7 @@ import "./DeletePostModal.css"
 // import Post from "../Post";
 
 const DeleteFormModal = ({ postType, postData }) => {
-    // const history = useHistory();
+    const history = useHistory();
     const dispatch = useDispatch();
     const [isAuth, setIsAuth] = useState()
     // const [authError, setAuthError] = useState("")
@@ -41,7 +41,9 @@ const DeleteFormModal = ({ postType, postData }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await dispatch(deleteMyPost(postData.id))
-        window.location.reload();
+        await closeModal()
+        await dispatch(getAllPosts())
+        await history.push("/feed")
 
     };
     return (
