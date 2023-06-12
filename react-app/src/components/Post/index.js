@@ -28,6 +28,7 @@ import EditVideoFormModal from "../editPostFormModal/EditVideoFormModal";
 // import EditLinkFormModal from "../editPostFormModal/EditLinkFormModal";
 
 import PostOpenModalButton from "../PostOpenModalButton";
+import EditLinkFormModal from "../editPostFormModal/EditLinkFormModal";
 
 const Post = ({ post }) => {
     const [isHovered, setIsHovered] = useState(false);
@@ -155,30 +156,39 @@ const Post = ({ post }) => {
         }, 200); // Delay in milliseconds before hiding the Blog Preview
     };
 
-    const handleLike = () => {
-        let updatedLikesCount;
+    const handleLike = async () => {
+        let updatedLike = isLiked
+        let updatedLikesCount = postLikes
         if (!isLiked) {
 
-            dispatch(likePostThunk(id)).then(() => dispatch(getMyLikes()))
+            await dispatch(likePostThunk(id)).then(() => dispatch(getMyLikes()))
+            await setPostLikes(updatedLikesCount + 1)
         } else {
 
-            dispatch(unlikePostThunk(id)).then(() => dispatch(getMyLikes()));
+            await dispatch(unlikePostThunk(id)).then(() => dispatch(getMyLikes()));
+            if (postLikes !== 0) {
+                await setPostLikes(updatedLikesCount - 1)
+            }
+            else if (postLikes === 0) {
+                await setPostLikes(0)
+            }
 
         }
 
-        setisLiked(!isLiked)
+        await setisLiked(!isLiked)
 
-        if (initialLikeState) {
-            updatedLikesCount = isLiked ? likes - 1 : likes;
-        }
-        else {
-            updatedLikesCount = isLiked ? likes - 1 : likes + 1;
-        }
-        // let updatedLikesCount = isLiked ? likes - 1 : likes + 1;
-        if (updatedLikesCount < 0) {
-            updatedLikesCount = 0;
-        }
-        setPostLikes(updatedLikesCount)
+
+        // if (initialLikeState) {
+        //     updatedLikesCount = isLiked ? likes - 1 : likes;
+        // }
+        // else {
+        //     updatedLikesCount = isLiked ? likes - 1 : likes + 1;
+        // }
+        // // updatedLikesCount = isLiked ? likes - 1 : likes + 1;
+        // if (updatedLikesCount < 0) {
+        //     updatedLikesCount = 0;
+        // }
+        // setPostLikes(updatedLikesCount)
     };
 
     const handleEdit = () => {
@@ -270,13 +280,13 @@ const Post = ({ post }) => {
                                             <div className="post-icon">
                                                 <PostOpenModalButton
                                                     iconType={pencil}
-                                                    modalComponent={<EditVideoFormModal postData={post} />}
+                                                    modalComponent={<EditLinkFormModal postData={post} />}
                                                     smallerIcon={true}
                                                 />
                                             </div>
                                         )}
                                         <div className="post-icon">
-                                            <img src={share} alt="heart-icon" />
+                                            <img src={share} alt="heart-icon" onClick={handleComment} />
                                         </div>
                                         <div className="post-icon">
                                             <img src={comment} alt="comment-icon" onClick={handleComment} />

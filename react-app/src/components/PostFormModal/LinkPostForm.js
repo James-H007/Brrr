@@ -14,6 +14,7 @@ const LinkPostForm = ({ postType }) => {
   const [text, setText] = useState("TEST");
   const [titleError, setTitleError] = useState("");
   const [textError, setTextError] = useState("");
+  const [urlError, setUrlError] = useState("")
   const [blogName, setBlogName] = useState("")
   const [blogAvatar, setBlogAvatar] = useState("")
   const [isLoaded, setIsLoaded] = useState("false")
@@ -52,11 +53,26 @@ const LinkPostForm = ({ postType }) => {
     setText(e.target.value);
   };
 
+  const isValidUrl = urlString => {
+    var urlPattern = new RegExp('^(https?:\\/\\/)?' + // validate protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // validate domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))' + // validate OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // validate port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?' + // validate query string
+      '(\\#[-a-z\\d_]*)?$', 'i'); // validate fragment locator
+    return !!urlPattern.test(urlString);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (title.trim().length < 1 || title.length > 225) {
       setTitleError("Title should be between 1 and 225 characters.");
+      return;
+    }
+
+    if (!isValidUrl(title)) {
+      setUrlError("Not a valid URL")
       return;
     }
 
@@ -152,6 +168,7 @@ const LinkPostForm = ({ postType }) => {
                 onChange={handleTitleChange}
               />
               {titleError && <div className="errors">{titleError}</div>}
+              {urlError && <div className="errors">{urlError}</div>}
               {/* <textarea
                 className="post-form-input-text"
                 placeholder="Your post here..."

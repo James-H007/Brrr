@@ -1,45 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { editMyPost } from "../../store/posts";
-import {ModalProvider} from "../../context/Modal"
+import { editMyPost, getAllPosts } from "../../store/posts";
+import { ModalProvider } from "../../context/Modal"
+import { useModal } from "../../context/Modal";
 
-const EditVideoFormModal = ({postType, postData} ) =>{
-    const history = useHistory();
-    const dispatch = useDispatch();
-    const [description, setDescription] = useState("");
-    const [descriptionError, setDescriptionError] = useState("");
-    const [isLoaded, setIsLoaded] = useState("false");
-    const user = useSelector(state => state.user.currentUser);
+const EditVideoFormModal = ({ postType, postData }) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const [description, setDescription] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
+  const [isLoaded, setIsLoaded] = useState("false");
+  const user = useSelector(state => state.user.currentUser);
+  const { closeModal } = useModal();
 
 
-    useEffect(() => {
-        setDescription(postData.postDescription);
-      }, [postData]);
+  useEffect(() => {
+    setDescription(postData.postDescription);
+  }, [postData]);
 
-      const handleSubmit = async (e) => {
-        e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        if (description.length < 1 || description.length > 1200) {
-            setDescriptionError("Title should be between 1 and 1200 characters.");
-            return;
-          }
+    if (description.length < 1 || description.length > 1200) {
+      setDescriptionError("Title should be between 1 and 1200 characters.");
+      return;
+    }
 
-          const updatedPost = {
-            post_description: description
-          }
+    const updatedPost = {
+      post_description: description
+    }
 
-        const editImagePost = await dispatch(editMyPost(postData.id, updatedPost));
+    const editImagePost = await dispatch(editMyPost(postData.id, updatedPost));
 
-        setDescription("")
+    setDescription("")
 
-        if(editImagePost){
-            window.location.reload();
-        }
-      };
+    if (editImagePost) {
+      await closeModal()
+      await dispatch(getAllPosts())
+      await history.push("/feed")
+    }
+  };
 
-      return (
-        <>
+  return (
+    <>
       {!isLoaded && (
         <p>
           Loading...
@@ -60,7 +64,7 @@ const EditVideoFormModal = ({postType, postData} ) =>{
                 placeholder="Maximum file size is 20MB... You can add a description as well"
                 name="text"
                 value={description}
-                onChange ={(e) => setDescription(e.target.value)}
+                onChange={(e) => setDescription(e.target.value)}
               />
               <div className="close-post-buttons">
                 <button className="poster-button" type="submit">
@@ -73,6 +77,6 @@ const EditVideoFormModal = ({postType, postData} ) =>{
       )}
 
     </>
-      )
+  )
 }
 export default EditVideoFormModal
