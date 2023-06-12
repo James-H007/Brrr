@@ -126,7 +126,7 @@ const VideoPostForm = ({ postType }) => {
           Loading...
         </p>
       )}
-      {isLoaded && (user.blogs.length == 0) && (
+      {isLoaded && (user.blogs.length === 0) && (
         <p>
           YOU DON'T HAVE ANY BLOGS! MAKE ONE!
         </p>

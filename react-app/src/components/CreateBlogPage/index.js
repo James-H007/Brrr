@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createBlog } from "../../store/blogs";
+import { createBlog, followABlog } from "../../store/blogs";
 import { getCurrentUser } from "../../store/users";
 import "./CreateBlogPage.css";
 import loadingCat from "../../assets/cat.gif"
@@ -55,6 +55,7 @@ const CreateBlogPage = () => {
 
       const newBlog = await dispatch(createBlog(userInput));
       if (newBlog) {
+        dispatch(followABlog(newBlog.blog.id))
         history.push(`/blog/${newBlog.blog.id}`);
       }
     } catch (error) {

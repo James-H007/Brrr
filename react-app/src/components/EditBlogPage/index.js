@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { editAblog, getBlogById } from '../../store/blogs'
 import "./EditBlogPage.css"
 import loadingCat from "../../assets/cat.gif"
-import { currentUser, getCurrentUser } from '../../store/users'
+import { getCurrentUser } from '../../store/users'
 function EditBlogPage() {
 
   const [blogTitle, setBlogTitle] = useState("")
   const [bannerImg, setBannerImg] = useState("")
   const [blogAvatar, setBlogAvatar] = useState("")
   const [description, setDescription] = useState("")
-  const [defaultBlog, setDefaultBlog] = useState(true)
+  // const [defaultBlog, setDefaultBlog] = useState(true)
   const [descriptionError, setDescriptionError] = useState("");
   const [bannerImgError, setBannerImgError] = useState("")
   const [blogAvatarError, setBlogAvatarError] = useState("")
@@ -34,7 +34,7 @@ function EditBlogPage() {
       setBannerImg(blogData.bannerImgUrl)
       setBlogAvatar(blogData.blogAvatarUrl)
       setDescription(blogData.description)
-      if (blogData.ownerId == user.id) {
+      if (blogData.ownerId === user.id) {
         setIsAuthorized(true)
       }
     }

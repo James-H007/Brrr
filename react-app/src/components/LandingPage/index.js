@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { login } from "../../store/session";
 import SignupFormModal from "../SignupFormModal";
-import OpenModalButton from "../OpenModalButton";
+// import OpenModalButton from "../OpenModalButton";
 import brrWP1 from "../../assets/brrWP1.jpg";
 import brrWP2 from "../../assets/brrWP2.jpg";
 import brrWP3 from "../../assets/brrWP3.jpg";
@@ -28,7 +28,7 @@ function LandingPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
-  const [showMenu, setShowMenu] = useState(false);
+  // const [showMenu, setShowMenu] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState("");
 
   useEffect(() => {
@@ -79,12 +79,12 @@ function LandingPage() {
     }
   };
 
-  const closeMenu = () => setShowMenu(false);
+  // const closeMenu = () => setShowMenu(false);
 
-  const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
-  };
+  // const openMenu = () => {
+  //   if (showMenu) return;
+  //   setShowMenu(true);
+  // };
 
   const handleSignUpClick = () => {
     openModal(<SignupFormModal />);

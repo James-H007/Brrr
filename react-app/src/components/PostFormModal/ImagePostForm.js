@@ -9,7 +9,7 @@ import { useModal } from "../../context/Modal";
 const ImagePostForm = ({ postType }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileSizeError, setFileSizeError] = useState("");
-  const [fileTypeError, setFileTypeError] = useState("")
+  // const [fileTypeError, setFileTypeError] = useState("")
   const [imagePreview, setImagePreview] = useState(null);
   const [imageEmbedCode, setImageEmbedCode] = useState(null)
   const [description, setDescription] = useState("")
@@ -132,7 +132,7 @@ const ImagePostForm = ({ postType }) => {
           Loading...
         </p>
       )}
-      {isLoaded && (user.blogs.length == 0) && (
+      {isLoaded && (user.blogs.length === 0) && (
         <p>
           YOU DON'T HAVE ANY BLOGS! MAKE ONE!
         </p>
@@ -176,7 +176,7 @@ const ImagePostForm = ({ postType }) => {
               </div>
               {fileSizeError && <div className="errors">{fileSizeError}</div>}
               {/* {fileTypeError && <div className="errors">{fileTypeError}</div>} */}
-              {imagePreview && !fileSizeError &&(
+              {imagePreview && !fileSizeError && (
                 <div className="image-preview">
                   <img src={imagePreview} alt="Preview" className="preview-image" />
                 </div>

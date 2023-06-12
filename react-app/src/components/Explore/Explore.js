@@ -1,4 +1,4 @@
-import BlogPreview from "../BlogPreview/BlogPreview"
+// import BlogPreview from "../BlogPreview/BlogPreview"
 import "./Explore.css"
 import ExploreBlog from "./ExploreBlog"
 import { getAllBlogs } from "../../store/blogs"

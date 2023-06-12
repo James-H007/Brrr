@@ -5,7 +5,7 @@ import { useModal } from "../../context/Modal";
 import { getCurrentUser } from "../../store/users";
 import { createNewPost } from "../../store/posts";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const LinkPostForm = ({ postType }) => {
   const history = useHistory();
@@ -149,8 +149,8 @@ const LinkPostForm = ({ postType }) => {
                 value={text}
                 onChange={handleTextChange}
               />
-              { text &&
-                 <p>Link preview: <a href={text} target="_blank" rel="noopener noreferrer">{text}</a></p>
+              {text &&
+                <p>Link preview: <a href={text} target="_blank" rel="noopener noreferrer">{text}</a></p>
               }
               {textError && <div className="errors">{textError}</div>}
               <div className="close-post-buttons">

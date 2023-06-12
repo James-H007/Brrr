@@ -1,20 +1,20 @@
 // import "./PostFormModal.css";
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { createNewPost, deleteMyPost, getPosts } from "../../store/posts";
-import { getCurrentUser, userById } from "../../store/users";
+// import { useHistory } from "react-router-dom";
+import { deleteMyPost } from "../../store/posts";
+import { getCurrentUser } from "../../store/users";
 import { useDispatch, useSelector } from "react-redux";
-import { editMyPost } from "../../store/posts";
+// import { editMyPost } from "../../store/posts";
 import { useModal } from "../../context/Modal";
 
 import "./DeletePostModal.css"
-import Post from "../Post";
+// import Post from "../Post";
 
 const DeleteFormModal = ({ postType, postData }) => {
-    const history = useHistory();
+    // const history = useHistory();
     const dispatch = useDispatch();
     const [isAuth, setIsAuth] = useState()
-    const [authError, setAuthError] = useState("")
+    // const [authError, setAuthError] = useState("")
     const [isLoaded, setIsLoaded] = useState("false");
     const { closeModal } = useModal();
     const deleteGif = "https://media.tenor.com/cS9NkvTBKtAAAAAd/pulp-fiction.gif"
@@ -32,11 +32,11 @@ const DeleteFormModal = ({ postType, postData }) => {
 
     useEffect(() => {
         if (currentUser) {
-            if (currentUser.id == postData.userId) {
+            if (currentUser.id === postData.userId) {
                 setIsAuth(true)
             }
         }
-    }, [currentUser])
+    }, [currentUser, postData.userId])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
