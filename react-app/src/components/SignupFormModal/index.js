@@ -18,6 +18,17 @@ function SignupFormModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const validDomains = [".com", ".edu", ".org",".io"];
+    const isValidEmail = validDomains.some((domain) =>
+      email.endsWith(domain) && email.includes("@")
+    );
+
+    if (password.length < 6) {
+      setErrors(["Password must be at least 6 characters long"]);
+    } else if (!isValidEmail) {
+      setErrors(["Email must include an @ and end with .com, .edu, .io, or .org"]);
+    } else
     if (password === confirmPassword) {
       const data = await dispatch(
         signUp(
