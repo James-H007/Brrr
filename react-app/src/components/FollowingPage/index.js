@@ -2,14 +2,14 @@ import "./FollowingPage.css"
 import { getCurrentUser } from "../../store/users"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { fetchFollowedBlogs, getBlogById } from "../../store/blogs"
+import { fetchFollowedBlogs } from "../../store/blogs"
 import loadingCat from "../../assets/cat.gif"
 import { Link } from "react-router-dom"
 
 const FollowingPage = () => {
     const [isLoaded, setIsLoaded] = useState(false)
     const dispatch = useDispatch()
-    const currentUser = useSelector(state => state.user.currentUser)
+    // const currentUser = useSelector(state => state.user.currentUser)
     const followedBlogs = useSelector(state => state.blogs.followedBlogs)
     const noFollowing = "https://thumbs.gfycat.com/AcrobaticScaryHare-size_restricted.gif"
     // console.log("--------------------", followedBlogs)
@@ -94,7 +94,7 @@ const FollowingPage = () => {
 
                 </>
             )}
-            {isLoaded && Object.values(followedBlogs).length == 0 && (
+            {isLoaded && Object.values(followedBlogs).length === 0 && (
                 <>
 
                     <img src={noFollowing} alt="gif" className="no-likes-gif" />

@@ -9,7 +9,7 @@ import { useModal } from "../../context/Modal";
 const ImagePostForm = ({ postType }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileSizeError, setFileSizeError] = useState("");
-  const [fileTypeError, setFileTypeError] = useState("")
+  // const [fileTypeError, setFileTypeError] = useState("")
   const [imagePreview, setImagePreview] = useState(null);
   const [imageEmbedCode, setImageEmbedCode] = useState(null)
   const [description, setDescription] = useState("")
@@ -134,6 +134,7 @@ const ImagePostForm = ({ postType }) => {
         </p>
       )}
       {isLoaded && (user.blogs.length === 0) && (
+
         <>
 
           <div className="post-form-container">
@@ -146,6 +147,7 @@ const ImagePostForm = ({ postType }) => {
 
           </div>
         </>
+
       )}
       {isLoaded && (user.blogs.length > 0) && (
         <div className="post-form-container">

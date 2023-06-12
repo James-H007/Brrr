@@ -11,17 +11,22 @@ import { getCurrentUser } from "../../store/users";
 
 const Blog = ({ data }) => {
     const [isLoaded, setIsLoaded] = useState(false)
-    const [blogAvatar, setBlogAvatar] = useState("")
-    const [blogBanner, setBlogBanner] = useState("")
-    const [blogTitle, setBlogTitle] = useState("")
-    const [blogName, setBlogName] = useState("")
-    const [blogDescription, setBlogDescription] = useState("")
-    const [blogPosts, setBlogPosts] = useState([])
+    // const [blogAvatar, setBlogAvatar] = useState("")
+    // const [blogBanner, setBlogBanner] = useState("")
+    // const [blogTitle, setBlogTitle] = useState("")
+    // const [blogName, setBlogName] = useState("")
+    // const [blogDescription, setBlogDescription] = useState("")
+    // const [blogPosts, setBlogPosts] = useState([])
     const [isFollowed, setIsFollowed] = useState(null)
+
+
+    // const blog_banner = "https://images.squarespace-cdn.com/content/v1/5c524a52a9e0288eb5cfa3ee/1616108169603-VV7YD0OXJUPST28QPEKI/LofiVineyard-09+blank+Banner.jpg?format=2500w"
+    // const iconImage = "https://lofigirl.com/wp-content/uploads/2023/02/DAY_UPDATE_ILLU.jpg"
 
     const blog_banner = "https://images.squarespace-cdn.com/content/v1/5c524a52a9e0288eb5cfa3ee/1616108169603-VV7YD0OXJUPST28QPEKI/LofiVineyard-09+blank+Banner.jpg?format=2500w"
     const iconImage = "https://lofigirl.com/wp-content/uploads/2023/02/DAY_UPDATE_ILLU.jpg"
     const johnTravolta = "https://media.tenor.com/lx2WSGRk8bcAAAAC/pulp-fiction-john-travolta.gif"
+
 
     const { id } = useParams()
     const history = useHistory()
@@ -32,7 +37,12 @@ const Blog = ({ data }) => {
     const currentUser = useSelector(state => state.user.currentUser)
     const blogById = useSelector(state => state.blogs.currentBlog)
     const blogFollowers = useSelector(state => state.blogs.followers)
+
+//     console.log(blogFollowers, '-------------------HERE')
+//     const initialFollowState = blogFollowers.some(follower => follower.id === currentUser.id)
+
     const initialFollowState = blogFollowers.some(follower => follower.id == currentUser.id)
+
 
     console.log(blogById,"----------------------------BlogbyId");
 
@@ -185,7 +195,10 @@ const Blog = ({ data }) => {
                             <div className="post-comp">
                                 {blogById.posts.slice().reverse().map((post, i) => (
                                     <>
-                                        <Post post={post} key={i} />
+                                        <div key={i}>
+                                            <Post post={post} key={i} />
+                                        </div>
+
                                     </>
                                 ))}
 

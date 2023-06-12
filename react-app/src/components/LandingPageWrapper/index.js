@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Feed from "../Feed/index";
 import LandingPage from "../LandingPage/index";

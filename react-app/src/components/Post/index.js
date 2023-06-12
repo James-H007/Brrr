@@ -9,13 +9,12 @@ import trash from "../../assets/trash-can-regular.svg";
 import "./post.css";
 import BlogPreview from "../BlogPreview/BlogPreview";
 import { fetchFollowedBlogs, getAllBlogs } from "../../store/blogs";
-import stockVideo from "../../assets/stock.mp4";
+// import stockVideo from "../../assets/stock.mp4";
 import { getBlogById } from "../../store/blogs";
 import { getCurrentUser } from "../../store/users";
 import {
     getMyLikes,
     likePostThunk,
-    unlikePost,
     unlikePostThunk,
 } from "../../store/likes";
 import { Link } from "react-router-dom";
@@ -26,7 +25,7 @@ import DeleteFormModal from "../DeletePostModal";
 
 import EditImageFormModal from "../editPostFormModal/EditImageFormModal"
 import EditVideoFormModal from "../editPostFormModal/EditVideoFormModal";
-import EditLinkFormModal from "../editPostFormModal/EditLinkFormModal";
+// import EditLinkFormModal from "../editPostFormModal/EditLinkFormModal";
 
 import PostOpenModalButton from "../PostOpenModalButton";
 
@@ -34,7 +33,7 @@ const Post = ({ post }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [isLiked, setisLiked] = useState(false);
-    const [isFollowed, setisFollowed] = useState(false);
+    // const [isFollowed, setisFollowed] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
     const [postLikes, setPostLikes] = useState(null)
 
@@ -92,21 +91,21 @@ const Post = ({ post }) => {
         ownerId = blog.ownerId;
     }
 
-    if (postType == "text") {
+    if (postType === "text") {
         postContent = (
             <div className="post-body">
                 <p className="post-title">{postTitle}</p>
                 <p className="post-description">{postDescription}</p>
             </div>
         );
-    } else if (postType == "image") {
+    } else if (postType === "image") {
         postContent = (
             <div>
-                <img src={imageEmbedCode} alt="post-image" className="post-image" />
+                <img src={imageEmbedCode} alt="post-image-here" className="post-image" />
                 <p className="post-description">{postDescription}</p>
             </div>
         );
-    } else if (postType == "link") {
+    } else if (postType === "link") {
         postContent = (
             <div className="post-body">
                 <a href={postTitle} className="post-url" target="_blank" rel="noopener noreferrer">
@@ -115,7 +114,7 @@ const Post = ({ post }) => {
                 </a>
             </div>
         );
-    } else if (postType == "video") {
+    } else if (postType === "video") {
         postContent = (
             <div>
                 <video controls className="post-video">
@@ -160,10 +159,10 @@ const Post = ({ post }) => {
         let updatedLikesCount;
         if (!isLiked) {
 
-            dispatch(likePostThunk(id));
+            dispatch(likePostThunk(id)).then(() => dispatch(getMyLikes()))
         } else {
 
-            dispatch(unlikePostThunk(id));
+            dispatch(unlikePostThunk(id)).then(() => dispatch(getMyLikes()));
 
         }
 
@@ -188,6 +187,10 @@ const Post = ({ post }) => {
             modalComponent={<editTextFormModal />}
         />;
     };
+
+    const handleComment = () => {
+        window.alert("Feature yet to be added.")
+    }
 
     return (
         <>
@@ -224,7 +227,7 @@ const Post = ({ post }) => {
                                 <div className="post-stats">
                                     <p className="post-notes">{postLikes} Notes</p>
                                     <div className="post-icons">
-                                        {currentUser.id == ownerId && (
+                                        {currentUser.id === ownerId && (
                                             <div className="post-icon">
                                                 {/* <img src={trash} alt="trash-icon" /> */}
                                                 <PostOpenModalButton
@@ -235,7 +238,7 @@ const Post = ({ post }) => {
 
                                             </div>
                                         )}
-                                        {currentUser.id == ownerId && postType == "text" && (
+                                        {currentUser.id === ownerId && postType === "text" && (
                                             <div className="post-icon">
                                                 <PostOpenModalButton
                                                     iconType={pencil}
@@ -245,7 +248,7 @@ const Post = ({ post }) => {
                                                 />
                                             </div>
                                         )}
-                                        {currentUser.id == ownerId && postType == "image" && (
+                                        {currentUser.id === ownerId && postType === "image" && (
                                             <div className="post-icon">
                                                 <PostOpenModalButton
                                                     iconType={pencil}
@@ -254,7 +257,7 @@ const Post = ({ post }) => {
                                                 />
                                             </div>
                                         )}
-                                        {currentUser.id == ownerId && postType == "video" && (
+                                        {currentUser.id === ownerId && postType === "video" && (
                                             <div className="post-icon">
                                                 <PostOpenModalButton
                                                     iconType={pencil}
@@ -263,7 +266,7 @@ const Post = ({ post }) => {
                                                 />
                                             </div>
                                         )}
-                                        {currentUser.id == ownerId && postType == "link" && (
+                                        {currentUser.id === ownerId && postType === "link" && (
                                             <div className="post-icon">
                                                 <PostOpenModalButton
                                                     iconType={pencil}
@@ -276,7 +279,7 @@ const Post = ({ post }) => {
                                             <img src={share} alt="heart-icon" />
                                         </div>
                                         <div className="post-icon">
-                                            <img src={comment} alt="comment-icon" />
+                                            <img src={comment} alt="comment-icon" onClick={handleComment} />
                                         </div>
                                         {!isLiked && (
                                             <div className="post-icon">

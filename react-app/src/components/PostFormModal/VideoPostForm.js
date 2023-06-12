@@ -128,6 +128,7 @@ const VideoPostForm = ({ postType }) => {
         </p>
       )}
       {isLoaded && (user.blogs.length === 0) && (
+
         <>
 
           <div className="post-form-container">
@@ -140,6 +141,7 @@ const VideoPostForm = ({ postType }) => {
 
           </div>
         </>
+
       )}
       {isLoaded && (user.blogs.length > 0) && (<div className="post-form-container">
         <div className="post-form-content">

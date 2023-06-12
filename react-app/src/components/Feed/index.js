@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PostOpenModalButton from "../PostOpenModalButton";
-import PostFormModal from "../PostFormModal";
+// import PostFormModal from "../PostFormModal";
 import TextPostForm from "../PostFormModal/TextPostForm";
 import ImagePostForm from "../PostFormModal/ImagePostForm";
 import VideoPostForm from "../PostFormModal/VideoPostForm";
@@ -79,14 +79,14 @@ const Feed = () => {
            videoEmbedCode: 'jdskbvkjdvsbsdvj'
        },
        */
-    }, dispatch)
+    }, [dispatch])
 
 
 
-    const openMenu = () => {
-        if (showMenu) return;
-        setShowMenu(true);
-    };
+    // const openMenu = () => {
+    //     if (showMenu) return;
+    //     setShowMenu(true);
+    // };
 
     useEffect(() => {
         if (!showMenu) return;
@@ -104,7 +104,7 @@ const Feed = () => {
 
     return (
         <>
-            {(Object.values(user).length == 0) && (
+            {(Object.values(user).length === 0) && (
                 <>
                     <img src={notLoggedIn} alt="gif" className="no-likes-gif" />
                     <p className="no-likes">
@@ -152,7 +152,11 @@ const Feed = () => {
                             {
                                 sortedCurrentFeed.map((post, i) => (
                                     <>
-                                        <Post post={post} />
+
+                                        <div key={i}>
+                                            <Post post={post} />
+                                        </div>
+
                                     </>
                                 ))
                             }
@@ -161,7 +165,7 @@ const Feed = () => {
                     </div>
                 </div>
             )}
-            {isLoaded && user && sortedCurrentFeed && (Object.values(user).length > 0) && (sortedCurrentFeed.length == 0) && (
+            {isLoaded && user && sortedCurrentFeed && (Object.values(user).length > 0) && (sortedCurrentFeed.length === 0) && (
                 <>
                     <p className="no-likes">
                         Not following? No feed.
