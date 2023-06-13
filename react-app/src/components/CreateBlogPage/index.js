@@ -94,7 +94,7 @@ const CreateBlogPage = () => {
       setBlogNameSpaceError("")
     }
 
-    if (allBlogNames.includes(blogName)) {
+    if (allBlogNames.includes(blogName.toLowerCase())) {
       setBlogNameUniqueError("Blog name must be unique")
       isValid = false;
     }
