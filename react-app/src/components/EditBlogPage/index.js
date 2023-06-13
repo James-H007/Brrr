@@ -99,7 +99,7 @@ function EditBlogPage() {
   const validateForm = () => {
     let isValid = true;
 
-    if (blogTitle.length === 0 || blogTitle.length > 24) {
+    if (blogTitle.trim().length === 0 || blogTitle.length > 24) {
       setTitleError("Title must be between 1 and 24 characters");
       isValid = false;
     } else {
