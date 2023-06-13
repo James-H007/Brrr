@@ -10,6 +10,7 @@
     border-radius: 10px;
     height: 400px;
     font-family: 'Rubik';
+    position: relative;
 }
 
 .blog-banner {
@@ -19,9 +20,34 @@
     border-radius: 10px 10px 0px 0px;
 }
 
+.blog-follow-button-wrapper {
+    position: absolute;
+    /* right: 630px; */
+    top: 0;
+    right: 0;
+    margin-top: 5px;
+}
+
+.blog-follow-button {
+    background-color: black;
+    font-family: 'Rubik';
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    width: 100px;
+    height: 50px;
+}
+
+.blog-follow-button:hover {
+    background-color: white;
+    color: black;
+}
+
 .blog-icon-wrapper {
     position: absolute;
-    top: 26%;
+    top: 25%;
     border-radius: 10px;
 }
 
@@ -32,6 +58,8 @@
     border-radius: 10px;
     box-shadow: 0px 5px 2px black;
     object-fit: cover;
+    transform: translate(-50%, -4%);
+    position: absolute;
 }
 
 .blog-title {
@@ -57,4 +85,38 @@
     width: 100%;
     height: 100%;
 
+}
+
+.blog-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.blog-edit {
+    height: 30px;
+    width: 30px;
+    margin-top: 0 auto;
+    margin-bottom: 10px;
+    margin-right: 5px;
+}
+
+.blog-edit:hover {
+    cursor: pointer;
+}
+
+.no-blog-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    top: 90px;
+}
+
+.john-travolta-p {
+    font-size: 24px;
+    font-family: 'Rubik';
 }

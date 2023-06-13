@@ -6,6 +6,7 @@ from app.forms.post_forms import PostTypeForm
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.utils import secure_filename
 from ..aws_s3_bucket import s3, bucket
+import os
 
 post_routes = Blueprint('posts', __name__)
 
@@ -50,11 +51,62 @@ def create_post(blog_id):
     """
     Route to post to a blog
     """
+    print('Received request to create post for blog id:', blog_id)
+
     userId = current_user.id
+    description = request.form.get('description', None)
 
     form = PostTypeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
+
+    if 'file' in request.files:
+        file = request.files['file']
+        if file.filename == '':
+            return {"error": "No file selected"}, 400
+
+        filename = secure_filename(file.filename)
+        file.save(filename)
+
+        s3.upload_file(
+            Bucket='flaskbrrr',
+            Filename=filename,
+            Key=filename
+        )
+
+        url = f"https://{bucket}.s3.us-east-2.amazonaws.com/{filename}"
+
+        post_type = "video" if filename.lower().endswith(('.mp4', '.mov', '.avi', '.mkv', '.flv')) else "image"
+
+        if post_type == "video":
+            post = Post(
+                blog_id=blog_id,
+                user_id=userId,
+                post_type=post_type,
+                post_title=f"{post_type.capitalize()} post",
+                post_description=description,
+                video_embed_code=url,
+            )
+        else:
+            post = Post(
+                blog_id=blog_id,
+                user_id=userId,
+                post_type=post_type,
+                post_title=f"{post_type.capitalize()} post",
+                post_description=description,
+                image_embed_code=url,
+            )
+
+        db.session.add(post)
+        db.session.commit()
+
+        try:
+            os.remove(filename)
+        except Exception as e:
+            print(f"Error occurred while deleting file: {e}")
+
+        return {'post': post.to_dict()}, 201
+
+    elif form.validate_on_submit():
         post = Post (
             blog_id = blog_id,
             user_id = userId,
@@ -62,41 +114,15 @@ def create_post(blog_id):
             post_type = form.data["post_type"],
             post_description = form.data["post_description"],
             video_embed_code = form.data["video_embed_code"],
-            image_embed_code = form.data["image_embed_code"],
         )
 
         db.session.add(post)
         db.session.commit()
 
-        # We have to do this after ⬇ because we need the post.id
-
-        if 'file' in request.files:
-            file = request.files['file']
-            # if user does not select file, browser submits an empty part without a filename
-            if file.filename != '':
-                filename = secure_filename(file.filename)
-                file.save(filename)
-
-                # Upload the user's chosen file to AWS S3
-                s3.upload_file(
-                    Bucket='flaskbrrr',
-                    Filename=filename,
-                    Key=filename
-                )
-
-                # Get the URL of the uploaded file
-                url = f"https://{bucket}.s3.us-east-2.amazonaws.com/{filename}"
-
-                post_image = PostImage(
-                    post_id=post.id,
-                    image_url=url
-                )
-                db.session.add(post_image)
-                db.session.commit()
-
         return {'post': post.to_dict()}, 201
-
-    return {"error": form.errors}, 404 # <<-- change this after testing
+    else:
+        print(form.errors)
+        return {"error": form.errors}, 404
 
 
 @post_routes.route('/<int:post_id>/edit', methods=["PUT"])

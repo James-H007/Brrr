@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PostOpenModalButton from "../PostOpenModalButton";
-import PostFormModal from "../PostFormModal";
+// import PostFormModal from "../PostFormModal";
 import TextPostForm from "../PostFormModal/TextPostForm";
 import ImagePostForm from "../PostFormModal/ImagePostForm";
+import VideoPostForm from "../PostFormModal/VideoPostForm";
 import "./Feed.css"
 import text from "../../assets/font-solid.svg"
 import image from "../../assets/image.svg"
@@ -13,33 +14,51 @@ import Post from '../Post'
 import { fetchFollowedBlogs } from "../../store/blogs";
 import { getAllPosts } from "../../store/posts";
 import LinkPostForm from "../PostFormModal/LinkPostForm";
+import loadingCat from "../../assets/cat.gif"
+import { getCurrentUser } from "../../store/users";
+import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
 const Feed = () => {
     const [showMenu, setShowMenu] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false)
     const ulRef = useRef();
     const dispatch = useDispatch()
     const currentUsersFollowedBlogs = useSelector(state => Object.values(state.blogs.followedBlogs))
     const allPosts = useSelector(state => Object.values(state.posts.allPosts))
-
+    const noFeed = "https://gifdb.com/images/high/pulp-fiction-vincent-bathroom-break-s2qla4czbfiyqujn.gif"
     // When you query, do this:
     // currentUsersFollowedBlogs.map((i) => i.id === allPosts.blogId)
     // const currentFeed = currentUsersFollowedBlogs.map((i) => i.id === allPosts.blogId)
 
     const followedBlogsIds = currentUsersFollowedBlogs.map((blog) => blog.id)
     const currentFeed = allPosts.filter(post => followedBlogsIds.includes(post.blogId))
-    console.log(followedBlogsIds, "--------Array of followed blog ids")
-    console.log(currentFeed, "-------------LOOOK HERE CURRENT FEED")
+    const sortedCurrentFeed = currentFeed.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    const user = useSelector(state => state.user.currentUser)
+    // console.log(user, "USER USER")
+    // console.log(followedBlogsIds, "--------Array of followed blog ids")
+    // console.log(currentFeed, "-------------LOOOK HERE CURRENT FEED")
+    // console.log(sortedCurrentFeed, "=-----------------SORTED CURRENT FEED")
+    // useEffect(() => {
+
+    /*
+     currentUsersFollowedBlogs === [ { blog_avatar: 'djsbbkbkjbkbkjkdvd.png', blog_name: 'Marnie', id: 2 } ]
+    */
+    // }, [dispatch])
+
+    const notLoggedIn = "https://media.tenor.com/nDrR1iOWmn0AAAAC/pulp-fiction-ahh.gif"
+
     useEffect(() => {
-        dispatch(fetchFollowedBlogs())
-        /*
-         currentUsersFollowedBlogs === [ { blog_avatar: 'djsbbkbkjbkbkjkdvd.png', blog_name: 'Marnie', id: 2 } ]
-        */
+        dispatch(getCurrentUser())
     }, [dispatch])
 
-
+    useEffect(() => {
+        console.log(user, "------------")
+    }, [user])
 
     useEffect(() => {
         dispatch(getAllPosts())
+            .then(() => dispatch(fetchFollowedBlogs()))
+            .then(() => { setIsLoaded(true) })
         /*
         allPosts ===
         {
@@ -60,14 +79,14 @@ const Feed = () => {
            videoEmbedCode: 'jdskbvkjdvsbsdvj'
        },
        */
-    }, dispatch)
+    }, [dispatch])
 
 
 
-    const openMenu = () => {
-        if (showMenu) return;
-        setShowMenu(true);
-    };
+    // const openMenu = () => {
+    //     if (showMenu) return;
+    //     setShowMenu(true);
+    // };
 
     useEffect(() => {
         if (!showMenu) return;
@@ -85,42 +104,77 @@ const Feed = () => {
 
     return (
         <>
-            <div className='main-feed'>
-                <div className='main-post-area'>
-                    <div className='post-select'>
-                        <PostOpenModalButton
-                            buttonText="Text"
-                            iconType={text}
-                            modalComponent={<TextPostForm postType="text" />}
-                        />
-                        <PostOpenModalButton
-                            buttonText="Image"
-                            iconType={image}
-                            modalComponent={<ImagePostForm postType="image" />}
-                        />
-                        <PostOpenModalButton
-                            buttonText="Link"
-                            iconType={link}
-                            modalComponent={<LinkPostForm postType="link" />}
-                        />
-                        <PostOpenModalButton
-                            buttonText="Video"
-                            iconType={video}
-                            modalComponent={<ImagePostForm postType="video" />}
-                        />
+            {(Object.values(user).length === 0) && (
+                <>
+                    <img src={notLoggedIn} alt="gif" className="no-likes-gif" />
+                    <p className="no-likes">
+                        Hey. You're not logged in.
+                    </p>
+                    <Link to="/">
+                        <button className='redirect-button'>Take me back to the home page</button>
+                    </Link>
+                </>
+            )}
+            {(!isLoaded || !currentFeed || !sortedCurrentFeed) && (
+                <>
+                    <div className="loading-box">
+                        <img src={loadingCat} alt="loading-cat" className="loading-cat" />
+                        <p className="loading-message">Loading...</p>
                     </div>
-                    <div className='post-comp'>
-                        {
-                            currentFeed.map((post, i) => (
-                                <>
-                                    <Post post={post} />
-                                </>
-                            ))
-                        }
+                </>
+            )}
+            {isLoaded && currentFeed && sortedCurrentFeed && user && (Object.values(user).length > 0) && (
+                <div className='main-feed'>
+                    <div className='main-post-area'>
+                        <div className='post-select'>
+                            <PostOpenModalButton
+                                buttonText="Text"
+                                iconType={text}
+                                modalComponent={<TextPostForm postType="text" />}
+                            />
+                            <PostOpenModalButton
+                                buttonText="Image"
+                                iconType={image}
+                                modalComponent={<ImagePostForm postType="image" />}
+                            />
+                            <PostOpenModalButton
+                                buttonText="Link"
+                                iconType={link}
+                                modalComponent={<LinkPostForm postType="link" />}
+                            />
+                            <PostOpenModalButton
+                                buttonText="Video"
+                                iconType={video}
+                                modalComponent={<VideoPostForm postType="video" />}
+                            />
+                        </div>
+                        <div className='post-comp'>
+                            {
+                                sortedCurrentFeed.map((post, i) => (
+                                    <>
 
+                                        <div key={i}>
+                                            <Post post={post} />
+                                        </div>
+
+                                    </>
+                                ))
+                            }
+
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
+            {isLoaded && user && sortedCurrentFeed && (Object.values(user).length > 0) && (sortedCurrentFeed.length === 0) && (
+                <>
+                    <p className="no-likes">
+                        Not following? No feed.
+                    </p>
+                    <img src={noFeed} alt="gif" className="no-feed-gif" />
+
+                </>
+            )}
+
         </>
     )
 }

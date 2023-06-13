@@ -1,7 +1,10 @@
 body {
     background-color: rgb(255, 255, 255);
+    width: 100%;
+    margin: 0 auto;
 }
-button{
+
+button {
     /* width: 20%; */
     height: 30px;
     border-radius: 10px;
@@ -9,9 +12,30 @@ button{
     font-family: 'Rubik';
     border: none;
 }
-button:hover{
+
+button:hover {
     background-color: rgb(128, 128, 128);
     cursor: pointer;
     color: white;
     box-shadow: none;
+}
+
+.loading-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-cat {
+    object-fit: cover;
+    border-radius: 10px;
+    height: 300px;
+    width: 400px;
+}
+
+.loading-message {
+    font-family: 'Rubik';
+    font-size: 30px;
+    font-weight: bold;
 }

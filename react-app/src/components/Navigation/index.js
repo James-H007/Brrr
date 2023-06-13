@@ -9,7 +9,9 @@ import Snowflake from "../../assets/snowflake-regular.svg";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-import {getAllBlogs} from "../../store/blogs"
+
+import { getAllBlogs } from "../../store/blogs";
+
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -18,41 +20,39 @@ function Navigation({ isLoaded }) {
   const ulRef = useRef();
 
   // Search functionality -----------------------------------------------------------------------------
-  const allBlogs = useSelector(state => state.blogs.blogs)
-  const [searchText, setSearchText] = useState('')
-  const [searchResults, setSearchResults] = useState([])
+  const allBlogs = useSelector((state) => state.blogs.blogs) || [];
+  const [searchText, setSearchText] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    dispatch(getAllBlogs())
-  }, [dispatch])
-
+    dispatch(getAllBlogs());
+  }, [dispatch]);
 
   const handleSearch = (e) => {
-    setSearchText(e.target.value)
+    setSearchText(e.target.value);
 
-    if (e.target.value === ''){
+
+    if (e.target.value === '') {
       setSearchResults([])
       return
+
     }
 
-    const results = allBlogs.filter((i) => (
+    const results = allBlogs.filter((i) =>
       i.blogTitle.toLowerCase().includes(e.target.value.toLowerCase())
-    ))
+    );
 
-    setSearchResults(results)
-  }
-
+    setSearchResults(results);
+  };
 
   // --------------------------------------------------------------------------------------------------
 
-
-
   const closeMenu = () => setShowMenu(false);
 
-  const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
-  };
+  // const openMenu = () => {
+  //   if (showMenu) return;
+  //   setShowMenu(true);
+  // };
 
   useEffect(() => {
     if (!showMenu) return;
@@ -91,13 +91,18 @@ function Navigation({ isLoaded }) {
 
             {searchResults.length > 0 && (
               <ul className="search-results">
-                {searchResults.map(i => (
+                {searchResults.map((i) => (
                   <li className="search-li">
-                    <Link to={`/blog/${i.id}`} key={i.id} onClick={() => {
-                      setSearchResults([]);
-                      setSearchText('')
-                    }}>
-                      {i.blogTitle}
+                    <Link
+                      to={`/blog/${i.id}`}
+                      key={i.id}
+                      onClick={() => {
+                        setSearchResults([]);
+                        setSearchText("");
+                      }}
+                    >
+                      <img src={i.blogAvatarUrl} alt='blog-icon' className="blog-select-icon" />
+                      <p className="search-title">{i.blogTitle}</p>
                     </Link>
                   </li>
                 ))}
@@ -138,7 +143,7 @@ function Navigation({ isLoaded }) {
     <ul className="navBar">
       <div className="logoSearch">
         <li>
-          <NavLink exact to="/">
+          <NavLink exact to="/feed">
             <img src={Snowflake} alt="logo" className="logo" />
           </NavLink>
         </li>

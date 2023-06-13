@@ -7,16 +7,39 @@ import "./SignupForm.css";
 function SignupFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
+  const [first_name, setFirst] = useState("");
+  const [last_name, setLast] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [profile_pic_url, setProfile_pic_url] = useState("https://64.media.tumblr.com/d713916b3661f9cae54f9f880168a2f2/tumblr_ny5vbt2nLA1umv52oo2_500.png");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const validDomains = [".com", ".edu", ".org",".io"];
+    const isValidEmail = validDomains.some((domain) =>
+      email.endsWith(domain) && email.includes("@")
+    );
+
+    if (password.length < 6) {
+      setErrors(["Password must be at least 6 characters long"]);
+    } else if (!isValidEmail) {
+      setErrors(["Email must include an @ and end with .com, .edu, .io, or .org"]);
+    } else
     if (password === confirmPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(
+        signUp(
+          first_name,
+          last_name,
+          username,
+          email,
+          password,
+          profile_pic_url,
+        )
+      );
       if (data) {
         setErrors(data);
       } else {
@@ -48,6 +71,24 @@ function SignupFormModal() {
             />
           </label>
           <label className="sign_up_input">
+            First Name
+            <input
+              type="text"
+              value={first_name}
+              onChange={(e) => setFirst(e.target.value)}
+              required
+            />
+          </label>
+          <label className="sign_up_input">
+            Last Name
+            <input
+              type="text"
+              value={last_name}
+              onChange={(e) => setLast(e.target.value)}
+              required
+            />
+          </label>
+          <label className="sign_up_input">
             Username
             <input
               type="text"
@@ -56,6 +97,15 @@ function SignupFormModal() {
               required
             />
           </label>
+          {/* <label className="sign_up_input">
+            Profile Picture
+            <input
+              type="text"
+              value={profile_pic_url}
+              onChange={(e) => setProfile_pic_url(e.target.value)}
+              required
+            />
+          </label> */}
           <label className="sign_up_input">
             Password
             <input

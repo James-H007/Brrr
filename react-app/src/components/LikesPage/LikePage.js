@@ -4,18 +4,23 @@ import Post from "../Post";
 import "../Feed/Feed.css";
 import "./LikesPage.css"
 import { getMyLikes } from "../../store/likes"
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const LikesPage = () => {
-  //   const [likedPosts, setLikedPosts] = useState([]);
+  const [likedPostsAmount, setLikedPostsAmount] = useState(null);
+  const [noLikes, setNoLikes] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false);
+  const history = useHistory()
 
-  //   useEffect(() => {
-  //     const fetchLikedPosts = async () => {
+  const noLikers = "https://media.tenor.com/V6viLE6UQPEAAAAC/john-travolta-where-are-you-guys.gif"
+  // useEffect(() => {
+  //   const fetchLikedPosts = async () => {
   //     // const likedPostsData = await get_user_liked_posts();
   //     setLikedPosts(likedPostsData);
-  //     };
+  //   };
 
-  //     fetchLikedPosts();
-  //   }, []);
+  //   fetchLikedPosts();
+  // }, []);
 
   //<------------------------------------------------->
   //  1. pull data with user's liked post
@@ -23,9 +28,45 @@ const LikesPage = () => {
 
   const dispatch = useDispatch()
   const currentUserLikes = useSelector(state => Object.values(state.likes.myLikes))
+  const initialLikesAmount = currentUserLikes.length
+  // console.log(currentUserLikes, "-------------------")
+
+  // useEffect(() => {
+  //   if (currentUserLikes.length === 0) {
+  //     dispatch(getMyLikes())
+  //     if (currentUserLikes.length === 0) {
+  //       history.push("/feed")
+  //     }
+  //   }
+  // }, [currentUserLikes, history]);
 
   useEffect(() => {
-    dispatch(getMyLikes())
+    setLikedPostsAmount(initialLikesAmount)
+  }, [initialLikesAmount])
+
+  useEffect(() => {
+    setLikedPostsAmount(currentUserLikes.length)
+    console.log(likedPostsAmount, "LIKED POST AMOUNT")
+
+  }, [currentUserLikes, likedPostsAmount])
+
+  useEffect(() => {
+    setIsLoaded(false)
+    if (likedPostsAmount === 0) {
+      setNoLikes(true)
+      // history.push("/feed")
+    }
+    else if (likedPostsAmount > 0) {
+      dispatch(getMyLikes())
+    }
+    setIsLoaded(true)
+  }, [likedPostsAmount, dispatch, history])
+
+
+
+  useEffect(() => {
+    dispatch(getMyLikes()).then(() => setIsLoaded(true))
+
 
     /*
     currentUserLikes ===
@@ -71,19 +112,44 @@ const LikesPage = () => {
 
 
   return (
-    <div className="main-feed">
-      <div className="main-post-area">
-        <div className="like-header">
-          Likes ❤️
-        </div>
-        <div className="post-comp">
-          {/* {likedPosts.map((post) => (
-            <Post key={post.id} {...post} />
-          ))} */}
-          <Post />
-        </div>
-      </div>
-    </div>
+    <>
+      {!isLoaded && (
+        <p>
+          Loading...
+        </p>
+      )}
+      {isLoaded && ((currentUserLikes === 0) || noLikes) && (
+        <>
+
+          <img src={noLikers} alt="gif" className="no-likes-gif" />
+          <p className="no-likes">
+            No likes are here. Try liking stuff first.
+          </p>
+        </>
+      )}
+      {
+        isLoaded && (currentUserLikes.length > 0) && !noLikes && (
+          <div className="main-feed">
+            <div className="main-post-area">
+              <div className="like-header">
+                Likes ❤️
+              </div>
+
+              <div className="post-comp">
+                {currentUserLikes.map((data) => (
+                  <div key={data.id}>
+                    <Post post={data.post} />
+                  </div>
+
+                ))}
+                {/* <Post /> */}
+              </div>
+            </div>
+          </div>
+        )
+      }
+
+    </>
   );
 };
 

@@ -10,10 +10,23 @@ def seed_users():
         first_name='Marnie', last_name='Jones', username='marnie', email='marnie@aa.io', password='password', profile_pic_url='https://64.media.tumblr.com/d713916b3661f9cae54f9f880168a2f2/tumblr_ny5vbt2nLA1umv52oo2_500.png')
     bobbie = User(
         first_name="Bobbie", last_name="Doe",username='bobbie', email='bobbie@aa.io', password='password', profile_pic_url='https://64.media.tumblr.com/d713916b3661f9cae54f9f880168a2f2/tumblr_ny5vbt2nLA1umv52oo2_500.png')
+    matt = User(
+        first_name="Matt", last_name="David",username='matt_david', email='matt@aa.io', password='password', profile_pic_url='https://64.media.tumblr.com/d713916b3661f9cae54f9f880168a2f2/tumblr_ny5vbt2nLA1umv52oo2_500.png')
+    james = User(
+        first_name="James", last_name="Hoang",username='james_hoang', email='james@aa.io', password='password', profile_pic_url='https://64.media.tumblr.com/d713916b3661f9cae54f9f880168a2f2/tumblr_ny5vbt2nLA1umv52oo2_500.png')
+    sterling = User(
+        first_name="Sterling", last_name="Herbert",username='sterling_herbert', email='sterling@aa.io', password='password', profile_pic_url='https://64.media.tumblr.com/d713916b3661f9cae54f9f880168a2f2/tumblr_ny5vbt2nLA1umv52oo2_500.png')
+    anime = User(
+        first_name="Anime", last_name="Emina",username='anime_emina', email='anime@aa.io', password='password', profile_pic_url='https://64.media.tumblr.com/d713916b3661f9cae54f9f880168a2f2/tumblr_ny5vbt2nLA1umv52oo2_500.png')
+
 
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
+    db.session.add(matt)
+    db.session.add(james)
+    db.session.add(sterling)
+    db.session.add(anime)
     db.session.commit()
 
 

@@ -76,7 +76,7 @@ export const getMyPosts = () => async (dispatch) => {
 
   if (response.ok) {
     const { posts } = await response.json()
-    dispatch(getMyPosts(posts))
+    dispatch(getUsersPosts(posts))
     return posts
   }
 }
@@ -91,7 +91,7 @@ export const getAllPostImages = () => async (dispatch) => {
 
   if (response.ok) {
     const { post_images } = await response.json()
-    dispatch(getAllPostImages(post_images))
+    dispatch(getPostImages(post_images))
     return post_images
   }
 }
@@ -109,20 +109,6 @@ export const createNewPost = (blog_id, formData) => async (dispatch) => {
     dispatch(createPost(post))
     return post
   }
-  /*
-  *****REMEMBER*****
-    - We might need to change how we implement AWS, maybe create and do the route in that file.
-
-  In our component:
-      const formData = new FormData();
-      formData.append('post_title', postTitle);
-      formData.append('post_type', postType);
-      formData.append('post_description', postDescription);
-      formData.append('video_embed_code', videoEmbedCode);
-      formData.append('image_embed_code', imageEmbedCode);
-      formData.append('file', file);
-      dispatch(createNewPost(blog_id, formData));
-  */
 }
 
 // @post_routes.route('/<int:post_id>/edit', methods=["PUT"])

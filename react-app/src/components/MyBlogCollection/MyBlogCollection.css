@@ -1,0 +1,14 @@
+.create-blog {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  font-family: cursive;
+  font-size: 22px;
+  color: black;
+  transition: ease-in-out 0.2s;
+  cursor: pointer;
+}
+
+.create-blog:hover {
+  font-size: 24px;
+}
