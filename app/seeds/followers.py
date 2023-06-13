@@ -15,7 +15,7 @@ def seed_followers():
     turkey = Blog(
         owner_id=1,
         default_blog=False,
-        blog_title="My Turkey Blog",
+        blog_title="my_turkey_blog",
         banner_img_url="https://img.freepik.com/premium-photo/wide-banner-with-many-random-square-hexagons-charcoal-dark-black-color_105589-1820.jpg",
         blog_avatar_url="https://64.media.tumblr.com/ac46b069c7bb24e2ee5bf368a32b84fe/5c65a2189e2d73b7-9d/s540x810/384c42854b3fca915f79ffcb8dc711665b7c3519.jpg",
         blog_name="Turkey",
