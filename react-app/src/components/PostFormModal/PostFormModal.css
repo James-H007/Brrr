@@ -139,6 +139,7 @@ input[type="file"]:hover {
 .preview-image {
     height: 300px;
     width: auto;
+    max-width: 600px;
     padding: 10px;
 }
 
