@@ -25,7 +25,7 @@ const About = () => {
                         <p className="blog-title">The Team</p>
                         {/* <p className="blog-url">@ADMIN</p> */}
                         <p className="blog-description-about">
-                            <a href="" target="_blank"><img src={github} className="about-icon" /></a>
+                            <a href="https://github.com/James-H007/Brrr" target="_blank"><img src={github} className="about-icon" /></a>
                             Brrr was created in inspiration of the website Tumblr. Users are able to create their own customizable blogs and post text, images, or videos! Users can follow other users for a unique social experience! Click on the GitHub icon above to view the repository.
                         </p>
 
