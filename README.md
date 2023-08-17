@@ -9,7 +9,7 @@ User authorization, blogs, posts retaining to blogs, blog follows, post likes, i
 
 ## Navigating through the website
 
-### *Hero Page*
+### *Feed*
 
 - In this section, users can post videos, links, photos, or just plain text   
 - Users can also search for popular blogs in the search bar
