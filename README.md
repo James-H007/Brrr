@@ -6,6 +6,9 @@ Our clone will contain the following features:
 
 User authorization, blogs, posts retaining to blogs, blog follows, post likes, image and video posting, and customization. All of these will appear in a feed on the homepage. Comments for the post will be added later.
 
+## Live Link
+
+https://brrr.onrender.com
 
 ## Technologies Used
 
