@@ -38,13 +38,13 @@ const Blog = ({ data }) => {
     const blogById = useSelector(state => state.blogs.currentBlog)
     const blogFollowers = useSelector(state => state.blogs.followers)
 
-//     console.log(blogFollowers, '-------------------HERE')
-//     const initialFollowState = blogFollowers.some(follower => follower.id === currentUser.id)
+    //     console.log(blogFollowers, '-------------------HERE')
+    //     const initialFollowState = blogFollowers.some(follower => follower.id === currentUser.id)
 
     const initialFollowState = blogFollowers.some(follower => follower.id == currentUser.id)
 
 
-    console.log(blogById,"----------------------------BlogbyId");
+    //console.log(blogById,"----------------------------BlogbyId");
 
 
 
@@ -114,8 +114,8 @@ const Blog = ({ data }) => {
     const handleDelete = async () => {
         if (currentUser.id === blogById.ownerId) {
             dispatch(removeBlogById(blogById.id))
-            .then(() => dispatch(getBlogById(id)))
-            .then(() => history.push("/my-blogs"))
+                .then(() => dispatch(getBlogById(id)))
+                .then(() => history.push("/my-blogs"))
         }
     }
 
@@ -140,14 +140,14 @@ const Blog = ({ data }) => {
                 <>
                     <div className="no-blog-page">
                         <img src={johnTravolta} alt="gif" className="john-travolta-gif" />
-                         <p className="john-travolta-p">This blog does not exist.</p>
-                         <button onClick={handleClick} className="feed-button">Return to feed</button>
+                        <p className="john-travolta-p">This blog does not exist.</p>
+                        <button onClick={handleClick} className="feed-button">Return to feed</button>
                     </div>
                 </>
             )}
 
 
-            {isLoaded && blogById && currentUser && id &&(
+            {isLoaded && blogById && currentUser && id && (
                 <div>
                     <div className="main-feed">
                         <div className="main-post-area">
@@ -185,7 +185,7 @@ const Blog = ({ data }) => {
                                                 <img src={pencil} alt="pencil" className="blog-edit" />
                                             </Link>
 
-                                            <img src={trash} alt="trash" className="blog-edit" onClick={handleDelete}/>
+                                            <img src={trash} alt="trash" className="blog-edit" onClick={handleDelete} />
                                         </div>
                                     )
                                 }

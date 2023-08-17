@@ -51,9 +51,9 @@ const Feed = () => {
         dispatch(getCurrentUser())
     }, [dispatch])
 
-    useEffect(() => {
-        console.log(user, "------------")
-    }, [user])
+    // useEffect(() => {
+    //     console.log(user, "------------")
+    // }, [user])
 
     useEffect(() => {
         dispatch(getAllPosts())

@@ -11,7 +11,7 @@ const MyBlogCollection = () => {
     const [isLoaded, setIsLoaded] = useState(false)
     const dispatch = useDispatch()
     const currentUserBlogs = useSelector(state => state.user.currentUser.blogs)
-    console.log(currentUserBlogs)
+    //console.log(currentUserBlogs)
 
     const noBlogs = "https://media.tenor.com/KO7gk7WEvkAAAAAC/bob-ross-pointing.gif"
 
