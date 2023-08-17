@@ -139,7 +139,7 @@ const About = () => {
                             </div>
                             <footer>
                                 <div className="post-icons-about">
-                                    <a href="" target="_blank"><img src={github} className="about-icon" /></a>
+                                    <a href="https://github.com/Sterling-Hebert" target="_blank"><img src={github} className="about-icon" /></a>
                                     <a href="https://www.linkedin.com/in/sterling-hebert-615137238/" target="_blank"><img src={linkedIn} className="about-icon" /></a>
                                 </div>
                             </footer>
