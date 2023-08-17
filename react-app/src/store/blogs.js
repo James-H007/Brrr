@@ -93,7 +93,7 @@ export const getAllBlogs = () => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     // const dataObj = normalizeData(data)
-    console.log(data);
+    //console.log(data);
     dispatch(getBlogs(data.blogs));  // <<--  Might need to be just "data" not "data.blogs"
   }
 };
@@ -112,7 +112,7 @@ export const getBlogById = (id) => async (dispatch) => {
     return blog
 
   } else {
-    console.log('Error: Blog not found');
+    //console.log('Error: Blog not found');
   }
 }
 
@@ -159,7 +159,7 @@ export const createBlog = (blog) => async (dispatch) => {
   if (response.ok) {
     const newBlog = await response.json()
     dispatch(createNewBlog(newBlog)) // or newBlog.blog
-    console.log("---Our New Blog---", newBlog);
+    //console.log("---Our New Blog---", newBlog);
     return newBlog
   }
 }

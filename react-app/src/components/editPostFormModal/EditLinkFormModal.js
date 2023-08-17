@@ -17,7 +17,7 @@ const EditLinkFormModal = ({ postType, postData }) => {
 
 
   useEffect(() => {
-    console.log(postData, "Post Data HERE")
+    // console.log(postData, "Post Data HERE")
     setText(postData.postTitle);
   }, [postData]);
 

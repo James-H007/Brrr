@@ -46,7 +46,7 @@ const LikesPage = () => {
 
   useEffect(() => {
     setLikedPostsAmount(currentUserLikes.length)
-    console.log(likedPostsAmount, "LIKED POST AMOUNT")
+    //console.log(likedPostsAmount, "LIKED POST AMOUNT")
 
   }, [currentUserLikes, likedPostsAmount])
 

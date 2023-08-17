@@ -37,9 +37,9 @@ const LinkPostForm = ({ postType }) => {
 
   }, [dispatch])
 
-  useEffect(() => {
-    console.log(user);
-  }, [user])
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user])
 
   // const blogId = 2
 
