@@ -1,4 +1,4 @@
-# Brrr-project (Tumblr Clone)
+# Brrr (Tumblr-Inspired)
 
 This is the starter for the Flask React project. We are cloning the popular website Tumblr.
 
