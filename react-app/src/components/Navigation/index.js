@@ -9,7 +9,7 @@ import Snowflake from "../../assets/snowflake-regular.svg";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-
+import info from "../../assets/info.svg"
 import { getAllBlogs } from "../../store/blogs";
 
 
@@ -150,9 +150,16 @@ function Navigation({ isLoaded }) {
         {isLoaded && sessionLinks}
       </div>
       {isLoaded && sessionUser && (
-        <li>
-          <ProfileButton user={sessionUser} />
-        </li>
+        <div className="top-right">
+          <li>
+            <NavLink exact to="/about">
+              <img src={info} alt="logo" className="profile-button" />
+            </NavLink>
+          </li>
+          <li>
+            <ProfileButton user={sessionUser} />
+          </li>
+        </div>
       )}
     </ul>
   );

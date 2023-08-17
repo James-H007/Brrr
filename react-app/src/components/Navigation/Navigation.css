@@ -11,7 +11,9 @@
   width: 100%;
   padding: 0;
   margin: 0;
-
+  position: sticky;
+  top: 0px;
+  z-index: 1000;
 }
 
 .logoSearch {
@@ -139,6 +141,13 @@ a {
   border-radius: 10px;
 }
 
+.top-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0px;
+}
+
 
 @keyframes shake {
   0% {
@@ -187,7 +196,9 @@ a {
 }
 
 @media screen and (max-width: 1150px) {
-  .searchInput, .search-button {
+
+  .searchInput,
+  .search-button {
     display: none;
   }
 }
