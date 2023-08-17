@@ -17,7 +17,7 @@ button {
 
 .profile-dropdown {
     position: absolute;
-    top: 10%;
+    top: 7vh;
     right: 50px;
     display: flex;
     flex-direction: column;
@@ -32,6 +32,7 @@ button {
     z-index: 50;
 
 }
+
 .user-dropdown li {
     padding: 8px;
     cursor: pointer;
@@ -71,82 +72,100 @@ button {
     background-color: #c0392b;
 }
 
-.logout-container{
-background-color: #EDEDED;
-color: 535353;
+.logout-container {
+    background-color: #EDEDED;
+    color: 535353;
 }
+
 .logout-container:hover {
-    cursor: pointer;}
+    cursor: pointer;
+}
 
 .likes-container {
     display: flex;
     align-items: center;
 }
+
 .likes-container a {
     text-decoration: none;
 }
+
 .heart-icon {
     display: inline-block;
     vertical-align: middle;
     margin-right: 5px;
     width: 20px;
 }
-.explore-blogs-container{
+
+.explore-blogs-container {
     display: flex;
     align-items: center;
 }
+
 .explore-blogs-container a {
     text-decoration: none;
 }
+
 .explore-icon {
     display: inline-block;
     vertical-align: middle;
     margin-right: 5px;
     width: 20px;
 }
+
 .following-icon {
     display: inline-block;
     vertical-align: middle;
     margin-right: 5px;
     width: 20px;
 }
-.create-blogs-container{
+
+.create-blogs-container {
     display: flex;
     align-items: center;
 }
+
 .create-blogs-container a {
     text-decoration: none;
 }
-.plus-icon{
+
+.plus-icon {
     display: inline-block;
     vertical-align: middle;
     margin-right: 5px;
     width: 20px;
 }
+
 .following-container a {
     text-decoration: none;
 }
+
 .gift-container {
     display: flex;
     align-items: center;
 }
+
 .gift-container a {
     text-decoration: none;
 }
+
 .gift-icon {
     display: inline-block;
     vertical-align: middle;
     margin-right: 5px;
     width: 20px;
 }
-.my-blogs-container{
+
+.my-blogs-container {
     display: flex;
     align-items: center;
 }
+
 .my-blogs-container a {
     text-decoration: none;
 }
-.rectangle-icon{
+
+.rectangle-icon {
     display: inline-block;
     vertical-align: middle;
     margin-right: 5px;

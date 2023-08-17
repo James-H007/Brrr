@@ -1,0 +1,40 @@
+.main-feed-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 100%;
+    margin: 0 auto;
+
+    margin-top: 0px;
+    /* background-color: gray; */
+    animation: fadeIn 3s;
+}
+
+.blog-description-about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    font-size: 15px;
+    text-align: center;
+    gap: 5px;
+}
+
+.post-icons-about {
+    margin: 5px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.about-icon {
+    width: 50px;
+}
+
+.a-href-link {
+    text-decoration: underline;
+}

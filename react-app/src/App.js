@@ -15,6 +15,7 @@ import CreateBlogPage from "./components/CreateBlogPage";
 import MyBlogCollection from "./components/MyBlogCollection";
 import EditBlogPage from "./components/EditBlogPage";
 import Home from "./components/LandingPageWrapper";
+import About from "./components/About";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,9 @@ function App() {
           <Switch>
             <Route path="/login">
               <LoginFormPage />
+            </Route>
+            <Route path="/about">
+              <About />
             </Route>
             <Route path="/signup">
               <SignupFormPage />
