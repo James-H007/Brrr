@@ -258,3 +258,28 @@ a {
     transform: scale(0.8);
   }
 } */
+
+@media screen and (max-width: 512px) {
+  .create_blog_container {
+    transform: scale(0.8);
+    overflow-x: auto;
+    width: 50%;
+  }
+
+  .navBar {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 250px) {
+  .navBar {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .profile-button {
+    visibility: hidden;
+  }
+
+
+}
