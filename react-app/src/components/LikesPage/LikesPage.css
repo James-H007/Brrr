@@ -1,5 +1,6 @@
 .like-header {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 15%;
@@ -13,6 +14,9 @@
     font-family: 'Rubik';
     font-size: 80px;
     font-weight: bold;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .like-header:hover {
