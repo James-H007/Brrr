@@ -224,3 +224,12 @@ input[type="file"]:hover {
     border-radius: 5px;
     margin-right: 5px;
 }
+
+@media screen and (max-width: 800px) {
+    .post-form-container {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

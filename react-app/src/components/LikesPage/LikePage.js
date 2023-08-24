@@ -132,7 +132,7 @@ const LikesPage = () => {
           <div className="main-feed">
             <div className="main-post-area">
               <div className="like-header">
-                Likes ❤️
+                ❤️
               </div>
 
               <div className="post-comp">

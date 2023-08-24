@@ -29,6 +29,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: row;
     gap: 15%;
     padding: 0px;
     margin: 0px;
@@ -135,42 +136,61 @@
 
 @media screen and (max-width: 1560px) {
     .post-select {
+        flex-direction: row;
         gap: 5%;
     }
 }
 
- @media screen and (max-width: 1030px) {
+@media screen and (max-width: 1030px) {
     .post-select {
         gap: 2%;
     }
 }
 
- @media screen and (max-width: 940px) {
+@media screen and (max-width: 940px) {
     .post-select {
+        flex-direction: row;
+        overflow-x: auto;
         gap: 2%;
     }
 }
 
 @media screen and (max-width: 900px) {
     .post-select {
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
         gap: 2%;
     }
 }
 
 @media screen and (max-width: 850px) {
-    .main-post-area, .main-post-area > * {
-        flex-direction: column;
+    .post-select {
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
     }
+
+
+
+    /* .main-post-area,
+    .main-post-area>* {
+        flex-direction: column;
+    } */
 }
 
 @media screen and (max-width: 600px) {
     .post-select {
-        flex-direction: column;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
     }
+
     .post-type-icon {
         height: 20px;
         width: 20px;
     }
+
     .post-type-box {
         height: 80px;
         width: 40px;

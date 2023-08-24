@@ -8,7 +8,7 @@
   justify-content: space-between;
   background-color: black;
   margin-top: 0;
-  width: 100%;
+  width: 100vw;
   padding: 0;
   margin: 0;
   position: sticky;
@@ -197,8 +197,64 @@ a {
 
 @media screen and (max-width: 1150px) {
 
+  .searchArea,
   .searchInput,
   .search-button {
     display: none;
   }
+
+  .blog-description-about {
+    overflow-y: auto;
+  }
 }
+
+@media screen and (max-width: 850px) {
+  .like-header {
+    font-size: 3px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .navBar {
+    transform: none !important;
+
+  }
+
+  .main-feed {
+    transform: scale(0.9);
+    transform-origin: top;
+  }
+
+
+}
+
+@media screen and (max-width: 688px) {
+  .main-feed {
+    transform: scale(0.8);
+    transform-origin: top;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .post-container {
+    overflow-x: auto;
+  }
+
+  .entire-edit-blog {
+    transform: scale(0.8);
+  }
+
+  .following-blog-banner-prev {
+    visibility: hidden;
+  }
+
+  .following-info {
+    width: 100%;
+  }
+}
+
+/* @media screen and (max-width:500px) {
+  body {
+    transform: scale(0.8);
+  }
+} */
