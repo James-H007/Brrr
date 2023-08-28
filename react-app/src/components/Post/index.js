@@ -20,7 +20,7 @@ import {
 import { Link } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import EditTextFormModal from "../editPostFormModal/editTextFormModal";
-
+import Comments from "../Comments";
 import DeleteFormModal from "../DeletePostModal";
 
 import EditImageFormModal from "../editPostFormModal/EditImageFormModal"
@@ -315,6 +315,9 @@ const Post = ({ post }) => {
                                 </div>
                             </footer>
 
+                        </div>
+                        <div className="comments">
+                            <Comments post={post} />
                         </div>
                     </div>
                 </>

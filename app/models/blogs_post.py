@@ -157,7 +157,7 @@ class Post(db.Model):
     # )
 
     #One side, post hosts many comments
-    # comments = db.relationship("Comment", back_populates='post', cascade='all, delete-orphan')
+    comments = db.relationship("Comment", back_populates='post', cascade='all, delete-orphan')
 
     # Code block below (DEPRECATED)
     # post_comments = db.relationship(
@@ -182,7 +182,8 @@ class Post(db.Model):
             'createdAt':self.created_at,
             'updatedAt':self.updated_at,
             'postImages': [image.to_dict() for image in self.post_images],
-            'blog': self.blog.to_dict_no_posts()
+            'blog': self.blog.to_dict_no_posts(),
+            'comments': [comment.to_dict() for comment in self.comments]
         }
     def to_dict_no_blogs(self):
         return {
