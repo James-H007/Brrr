@@ -26,7 +26,7 @@ def post_comment(postId):
 
     return {'comments': [comment.to_dict() for comment in post_comments]}, 200
 
-@comment_routes.route('/<int:id>/create-comment', methods=["POST"])
+@comment_routes.route('/<int:postId>/create-comment', methods=["POST"])
 def create_comment(postId):
     """
     Route to create a comment
@@ -52,15 +52,15 @@ def create_comment(postId):
     print(errors)
     return jsonify({'errors': errors}), 400
 
-@comment_routes.route('/<int:id>/delete-comment', methods=['DELETE'])
+@comment_routes.route('/<int:commentId>/delete-comment', methods=['DELETE'])
 @login_required
-def delete_comment(comment_id):
+def delete_comment(commentId):
     """
     Route to delete a post based on "post_id"
     """
     userId = current_user.id
 
-    comment = Comment.query.get(comment_id)
+    comment = Comment.query.get(commentId)
 
     if not comment:
         return {"error": "Comment not found."}, 404

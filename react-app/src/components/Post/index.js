@@ -285,12 +285,12 @@ const Post = ({ post }) => {
                                                 />
                                             </div>
                                         )}
-                                        <div className="post-icon">
+                                        {/* <div className="post-icon">
                                             <img src={share} alt="heart-icon" onClick={handleComment} />
                                         </div>
                                         <div className="post-icon">
                                             <img src={comment} alt="comment-icon" onClick={handleComment} />
-                                        </div>
+                                        </div> */}
                                         {!isLiked && (
                                             <div className="post-icon">
                                                 <img

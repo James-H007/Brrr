@@ -21,7 +21,7 @@
     margin-bottom: 20px;
     height: 100%;
     animation: fadeIn 2s;
-    overflow-x: auto;
+    overflow-x: hidden;
     overflow-y: auto;
 }
 

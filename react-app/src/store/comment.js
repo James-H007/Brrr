@@ -65,15 +65,16 @@ export const getAPostComment = (postId) => async (dispatch) => {
 
 
 //@comment_routes.route('/<int:id>/create-comment', methods=["POST"])
-export const makeAComment = (comment, postId) => async (dispatch) => {
+export const makeAComment = (newComment, postId) => async (dispatch) => {
+
     const response = await fetch(`/api/comments/${postId}/create-comment`, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json" // Set the content type to JSON
         },
-        body: JSON.stringify(comment)
+        body: JSON.stringify(newComment)
     })
-
+    console.log(response, "LOOK OVER HERE")
     if (response.ok) {
         const newComment = await response.json()
         dispatch(createComment(newComment))
@@ -97,6 +98,7 @@ export const removeComment = (commentId) => async (dispatch) => {
 
 const initialState = { allComments: [], currentPostComments: [] }
 
+
 export default function commentsReducer(state = initialState, action) {
 
     switch (action.type) {
@@ -118,7 +120,7 @@ export default function commentsReducer(state = initialState, action) {
         case DELETE_COMMENT:
             return {
                 ...state,
-                allComments: state.blogs.filter(i => i.id !== action.payload)
+                allComments: state.allComments.filter(i => i.id !== action.payload)
             }
         default:
             return state

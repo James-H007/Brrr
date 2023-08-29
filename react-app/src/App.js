@@ -16,11 +16,13 @@ import MyBlogCollection from "./components/MyBlogCollection";
 import EditBlogPage from "./components/EditBlogPage";
 import Home from "./components/LandingPageWrapper";
 import About from "./components/About";
+import { getAllComments } from "./store/comment";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
+    dispatch(getAllComments())
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
