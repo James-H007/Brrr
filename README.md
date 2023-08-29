@@ -73,7 +73,7 @@ https://brrr.onrender.com
 - In this section, users can leave comments on posts
 - If users want to take back their comment they can delete it
 - Interact with other blogs!
-- 
+  
 ![image](https://github.com/James-H007/Brrr/assets/110857645/48190233-7a1b-46d5-b902-eaebae1e7c1a)
 
 
