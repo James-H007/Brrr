@@ -69,6 +69,12 @@ https://brrr.onrender.com
 
 ![image](https://github.com/James-H007/Brrr/assets/102698225/154c1a94-d1ea-4902-b0ee-13e1d7476fcc)
 
+### *Comments*
+- In this section, users can leave comments on posts
+- If users want to take back their comment they can delete it
+- Interact with other blogs!
+- 
+![image](https://github.com/James-H007/Brrr/assets/110857645/48190233-7a1b-46d5-b902-eaebae1e7c1a)
 
 
 
