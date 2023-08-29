@@ -20,7 +20,7 @@ import {
 import { Link } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import EditTextFormModal from "../editPostFormModal/editTextFormModal";
-
+import Comments from "../Comments";
 import DeleteFormModal from "../DeletePostModal";
 
 import EditImageFormModal from "../editPostFormModal/EditImageFormModal"
@@ -235,7 +235,7 @@ const Post = ({ post }) => {
                             {postContent}
                             <footer>
                                 <div className="post-stats">
-                                    <p className="post-notes">{postLikes} Notes</p>
+                                    <p className="post-notes">{postLikes} ❤️</p>
                                     <div className="post-icons">
                                         {currentUser.id === ownerId && (
                                             <div className="post-icon">
@@ -285,12 +285,12 @@ const Post = ({ post }) => {
                                                 />
                                             </div>
                                         )}
-                                        <div className="post-icon">
+                                        {/* <div className="post-icon">
                                             <img src={share} alt="heart-icon" onClick={handleComment} />
                                         </div>
                                         <div className="post-icon">
                                             <img src={comment} alt="comment-icon" onClick={handleComment} />
-                                        </div>
+                                        </div> */}
                                         {!isLiked && (
                                             <div className="post-icon">
                                                 <img
@@ -315,6 +315,9 @@ const Post = ({ post }) => {
                                 </div>
                             </footer>
 
+                        </div>
+                        <div className="comments">
+                            <Comments post={post} />
                         </div>
                     </div>
                 </>

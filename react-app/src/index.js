@@ -10,6 +10,7 @@ import * as blogActions from "./store/blogs"
 import * as userActions from "./store/users"
 import * as likeActions from "./store/likes"
 import * as postActions from "./store/posts"
+import * as commentActions from "./store/comment"
 import App from "./App";
 
 import "./index.css";
@@ -23,6 +24,7 @@ if (process.env.NODE_ENV !== "production") {
 	window.userActions = userActions;
 	window.likeActions = likeActions;
 	window.postActions = postActions;
+	window.commentActions = commentActions;
 }
 
 // Wrap the application with the Modal provider and render the Modal component
