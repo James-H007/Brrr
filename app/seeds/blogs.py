@@ -11,13 +11,14 @@ def seed_blogs():
         blog_name="demo",
         description="Dedicated to show drawings and prints from the past.",
     )
+
     marnie = Blog(
         owner_id=2,
         default_blog=True,
         blog_title="Literature and Love",
         banner_img_url="https://i.pinimg.com/736x/f1/29/93/f1299356706bd81065d4073774cc78de.jpg",
         blog_avatar_url="https://bookmarin.com/wp-content/uploads/2017/05/old-woman-reading-a-book-painting.jpg",
-        blog_name="marnie",
+        blog_name="BookLover❤️",
         description="There is always love in reading...🌹",
     )
     bobbie = Blog(
@@ -29,12 +30,31 @@ def seed_blogs():
         blog_name="bobbie",
         description="Funny memes for your entertainment",
     )
+    demo2 = Blog(
+        owner_id=1,
+        default_blog=False,
+        blog_title="Animation and Sakuga",
+        banner_img_url="https://33.media.tumblr.com/b8bc48f50590c4fda3f040a6c3833f6f/tumblr_nwl8059Ote1qeizddo1_1280.gif",
+        blog_avatar_url="https://i.ytimg.com/vi/ZeqrStH6laQ/sddefault.jpg",
+        blog_name="Sakuga",
+        description="Dedicated to amazing animated shorts.",
+    )
 
+    bobbie2 = Blog(
+        owner_id=3,
+        default_blog=False,
+        blog_title="Superheroes",
+        banner_img_url="https://thumbs.gfycat.com/DistinctGoodGalapagossealion-max-1mb.gif",
+        blog_avatar_url="https://media.tenor.com/9C1QmBy7CEIAAAAd/marvel-superhero.gif",
+        blog_name="hero4ever",
+        description="Heroes from all media!",
+    )
 
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
-
+    db.session.add(demo2)
+    db.session.add(bobbie2)
     db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't

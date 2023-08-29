@@ -54,17 +54,15 @@
 .comment-section {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-top: 10px;
+    align-items: flex-start;
     gap: 10px;
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 200px;
-    height: 100%;
     width: 95%;
     padding-top: 5px;
     border-top: 1px dashed black;
-
+    margin-top: 5px;
 }
 
 .single-comment-upper {
@@ -72,17 +70,23 @@
     width: 100%;
     margin: 0;
     word-wrap: break-word;
+    background-color: red;
+    max-height: 100%;
 }
 
 .single-comment {
     display: flex;
     flex-direction: column;
     width: 95%;
-    height: 100%;
     border: 1px solid black;
     border-radius: 20px;
-    overflow-x: hidden;
+    padding: 10px;
     word-wrap: break-word;
+    background-color: white;
+    /* Set the background color for single comments */
+    margin-bottom: 5px;
+    margin-top: 5px;
+    /* Add some spacing between single comments */
 }
 
 .single-comment-header {

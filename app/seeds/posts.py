@@ -5,7 +5,7 @@ def seed_posts():
     demo = Post(
         blog_id=1,
         user_id=1,
-        post_title="Demo User's First Post",
+        post_title="Inspiration",
         post_type = "text",
         post_description="Art is the bridge between what we see and what we feel.",
         video_embed_code="fake.url",
@@ -36,6 +36,45 @@ def seed_posts():
         post_description="The Last Supper",
         video_embed_code="fake.url",
         image_embed_code="https://cdn.shopify.com/s/files/1/1414/2472/files/4-_640px-Ultima_Cena_-_Da_Vinci_5-compressor.jpg",
+        likes_count=2000,
+        reblogs=0,
+        comments_count=0,
+        notes=2000,
+    )
+    demo4 = Post(
+        blog_id=4,
+        user_id=1,
+        post_title="Demo User's First Post",
+        post_type = "image",
+        post_description="Little Witch Academia",
+        video_embed_code="fake.url",
+        image_embed_code="https://i.imgur.com/hpj5Xj0.gif",
+        likes_count=2000,
+        reblogs=0,
+        comments_count=0,
+        notes=2000,
+    )
+    demo5 = Post(
+        blog_id=4,
+        user_id=1,
+        post_title="Demo User's First Post",
+        post_type = "image",
+        post_description="Space Dandy",
+        video_embed_code="fake.url",
+        image_embed_code="https://lh3.googleusercontent.com/-c9T2Jw0nwk4/Uw_q66yn26I/AAAAAAAAPRo/xj_VqRd3vWQ/w500-h282/tumblr_mz3nz5MIEo1qanw3wo2_500.gif",
+        likes_count=2000,
+        reblogs=0,
+        comments_count=0,
+        notes=2000,
+    )
+    demo6 = Post(
+        blog_id=4,
+        user_id=1,
+        post_title="Demo User's First Post",
+        post_type = "image",
+        post_description="Haikyuu",
+        video_embed_code="fake.url",
+        image_embed_code="https://thumbs.gfycat.com/GiganticWhoppingHalibut-size_restricted.gif",
         likes_count=2000,
         reblogs=0,
         comments_count=0,
@@ -107,14 +146,47 @@ def seed_posts():
         notes=0,
     )
 
+    bobbie3 = Post(
+        blog_id=5,
+        user_id=3,
+        post_title="Hot Take!",
+        post_type = "text",
+        post_description="I feel like every movie past EndGame was pointless :/",
+        video_embed_code="fake.url",
+        image_embed_code="https://media3.giphy.com/media/4pMX5rJ4PYAEM/giphy.gif",
+        likes_count=0,
+        reblogs=0,
+        comments_count=0,
+        notes=0,
+    )
+
+    bobbie4 = Post(
+        blog_id=5,
+        user_id=3,
+        post_title="Hot Take!",
+        post_type = "image",
+        post_description="Such a cool movie!",
+        video_embed_code="fake.url",
+        image_embed_code="https://media0.giphy.com/media/3osxYb0cBjLcp8Cbh6/giphy.gif",
+        likes_count=0,
+        reblogs=0,
+        comments_count=0,
+        notes=0,
+    )
+
     db.session.add(demo)
     db.session.add(demo2)
     db.session.add(demo3)
+    db.session.add(demo4)
+    db.session.add(demo6)
+    db.session.add(demo5)
     db.session.add(marnie)
     db.session.add(marnie2)
     db.session.add(marnie3)
     db.session.add(bobbie)
     db.session.add(bobbie2)
+    db.session.add(bobbie3)
+    db.session.add(bobbie4)
     db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't

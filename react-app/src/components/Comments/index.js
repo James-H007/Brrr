@@ -68,8 +68,8 @@ const Comments = ({ post }) => {
                 </div>
                 <div className="comment-section">
                     {comments.slice().reverse().map((comment, i) => (
-                        <div key={i} className="single-comment-upper">
-                            {comment.postId === post.id &&
+                        <>
+                            {(comment.postId === post.id) &&
                                 (<div id={i} className="single-comment">
                                     <div className="single-comment-header">
                                         <div className="comment-user-delete-pair">
@@ -87,7 +87,7 @@ const Comments = ({ post }) => {
 
                                 </div>)
                             }
-                        </div>
+                        </>
                     ))}
                     {!comments.some(isIncluded) && (
                         <div className="no-comments">
