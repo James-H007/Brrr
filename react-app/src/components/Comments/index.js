@@ -23,15 +23,31 @@ const Comments = ({ post }) => {
                             type="text"
                             value={reply}
                             onChange={(e) => setReply(e.target.value)}
-                            placeholder="Your words here"
+                            placeholder="Have something to say?"
                         />
+                        <div className="reply-submit">
+                            Submit
+                        </div>
                     </form>
                 </div>
-                {/* {comments.map((comment) => (
-                    <>
-                        {comment.comment}
-                    </>
-                ))} */}
+                <div className="comment-section">
+                    {comments.map((comment, i) => (
+                        <>
+                            <div className="single-comment" id={i}>
+                                <div className="single-comment-header">
+                                    <p className="comment-username">{comment.username}</p>
+                                    <p className="comment-createdAt">{comment.createdAt}</p>
+                                </div>
+                                <div className="comment-content">
+                                    {comment.comment}
+                                </div>
+
+                            </div>
+
+
+                        </>
+                    ))}
+                </div>
             </div>
         </div>
     )

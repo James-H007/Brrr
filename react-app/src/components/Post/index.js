@@ -235,7 +235,7 @@ const Post = ({ post }) => {
                             {postContent}
                             <footer>
                                 <div className="post-stats">
-                                    <p className="post-notes">{postLikes} Notes</p>
+                                    <p className="post-notes">{postLikes} Likes</p>
                                     <div className="post-icons">
                                         {currentUser.id === ownerId && (
                                             <div className="post-icon">
