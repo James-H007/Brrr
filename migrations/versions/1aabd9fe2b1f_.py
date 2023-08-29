@@ -1,8 +1,8 @@
-"""remigrated on 05/31/2023
+"""empty message
 
-Revision ID: 03316db0a82b
+Revision ID: 1aabd9fe2b1f
 Revises: 
-Create Date: 2023-05-31 18:49:36.033746
+Create Date: 2023-08-28 12:39:15.467331
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '03316db0a82b'
+revision = '1aabd9fe2b1f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -48,11 +48,11 @@ def upgrade():
     sa.UniqueConstraint('blog_name')
     )
     op.create_table('followers',
-    sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('blog_id', sa.Integer(), nullable=True),
-    sa.Column('is_followed', sa.Boolean(), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('blog_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['blog_id'], ['blogs.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], )
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('user_id', 'blog_id')
     )
     op.create_table('posts',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -77,7 +77,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('post_id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('comment', sa.String(length=255), nullable=True),
+    sa.Column('comment', sa.String(length=800), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['post_id'], ['posts.id'], ),

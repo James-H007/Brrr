@@ -50,7 +50,7 @@ class User(db.Model, UserMixin):
     blog_follows = db.relationship("Follower", back_populates='follower')
     #One side: A user can own many blogs
     blogs = db.relationship("Blog", back_populates='user', cascade='all, delete-orphan')
-
+    comments = db.relationship("Comment", back_populates="user", cascade='all, delete-orphan')
     @property
     def password(self):
         return self.hashed_password

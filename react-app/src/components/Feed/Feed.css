@@ -21,7 +21,7 @@
     margin-bottom: 20px;
     height: 100%;
     animation: fadeIn 2s;
-    overflow-x: auto;
+    overflow-x: hidden;
     overflow-y: auto;
 }
 
@@ -137,6 +137,7 @@
 @media screen and (max-width: 1560px) {
     .post-select {
         flex-direction: row;
+        overflow-x: hidden;
         gap: 5%;
     }
 }
@@ -144,13 +145,14 @@
 @media screen and (max-width: 1030px) {
     .post-select {
         gap: 2%;
+        overflow-x: hidden;
     }
 }
 
 @media screen and (max-width: 940px) {
     .post-select {
         flex-direction: row;
-        overflow-x: auto;
+        overflow-x: hidden;
         gap: 2%;
     }
 }
@@ -158,7 +160,7 @@
 @media screen and (max-width: 900px) {
     .post-select {
         flex-direction: row;
-        overflow-x: auto;
+        overflow-x: hidden;
         overflow-y: hidden;
         gap: 2%;
     }
@@ -167,7 +169,7 @@
 @media screen and (max-width: 850px) {
     .post-select {
         flex-direction: row;
-        overflow-x: auto;
+        overflow-x: hidden;
         overflow-y: hidden;
     }
 
@@ -182,7 +184,7 @@
 @media screen and (max-width: 600px) {
     .post-select {
         flex-direction: row;
-        overflow-x: auto;
+        overflow-x: hidden;
         overflow-y: hidden;
     }
 
