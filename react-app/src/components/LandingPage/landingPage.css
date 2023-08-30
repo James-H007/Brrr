@@ -4,6 +4,10 @@
 
 .landing-page {
     width: 100%;
-    height: 92%;
+    height: 100vh;
     overflow-y: hidden;
+}
+
+.signup_clickable {
+    cursor: pointer;
 }
