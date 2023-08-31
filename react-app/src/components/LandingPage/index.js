@@ -32,6 +32,13 @@ function LandingPage() {
   const [backgroundImage, setBackgroundImage] = useState("");
 
   useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
+  useEffect(() => {
     const backgroundImages = [
       brrWP1,
       brrWP2,
